@@ -1,22 +1,37 @@
+import Calendar from "../components/Calendar";
+
 export default function Home({images}) {
   
-  console.log(images)
-
   return (
-    <div className="">
-      <div className="bg-main">Header</div>
-      <h1>사진 업로드</h1>
-        <div>Camera</div>
-      <h1>오늘 먹은 음식</h1>
-        <div className="grid gap-4 grid-cols-4">
+    <>
+    <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
+      <div className="w-80 h-40 p-8 flex text-left flex-col justify-center">
+        <span className="font-bold text-3xl text-main ">안녕하세요. ---님</span><br/>
+        <span className="font-bold ">오늘은 어떤 음식을 드셨나요?</span>
+      </div>
+
+      <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
+        <div className="flex justify-center px-8 ">
+          <div className="w-full h-48  bg-slate-800 rounded-3xl flex justify-center text-white ">
+            <span>오늘 먹은 음식을 추가해주세요</span>
+          </div>
+        </div>
+        
+      <div className="font-bold px-8 pt-6 pb-2 text-xl">오늘 먹은 음식</div>
+        <div className="grid gap-4 grid-cols-4 px-8">
           {images.map(image => (
             <div key={image.id}>
               <img src={image.url}></img>
             </div>
           ))}
         </div>
-      <h1>식단 분석표</h1>
+
+      <div className="font-bold px-8 pt-6 pb-2 text-xl">식단 분석표</div>
+        <div className="px-8">
+          <Calendar/>
+        </div>
     </div>
+    </>
   )
 }
 
