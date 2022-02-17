@@ -1,9 +1,8 @@
 import tw from "twin.macro";
 
-export default function Home() {
+export default function LoginInputIdPw() {
   return (
     <div>
-        Hello
     </div>
   );
 }
