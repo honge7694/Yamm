@@ -1,7 +1,8 @@
+import Camera from "../components/Camera";
 import Calendar from "../components/Calendar";
 
 export default function Home({images}) {
-  
+
   return (
     <>
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
@@ -12,8 +13,9 @@ export default function Home({images}) {
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
         <div className="flex justify-center px-8 ">
-          <div className="w-full h-48  bg-slate-800 rounded-3xl flex justify-center text-white ">
+          <div className="w-full h-48 bg-slate-800 rounded-3xl flex justify-center text-white ">
             <span>오늘 먹은 음식을 추가해주세요</span>
+            <Camera/>
           </div>
         </div>
         
