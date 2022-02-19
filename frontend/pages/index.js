@@ -7,8 +7,6 @@ export default function Home() {
     <div>
       hi
     </div>
-    <div>
-      community commit test
-    </div>
+   
   )
 }
