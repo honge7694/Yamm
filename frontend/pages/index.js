@@ -1,7 +1,20 @@
 import Camera from "../components/Camera";
 import Calendar from "../components/Calendar";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home({images}) {
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500
+  };
 
   return (
     <>
@@ -15,18 +28,22 @@ export default function Home({images}) {
         <div className="flex justify-center px-8 ">
           <div className="w-full h-48 bg-slate-800 rounded-3xl flex justify-center text-white ">
             <span>오늘 먹은 음식을 추가해주세요</span>
-            <Camera/>
+            {/* <Camera/> */}
           </div>
         </div>
         
       <div className="font-bold px-8 pt-6 pb-2 text-xl">오늘 먹은 음식</div>
-        <div className="grid gap-4 grid-cols-4 px-8">
+      
+        <div>
+          <Slider {...settings}>
           {images.map(image => (
-            <div key={image.id}>
-              <img src={image.url}></img>
+            <div  key={image.id}>
+              <img className="w-auto px-2 rounded-3xl" src={image.url}></img>
             </div>
           ))}
+          </Slider>
         </div>
+
 
       <div className="font-bold px-8 pt-6 pb-2 text-xl">식단 분석표</div>
         <div className="px-8">

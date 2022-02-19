@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 
 
 const videoConstraints = {
-    width: 1280,
+    width: 720,
     height: 720,
     facingMode: "user"
 };
