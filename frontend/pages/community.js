@@ -3,7 +3,7 @@ import { memo, useCallback, useEffect, useMemo, useState, useRef } from "react";
 import Loader from "../components/Loader";
 import Dummy from '../components/Dummy';
 import BottomNav from '../components/BottmNav/BottomNav';
-
+import { dataDummy } from '../components/Dummy';
 const targetCSS = "w-screen h-[140px] flex justify-center text-center items-center";
 const container = "flex";
 const itemWrapper = "flex flex-col w-1/2";
@@ -16,7 +16,7 @@ const Community = ()=>{
 
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [itemLists, setItemLists] = useState([1,2,3,4,5,6,7,8]);
+  const [itemLists, setItemLists] = useState(dataDummy);
    // 스크롤 이벤트 등록
   useEffect(() => {
     window.addEventListener("scroll", listener);
@@ -26,19 +26,20 @@ const Community = ()=>{
     setCurrentScrollY(-document.body.getBoundingClientRect().y);
     const scrollDirection =  (lastScrollTop < currentScrollY ? "down" : "up");
     setLastScrollTop(currentScrollY);
-    (scrollDirection == "down" ? bottomNav.current.className = 'hidden fixed top-0 left-0 right-0' : bottomNav.current.className = 'animate-[wiggle_1s_ease-in-out] fixed left-1/4 bottom-20') 
+    (scrollDirection == "down" ? bottomNav.current.className = 'hidden' : bottomNav.current.className = 
+    '') 
   };
 
   const itemListMap = useMemo(() => {
     console.log("re", itemLists)
     let oddResult =  itemLists.map((v, i) => {
       if(i%2!=0){
-        return <BoardCards classNameCSS="m-2" number={i + 1} key={i} image="/vercel.svg" boardTitle={i+" 번째 게시글"} />;
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
     let evenResult =  itemLists.map((v, i) => {
       if(i%2==0){
-        return <BoardCards classNameCSS="m-2" number={i + 1} key={i} image="/vercel.svg" boardTitle={i+" 번째 게시글"}  />;
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
     return [evenResult, oddResult];
@@ -46,7 +47,7 @@ const Community = ()=>{
   const getMoreItem = async () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500)); // API 호출로 수정
-    let Items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let Items = dataDummy;
     setItemLists((itemLists) => itemLists.concat(Items));
     //console.log("www", itemLists)
     setIsLoaded(false);
@@ -73,12 +74,9 @@ const Community = ()=>{
     <>
       
       <div ref={bottomNav} className='hidden'>
-        <div>Y offset : {currentScrollY}</div>
         <BottomNav></BottomNav>
       </div>
       {/* Dummy.js 에서 함수 받아 와서 itemList 들어 있는 배열 가져 올 것, API 비동기 처리 할 것  */}
-      <Dummy>
-      </Dummy>
       {/* 두개로 받아서 성능 이슈 map 함수 하나로 할 것 */ }
       <div className={container} >
         <div className={itemWrapper} >

@@ -1,12 +1,13 @@
 import Image from 'next/image';
+import { useEffect, useMemo } from 'react';
 
-const imageWrap ="rounded-md border-indigo-500 bg-gray-500";
-const ImageItem = ({ image }) => {
+const imageWrap ="rounded-2xl border-indigo-500 bg-gray-500 w-full h-full relative min-h-[120px]";
+const ImageItem = ({ image, contentLength}) => {
     return (
         <>
-            <div className={imageWrap}>
-                <Image src={image} width="100%" height="100%" />
-            </div>
+          <div className={imageWrap}>
+              <Image className={'rounded-2xl'} src={image} layout={"fill"}  />
+          </div>
         </>
     );
 }

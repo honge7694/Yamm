@@ -1,7 +1,7 @@
 const BoardTitle = ({ boardTitle }) => {
     return (
         <>
-          <div>
+          <div className='text-sm'>
              {boardTitle} 
           </div>
         </>
