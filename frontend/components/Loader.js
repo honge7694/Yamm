@@ -1,21 +1,13 @@
 import { memo } from "react";
 import ReactLoading from "react-loading";
-import styled from "styled-components";
 
-const LoaderWrap = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-`;
+const LoaderWrap = "w-full h-3/4 flex justify-center text-center items-center";
 
 const Loader = () => {
   return (
-    <LoaderWrap>
+    <div className={LoaderWrap}>
       <ReactLoading type="spin" color="#A593E0" />
-    </LoaderWrap>
+    </div>
   );
 };
 

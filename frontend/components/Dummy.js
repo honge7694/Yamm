@@ -5,7 +5,7 @@ const imageDummy = [];
 export default function Dummy(){
     return (
     <>
-
+        
     </>    
     );
 }
