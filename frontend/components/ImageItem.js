@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 
 const imageWrap ="rounded-2xl border-indigo-500 bg-gray-500 w-full h-full relative min-h-[120px]";
-const ImageItem = ({ image, idx, hit, content, image}) => {
+const ImageItem = ({ image, idx, hit, content}) => {
     const router = useRouter();
     const routeFuntion = () => {
         router.push({
