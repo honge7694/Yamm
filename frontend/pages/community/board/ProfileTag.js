@@ -1,10 +1,19 @@
-const ProfileTag = () => {
+import TagModal from '../../../components/TagModal/TagModal';
+
+const ProfileTag = ({ hit }) => {
     return (
-        <div className='mr-5 ml-5'>
-        <div class="grid grid-rows-2 grid-flow-col gap-7 mt-6">
-          <div class="row-span-2 col-span-2 rounded-full bg-slate-500 w-[40px] h-[40px] flex justify-center items-center">01</div>
-          <div class="col-span-2 row-span-1 ">Nickname</div>
-          <div class="row-span-2 col-span-2 ">좋아요</div>
+        <div className='mr-5 ml-5 mt-7'>
+        <div class="grid grid-cols-6 grid-flow-row gap-3 mt-6">
+          <div class=" row-span-1 col-span-1 rounded-full bg-neutral-200 w-[50px] h-[50px] flex justify-center items-center" >
+            <div>사진</div>
+          </div>
+          <div class=" col-span-4 ml-3" >
+            <div>닉네임</div>
+            <div>Y-am : {hit}</div>
+          </div>
+          <div class=" col-span-1 flex items-center " >
+            <TagModal></TagModal>
+          </div>
         </div>
         </div>
     );

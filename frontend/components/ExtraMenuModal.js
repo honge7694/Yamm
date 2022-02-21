@@ -30,7 +30,7 @@ const ExtraMenuModal = () => {
     return (
         <>
             <div onClick={(e)=>{setIsExtraMenuImageClicked(true)}} className={imageWrap}>
-                <Image src="/vercel.svg" width="30px" height="30px" />
+                <Image src="/dot3.svg" width="30px" height="30px" />
             </div>
             { isExtraMenuImageClicked && 
                 <div onClick={(e)=>{setIsExtraMenuImageClicked(false); console.log("backlog-modal")}} className={extraMenuModalContainer}>

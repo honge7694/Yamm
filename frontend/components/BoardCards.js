@@ -3,7 +3,6 @@ import Image from 'next/image';
 import ImageItem from '../components/ImageItem';
 import ExtraMenuModal from '../components/ExtraMenuModal';
 import BoardTitle from '../components/BoardTitle';
-import { useRouter } from 'next/router';
 // flex 말고 grid를 써야하나?
 const boardTitleExtraMenuWrap1 = "flex justify-between mt-1";
 const boardTitleExtraMenuWrap = "";
@@ -21,19 +20,12 @@ export default function BoardCards({ image, boardTitle, classNameCSS, content, i
             return "min-h-[25px]";
         }
     },[]);
-    const router = useRouter();
-    const routeFuntion = () => {
-        router.push({
-            pathname : `/community/board/${idx}`,
-            query: { "image": image, "hit" : hit, "content" : content, "idx" : idx } 
-        });
-    }
-
+    
     return (
-        <div onClick={(e)=>{routeFuntion()}} className='mt-[5px]'>
+        <div className='mt-[5px]'>
           <div className={classNameCSS}>
               {/* API 호출 후 10개 씩 BORAD CARD IMAGE 받아온다 */}
-              <ImageItem image={image} contentLength={contentLength} />
+              <ImageItem image={image} contentLength={contentLength} idx={idx} hit={hit} content={content} image={image} />
               
       
               <div className={boardTitleExtraMenuWrap1}>
