@@ -12,11 +12,6 @@ body {
 @tailwind utilities;
 
 @font-face {
-  font-family: 'InkLipquid';
-  font-weight: 200;
-  src: url('/fonts/InkLipquidFonts.ttf') format('truetype');
-}
-@font-face {
   font-family: 'Jalnan';
   font-size: 35px;
   src: url('/fonts/Jalnan.ttf') format('truetype');

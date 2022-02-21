@@ -25,7 +25,7 @@ export default function LoginNavbar() {
   return (
     <div>
       <TopNav/>
-      <FontTitle/>
+      <FontTitle marginTop="mt-8" textSize="text-3xl" />
       <LoginForm onSubmit={onSubmit}/>
       <LoginLinks />
     </div>

@@ -1,5 +1,5 @@
-const Font = ({ children, color }) => {
-    const fontcss= 'font-["Jalnan"] text-2xl mt-10 ' + color;
+const Font = ({ children, color, marginTop, textSize }) => {
+    const fontcss= 'font-["Jalnan"] ' + `${color+" "} + ${textSize}`;
     return (
         <div className={fontcss}>{children}</div>
     );

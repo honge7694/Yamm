@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import FontTitle from '../../../components/font/fontTitle';
 
 const TopNav = () => {
     const router = useRouter();
@@ -11,7 +12,7 @@ const TopNav = () => {
                 <Image src="/Arrow2.svg" width="100%" height="100%" />
             </div>
             <div className='mt-1 text-2xl font-bold'>
-                Ya---M
+                <FontTitle marginTop="" textSize="text-xl" />
             </div>
             <div className=' rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white'>
                 저장
