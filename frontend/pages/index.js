@@ -1,6 +1,8 @@
-import Camera from "../components/Camera";
+import { useRouter } from "next/router";
+
 import Calendar from "../components/Calendar";
 import Slider from "react-slick";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,6 +18,12 @@ export default function Home({images}) {
     speed: 500
   };
 
+  const router = useRouter();
+  
+  const moveCapture = () => {
+    router.push('/capture')
+  }
+
   return (
     <>
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
@@ -26,10 +34,12 @@ export default function Home({images}) {
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
         <div className="flex justify-center px-8 ">
-          <div className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex justify-center text-white ">
-            <span className="pt-8">오늘 먹은 음식을 추가해주세요</span>
-            {/* <Camera/> */}
-          </div>
+          <button className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white" onClick={moveCapture}>
+            <div className="pt-8 text-2xl">오늘 먹은 음식을 추가해주세요</div>
+            <div className="pt-4 text-main">
+              <AddCircleIcon fontSize="large"/>
+            </div>
+          </button>
         </div>
         
       <div className="font-bold px-8 pt-6 pb-2 text-xl">오늘 먹은 음식</div>
