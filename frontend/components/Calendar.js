@@ -6,15 +6,15 @@ export default function Calendar() {
 
     const [startDate, setStartDate] = useState(new Date());
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-      <button className="bg-main p-2 rounded-3xl" onClick={onClick} ref={ref}>
+        <button className="text-white bg-main p-2 rounded-3xl" onClick={onClick} ref={ref}>
         {value}
-      </button>
+        </button>
     ));
     return (
-      <DatePicker
+        <DatePicker
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         customInput={<ExampleCustomInput />}
-        popperPlacement=""/>
+      />
     );
-  };
+    };
