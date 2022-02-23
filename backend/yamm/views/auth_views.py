@@ -59,7 +59,7 @@ def user_nickname(request):
         user = json.loads(request.body)
         user_nickname = user['nickname']
 
-        same_nickname = User.objects.filter(name = user_nickname).first()
+        same_nickname = User.objects.filter(nickname = user_nickname).first()
 
         if same_nickname:
             print("이미 존재하는 nickname 입니다.")
@@ -85,8 +85,6 @@ def user_signup(request):
     '''
     # FE -> BE로 데이터 전달 받음.
     if request.method == 'POST':
-        # user = request.POST.get() ## 수정해야함.
-        # user = request.data.get()
         user = json.loads(request.body)
 
         if user != None :
@@ -120,15 +118,14 @@ def user_signin(request):
     '''
     # FE -> BE로 데이터 전달 받음.
     if request.method == 'POST':
-        user = request.POST.get()
-        # user = json.loads(request.body)
+        user = json.loads(request.body)
 
         if user != None:
             user_email = user['email']
             user_pw = user['password']
 
             # DB에 email이 있는지 확인.
-            same_user = User.objects.filter(name=user_email).first()
+            same_user = User.objects.filter(email=user_email).first()
 
             if not same_user:
                 print("가입된 회원이 아닙니다.")
