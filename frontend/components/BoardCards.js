@@ -9,7 +9,7 @@ const boardTitleExtraMenuWrap = "";
 
 export default function BoardCards({ image, boardTitle, classNameCSS, content, idx, hit }){
     const contentLength = useMemo(()=>{
-        console.log(content.length,'here')
+        //console.log(content.length,'here') 나중에 사진 길이 체크할 함수 !!
         if (content.length < 20){
             return "min-h-[4px]";
         }else if(content.length >= 20 && content.length < 50){

@@ -31,7 +31,7 @@ const Community = ()=>{
   };
 
   const itemListMap = useMemo(() => {
-    console.log("re", itemLists)
+    console.log("itemList add", itemLists)
     let oddResult =  itemLists.map((v, i) => {
       if(i%2!=0){
         return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;

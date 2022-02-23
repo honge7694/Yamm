@@ -1,8 +1,7 @@
-import Image from 'next/image';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import LoginLinks from './loginLinks';
 import { useDispatch } from 'react-redux';
-import { signUpAction } from '../../reducers/user';
+import { loginRequestAction } from '../../reducers/user';
 import useInput from '../../hooks/useInput';
 import { useSelector } from 'react-redux';
 import FontTitle from '../font/fontTitle';
@@ -18,8 +17,8 @@ export default function LoginNavbar() {
   const isLoggedIn  = useSelector((state) => state.user.isLoggedIn);
 
   const onSubmit = useCallback(() => {
-    console.log("er")
-    dispatch(signUpAction({ id, password, nick, }));
+    console.log("dispath-loginRequestAction")
+    dispatch(loginRequestAction({ id, password, nick, }));
   }, [password]);
 
   return (
