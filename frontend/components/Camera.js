@@ -8,23 +8,34 @@ const videoConstraints = {
     facingMode: "user"
 };
 
-export default function Camera() {
+export default function Camera(props) {
     
     const [image, setImage] = useState();
 
+    // const videoConstraints = {
+    //     facingMode: { exact: "environment" }
+    //   };
+    
+    // 후면 카메라를 기본 카메라로 하기 위해서는 위 주석 해제 
+
     const webcamRef = useRef(null);
+    
     const capture = useCallback(() => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        moveFoodInfo();
+        const imageSrc = webcamRef.current.getScreenshot();        
         setImage(imageSrc)
+        moveFoodInfo();
         },        
         [webcamRef] 
     );
 
+    console.log(image)
     const router = useRouter();
 
     const moveFoodInfo = () => {
-        router.push('/foodinfo')
+        router.push({
+            pathname: '/foodinfo',
+            query: {image: image}
+        })
     }
 
     return (
@@ -32,10 +43,10 @@ export default function Camera() {
         <Webcam
             className="rounded-3xl"
             audio={false}
+            width={500}
             height={700}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            width={500}
             videoConstraints={videoConstraints}
         />
         <div className="pt-8 text-center">

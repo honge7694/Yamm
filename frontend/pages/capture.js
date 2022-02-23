@@ -1,25 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Camera from '../components/Camera'
 import Modal from '../components/Modal'
-import { useRouter } from "next/router";
-
 
 function capture() {
-
-  const router = useRouter();
   
-  const moveFoodInfo = () => {
-      router.push('/foodinfo')
+  const [showModal, setShowModal] = useState(true);
+
+  const closeModal = () => {
+    setShowModal(false);
   }
 
+  
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
         <div className="flex justify-center">
-            {/* <Modal/> */}
+            {showModal ?
+              <Modal closeModal={closeModal}/>
+            :  
             <div className="text-white bg-main/30 p-2 pd-8 rounded-3xl">
-                <Camera onClick={moveFoodInfo}/>
+              <Camera/>
             </div>
-
+            }
             {/* <Camera/> */}
         </div>
     </div>
