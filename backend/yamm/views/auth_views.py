@@ -5,20 +5,20 @@ from django.http import HttpResponse, JsonResponse
 from argon2 import PasswordHasher # 암호화
 
 from django.http import HttpResponse
-from django.core import serializers # json으로 데이터 보내기.
+from ..models import User
+# from django.core import serializers # json으로 데이터 보내기.
 
-from rest_framework import viewsets
+# from rest_framework import viewsets
 
 # DRF(Django-rest-framework)
-from ..serializers import UserSerializer
-from ..models import User
+# from ..serializers import UserSerializer
 
 
 
-class UserView(viewsets.ModelViewSet):
-    # api 문서
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+# class UserView(viewsets.ModelViewSet):
+#     # api 문서
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
 
 
 def user_email(request):
@@ -146,8 +146,18 @@ def user_signin(request):
             else:
                 print("Login 성공!")
 
+                # 세션 삭제.
+                del request.session['user_id']
+
+                request.session['user_id'] = same_user.email
+
+
                 return JsonResponse({
                     "result": "success",
                     "content": "로그인 성공하였습니다.",
                     "status": 200
                 })
+
+def user_logout(request):
+    del request.session['user_id']
+    return 'home page'
