@@ -16,7 +16,7 @@ export default function Home({ images }) {
 
   return (
     <>
-    <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
+    <div className="container mx-auto h-full bg-slate-50 rounded-3xl">
       <div className="w-80 h-40 p-8 flex text-left flex-col justify-center">
         <span className="font-bold text-3xl text-main ">안녕하세요. ---님</span><br/>
         <span className="font-bold ">오늘은 어떤 음식을 드셨나요?</span>

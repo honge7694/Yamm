@@ -1,4 +1,4 @@
-import React, {useState, useRef, useCallback} from 'react'
+import React, {useState, useRef, useCallback, useEffect} from 'react'
 import Webcam from "react-webcam";
 import { useRouter } from "next/router";
 
@@ -10,7 +10,6 @@ const videoConstraints = {
 
 export default function Camera(props) {
     
-    const [image, setImage] = useState();
 
     // const videoConstraints = {
     //     facingMode: { exact: "environment" }
@@ -20,21 +19,22 @@ export default function Camera(props) {
 
     const webcamRef = useRef(null);
     
+    
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();        
-        setImage(imageSrc)
+        localStorage.setItem("image", imageSrc);
         moveFoodInfo();
         },        
         [webcamRef] 
     );
+    
+    
 
-    console.log(image)
     const router = useRouter();
 
     const moveFoodInfo = () => {
         router.push({
             pathname: '/foodinfo',
-            query: {image: image}
         })
     }
 
