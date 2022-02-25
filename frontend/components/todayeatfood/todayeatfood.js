@@ -26,11 +26,11 @@ const settings = {
       </div>
       <div className="bg-gray-200 px-8" onClick={(e)=>{routeFoodInfo()}}>
         <Slider {...settings}>
-        { images.map(image => (
-        <div key={image.id}>
-          <img className="w-auto px-2 rounded-3xl" src={image.url}></img>
-        </div>
-        )) }
+          { images.map(image => (
+          <div key={image.id}>
+            <img className="w-auto px-2 rounded-3xl" src={image.url}></img>
+          </div>
+          )) }
         </Slider>
       </div>
     </div>

@@ -1,3 +1,15 @@
+@import url('/fonts/Jalnan.ttf');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Jalnan';
+  font-size: 35px;
+  src: url('/fonts/Jalnan.ttf') format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

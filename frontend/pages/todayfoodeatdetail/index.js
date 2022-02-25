@@ -1,19 +1,14 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-
+import TopNav from '../../components/todayeatfood/topnav/topnav';
+import CalorieGraph from '../../components/todayeatfood/caloriegraph';
+import TodayFoodList from '../../components/todayeatfood/todayfoodlist';
 
 function FoodInFo({  }) {
-    useEffect(()=>{
-        axios.get('/api/hello')
-        .then(res=>(
-            console.log(res,"food")
-        ));
-    }, []);
-   
-  
+    
     return (
     <div>
-      foodinfoss
+      <TopNav />
+      <CalorieGraph />
+      <TodayFoodList />
     </div>
   )
 }
