@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Calendar from "../components/calendar/calendar";
+import Calendar from "../components/calendar/index";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from "../components/todayeatfood/todayeatfood";
 import TodayEatFoodNull from "../components/todayeatfood/todayeatfoodnull";
@@ -35,7 +35,8 @@ export default function Home({ images }) {
       { true && <TodayEatFood images={images}/>}
       { false && <TodayEatFoodNull />}
       
-      <Calendar />
+      <Calendar />  
+        
     </div>
     </>
   )
