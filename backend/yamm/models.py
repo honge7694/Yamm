@@ -22,20 +22,15 @@ class FoodImage(models.Model):
     class Meta:
         db_table = 'tb_food_images'
 
-
 class FoodImageInfo(models.Model):
-    user_id = models.ForeignKey(
-        "User", related_name="user", on_delete=models.CASCADE, db_column='user_id')
-    food_id = models.ForeignKey(
-        "FoodInfo", related_name="food_info", on_delete=models.CASCADE, db_column='food_id')
-    img_id = models.ForeignKey(
-        "FoodImage", related_name="food_img", on_delete=models.CASCADE, db_column='food_img')
+    user_id = models.ForeignKey("User", related_name="user", on_delete=models.CASCADE, db_column='user_id')
+    food_id = models.ForeignKey("FoodInfo", related_name="food_info", on_delete=models.CASCADE, db_column='food_id')
+    img_id = models.ForeignKey("FoodImage", related_name="food_img", on_delete=models.CASCADE, db_column='food_img')
     date = models.DateTimeField()
     memo = models.TextField(null=True, blank=True)
 
     class Meta:
         db_table = 'tb_food_images_info'
-
 
 class FoodInfo(models.Model):
     name = models.CharField(max_length=100)
