@@ -27,6 +27,8 @@ function* logIn(action) {
   try {
     console.log('saga logIn');
     // const result = yield call(logInAPI); -> 로그인  API
+    axios.get('https://source.unsplash.com/random')
+    .then((test)=>{console.log(test)});
     yield delay(1000);
     yield put({
       type: LOG_IN_SUCCESS,

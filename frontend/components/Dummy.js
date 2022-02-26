@@ -14,7 +14,7 @@ export const dataDummy = [
         "hit" : 1 },
         { "idx" : 10032,
         "title" : "돈까스 맛있다",
-        "content" : "갈비 한입 크게 먹고 싶다 ",
+        "content" : "스윙스 돈까스가 먹고싶니 ?  ",
         "foodImg" : "/asset/돈까스.png",
         "hit" : 261 },
         { "idx" : 10042,

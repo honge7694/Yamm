@@ -10,7 +10,6 @@ const Logo = ()=>{
      renderer: 'svg',
      loop: true,
      autoplay:true,
-     animationData:require("/Users/PC/Downloads/logo1.json")
    },[])
 
  },[])
