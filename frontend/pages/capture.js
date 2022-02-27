@@ -21,6 +21,7 @@ function capture() {
               <Camera/>
             </div>
             }
+          
             {/* <Camera/> */}
         </div>
     </div>
