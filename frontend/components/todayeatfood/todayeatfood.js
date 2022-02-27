@@ -1,5 +1,7 @@
 import Slider from "react-slick";
 import { useRouter } from "next/router";
+import { useSelector } from 'react-redux';
+
 
 const settings = {
     className: "center",
@@ -9,14 +11,24 @@ const settings = {
     slidesToShow: 1,
     speed: 500
   };
-  const dummyFoodImage = ["/asset/떡볶이.png","/asset/삼겹살.png","/asset/비빔밥.png", "/asset/떡볶이.png"] 
-  const TodayEatFood = ({ images }) => {
+const dummyFoodImage = ["/asset/떡볶이.png","/asset/삼겹살.png","/asset/비빔밥.png", "/asset/떡볶이.png"] 
+
+const TodayEatFood = ({ images }) => {
+  
   
   const router = useRouter();
-
-  const routeFoodInfo = () => {
-    console.log("routeTodayFoodEatDetail")
-    router.push('/todayfoodeatdetail')
+  const isLoggedIn  = useSelector((state) => state.user.me);
+  
+  const routeTodayFoodEatDetail = () => {
+    
+    console.log(isLoggedIn,"routeTodayFoodEatDetail")
+    if (isLoggedIn==null) { 
+      router.push({
+        pathname: '/login',
+        query : { "url" : "/todayfoodeatdetail" }
+    })}else{
+      router.push("/todayfoodeatdetail");
+    }
   }
   
   return (
@@ -24,7 +36,7 @@ const settings = {
       <div className="font-bold px-8 pt-6 pb-2 text-xl">
           <p>오늘 먹은 음식</p>
       </div>
-      <div className="bg-gray-200 px-8" onClick={(e)=>{routeFoodInfo()}}>
+      <div className="bg-gray-200 px-8" onClick={(e)=>{routeTodayFoodEatDetail()}}>
         <Slider {...settings}>
           { images.map((image, i) => (
           <div key={image.id}>

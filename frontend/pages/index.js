@@ -3,6 +3,7 @@ import Calendar from "../components/calendar/index";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from "../components/todayeatfood/todayeatfood";
 import TodayEatFoodNull from "../components/todayeatfood/todayeatfoodnull";
+import BoardTest from '../components/boardtest';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -36,6 +37,8 @@ export default function Home({ images }) {
       { false && <TodayEatFoodNull />}
       
       <Calendar />  
+      
+      <BoardTest /* 임시 이름 */ />
         
     </div>
     </>

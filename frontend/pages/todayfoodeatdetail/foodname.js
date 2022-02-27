@@ -28,7 +28,7 @@ function FoodInFoFoodName({ router: { query } }) {
                 <FontTitle marginTop="" textSize="text-xl" />
             </div>
             
-            <div onClick={(e)=>{routeUpLoadFuntion()}} className='rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white' id="testForm"> 
+            <div className='rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white' id="testForm"> 
                 수정
             </div>
       </div>
