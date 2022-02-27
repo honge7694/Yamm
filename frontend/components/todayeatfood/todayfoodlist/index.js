@@ -26,10 +26,9 @@ const TodayFoodList = () => {
                     return <FoodItem key={i} foodData={foodData} />
                 })*/}
                 { data.length != 0 && <FoodItemm foodData={data[0][0]} testData={testData[0]} /> }
-                { data.length != 0 && <FoodItemm foodData={data[0][0]} testData={testData[0]} /> }
-                { data.length != 0 && <FoodItemm foodData={data[0][0]} testData={testData[0]} /> }
-                { data.length != 0 && <FoodItemm foodData={data[0][0]} testData={testData[0]} /> }
-                { data.length != 0 && <FoodItemm foodData={data[0][0]} testData={testData[0]} /> }
+                { data.length != 0 && <FoodItemm foodData={data[0][1]} testData={testData[1]} /> }
+                { data.length != 0 && <FoodItemm foodData={data[0][2]} testData={testData[2]} /> }
+                { data.length != 0 && <FoodItemm foodData={data[0][3]} testData={testData[0]} /> }
             </div>
         </div>
     );

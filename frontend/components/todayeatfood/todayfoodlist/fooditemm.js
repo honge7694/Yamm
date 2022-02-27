@@ -21,8 +21,9 @@ const FoodItemm = ({ foodData, testData }) => {
 
     const router = useRouter();
     let date = new Date(foodData["date"]);
-    let formatDate = format(date, "yyyy do H:mma");
+    let formatDate = format(date, "H:mma");
     const [testData1, setTestData1] = useState(testData)
+
     const routeFoodname = () => {
       router.push({
         pathname : `/todayfoodeatdetail/foodname`,

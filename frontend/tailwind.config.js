@@ -1,20 +1,29 @@
+// tailwind.config.js
 module.exports = {
-  content: [    
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  purge: ['./pages/**/*.js', './components/**/*.js'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {
-      colors: {
-        'main': '#EDA345',
-        'yellow1': '#EDA345',
-        'green1': '#264A36',
-        'red1': '#DB0007',
-      },
-      maxHeight: {
-        '80': '80%'
+  extend: {
+    keyframes: {
+      wiggle: {
+        '0%': { transform: 'translate3d(0,100%,0)' },
+        'to': { transform: 'translateZ(0)' },
       }
     },
+    animation: {
+      wiggle: 'wiggle 1s ease-in-out',
+    },
+    colors: {
+      'yellow1': '#EDA345',
+      'green1': '#264A36',
+      'red1': '#DB0007',
+    },
+  },
+  },
+  variants: {
+  extend: {},
   },
   plugins: [],
 }
+  
+  

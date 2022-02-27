@@ -14,7 +14,7 @@ function renderDay(day) {
   return (
     
     <div className="h-[30px] w-[30px] relative">
-      { console.log(date) }
+      
       <div className=" bottom-0 right-0 text-sm flex items-center">{date}</div>
       {birthdays[date] &&
         birthdays[date].map((name, i) => (
@@ -32,12 +32,14 @@ function renderDay(day) {
 }
 export default function Calendar() {
   return (
-      <div className="flex justify-center">
-        <DayPicker
-        canChangeMonth={true}
-        className="Birthdays"
-        renderDay={renderDay}
-        />
+      <div className=" w-full  flex justify-center mt-10">
+        <div className="w-5/6  flex justify-center">
+          <DayPicker
+          canChangeMonth={true}
+          className="Birthdays"
+          renderDay={renderDay}
+          />
+        </div>
       </div>
   );
 }

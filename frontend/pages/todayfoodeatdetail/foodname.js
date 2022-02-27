@@ -2,16 +2,21 @@ import React, { useEffect, PureComponent } from 'react'
 import { withRouter } from 'next/router';
 import FontTitle from '../../components/font/fontTitle';
 import Image from 'next/image';
-import { Chart } from '../../components/chart/Chart';
+import { Chart } from '../../components/chart/index';
 import moment from 'moment';
 import 'moment/locale/ko';
+import { useRouter } from "next/router";
 
 // withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ router: { query } }) {
 
-  const nowTime = moment().format('YY년 MM월 DD일');
+  const router = useRouter();
 
+  const nowTime = moment().format('YY년 MM월 DD일');
+  const routeBackFuntion = () => {
+    router.push('/todayfoodeatdetail')
+  }
   return (
     <div>
 
@@ -46,7 +51,7 @@ function FoodInFoFoodName({ router: { query } }) {
 
           
       <div className=' flex-col item justify-center bg-neutral-200 mt-10 rounded-2xl ml-5 mr-5'>
-        <div className='items-center justify-center flex'>Comment</div>
+        <div className='items-center justify-center flex font-["Jalnan"]'>📌 Ya---M 일기</div>
         <div className='mt-7 items-center justify-center flex'>{query["memo"]}</div>
       </div>
     </div>

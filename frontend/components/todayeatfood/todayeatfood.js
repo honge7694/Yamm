@@ -9,7 +9,7 @@ const settings = {
     slidesToShow: 1,
     speed: 500
   };
-
+  const dummyFoodImage = ["/asset/떡볶이.png","/asset/삼겹살.png","/asset/비빔밥.png", "/asset/떡볶이.png"] 
   const TodayEatFood = ({ images }) => {
   
   const router = useRouter();
@@ -26,9 +26,9 @@ const settings = {
       </div>
       <div className="bg-gray-200 px-8" onClick={(e)=>{routeFoodInfo()}}>
         <Slider {...settings}>
-          { images.map(image => (
+          { images.map((image, i) => (
           <div key={image.id}>
-            <img className="w-auto px-2 rounded-3xl" src={image.url}></img>
+            <img className="w-auto px-2 rounded-3xl" src={dummyFoodImage[i]}></img>
           </div>
           )) }
         </Slider>

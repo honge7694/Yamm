@@ -38,13 +38,7 @@ export default function Home({ images }) {
       <Calendar />  
         
     </div>
-<<<<<<< HEAD
-    <div>
-      community commit test
-    </div>
-=======
     </>
->>>>>>> feature_frontend_mainpage
   )
 }
 
