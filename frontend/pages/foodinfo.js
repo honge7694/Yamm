@@ -39,4 +39,4 @@ function foodinfo(props) {
   )
 }
 
-export default foodinfo
+export default foodinfo;

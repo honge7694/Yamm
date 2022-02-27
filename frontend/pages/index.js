@@ -1,23 +1,13 @@
 import { useRouter } from "next/router";
-
-import Calendar from "../components/Calendar";
-import Slider from "react-slick";
+import Calendar from "../components/calendar/index";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import TodayEatFood from "../components/todayeatfood/todayeatfood";
+import TodayEatFoodNull from "../components/todayeatfood/todayeatfoodnull";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Home({images}) {
-
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "100px",
-    slidesToShow: 1,
-    speed: 500
-  };
-
+export default function Home({ images }) {
+  
   const router = useRouter();
   
   const moveCapture = () => {
@@ -33,32 +23,20 @@ export default function Home({images}) {
       </div>
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
-        <div className="flex justify-center px-8 ">
-          <button className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white" onClick={moveCapture}>
-            <div className="pt-8 text-2xl">오늘 먹은 음식을 추가해주세요</div>
-            <div className="pt-4 text-main">
-              <AddCircleIcon fontSize="large"/>
-            </div>
-          </button>
-        </div>
+      <div className="flex justify-center px-8 ">
+        <button className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white" onClick={moveCapture}>
+          <div className="pt-8 text-2xl">오늘 먹은 음식을 추가해주세요</div>
+          <div className="pt-4 text-main">
+            <AddCircleIcon fontSize="large"/>
+          </div>
+        </button>
+      </div>
+
+      { true && <TodayEatFood images={images}/>}
+      { false && <TodayEatFoodNull />}
+      
+      <Calendar />  
         
-      <div className="font-bold px-8 pt-6 pb-2 text-xl">오늘 먹은 음식</div>
-
-        <div>
-          <Slider {...settings}>
-          {images.map(image => (
-            <div  key={image.id}>
-              <img className="w-auto px-2 rounded-3xl" src={image.url}></img>
-            </div>
-          ))}
-          </Slider>
-        </div>
-
-
-      <div className="font-bold px-8 pt-6 pb-2 text-xl">식단 분석표</div>
-        <div className="px-8">
-          <Calendar/>
-        </div>
     </div>
     </>
   )
@@ -67,7 +45,6 @@ export default function Home({images}) {
 export const getServerSideProps = async() => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_start=0&_end=4`)
   const images = await res.json();
-
   return {
     props: {
       images
