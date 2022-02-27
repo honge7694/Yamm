@@ -8,6 +8,8 @@ const videoConstraints = {
     facingMode: "user"
 };
 
+
+
 export default function Camera(props) {
     
 
@@ -31,7 +33,7 @@ export default function Camera(props) {
     
 
     const router = useRouter();
-
+    
     const moveFoodInfo = () => {
         router.push({
             pathname: '/foodinfo',

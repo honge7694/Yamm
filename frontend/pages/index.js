@@ -43,7 +43,7 @@ export default function Home({images}) {
         </div>
         
       <div className="font-bold px-8 pt-6 pb-2 text-xl">오늘 먹은 음식</div>
-      
+
         <div>
           <Slider {...settings}>
           {images.map(image => (
