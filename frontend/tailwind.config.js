@@ -17,7 +17,11 @@ module.exports = {
       'yellow1': '#EDA345',
       'green1': '#264A36',
       'red1': '#DB0007',
+      'main': '#EDA345'
     },
+    maxHeight: {
+      '80': '80%'
+    }
   },
   },
   variants: {
