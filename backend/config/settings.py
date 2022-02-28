@@ -19,14 +19,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'yamm.apps.YammConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # rest frame work
+    'rest_framework',
+
+    # my app
+    'yamm',
 ]
+
+# AUTH_USER_MODEL = 'yamm.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
