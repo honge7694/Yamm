@@ -12,15 +12,21 @@ function foodinfo(props) {
     setFoodImage(Image)
   }, [])
 
-  const [ Memo, setMemo ] = useState()
-  const [ checkFoodName, setCheckFoodName ] = useState()
+  const [ writeMemo, setWriteMemo ] = useState(false)
+  const [ searchFoodName, setSearchFoodName ] = useState()
 
   const openMemo = () => {
-    
+    setWriteMemo(true)
   }
+  const closeMemo = () => {
+    setWriteMemo(false)
+  } 
   
   const router = useRouter();
-
+  
+  const moveMain = () => {
+    router.push('/')
+  }
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl" >
       <div className="flex flex-col items-center text-center">
@@ -30,8 +36,15 @@ function foodinfo(props) {
         <div className="w-full pt-8">
           <div className="h-96 rounded-3xl drop-shadow-[0_-10px_20px_-5px_rgba(115,115,115,0.75)] bg-main">
             <div className="py-8 text-2xl font-bold">사진의 음식이 돈까스가 맞으신가요?</div>
-            <button className="p-4 px-8 m-4 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full">맞습니다</button>
+            <button className="p-4 px-8 m-4 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full" onClick={openMemo}>
+              맞습니다</button>
             <button className="p-4 px-8 m-4 font-bold bg-white hover:bg-slate-300 shadow-lg rounded-full">아닙니다</button>
+            { writeMemo ? <Memo closeMemo={closeMemo}/> : null }
+            { searchFoodName ? <Memo/> : null }
+            <div>
+              <button className="p-4 px-8 mt-32 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full" onClick={moveMain}>확인</button>
+            </div>
+
           </div>
         </div>
       </div>
