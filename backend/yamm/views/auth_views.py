@@ -1,10 +1,24 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import (
+    TokenBlacklistView,
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 from django.http import JsonResponse
 
-from ..serializers import UserSerializer, EmailCheckAvailableSerializer
+from ..serializers import (
+    UserSerializer, 
+    EmailCheckAvailableSerializer,
+    TokenObtainPairResponseSerializer,
+    TokenRefreshResponseSerializer,
+    TokenVerifyResponseSerializer,
+    TokenBlacklistResponseSerializer,
+)
 from ..models import User
 
 
@@ -42,4 +56,50 @@ class UserEmailCheck(APIView):
         
         return Response(response, status=status.HTTP_200_OK)
 
-        
+class DecoratedTokenObtainPairView(TokenObtainPairView):
+    '''
+    로그인 토큰 생성
+    '''
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenObtainPairResponseSerializer,
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+class DecoratedTokenRefreshView(TokenRefreshView):
+    '''
+    로그인 토큰 갱신
+    '''
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenRefreshResponseSerializer,
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+class DecoratedTokenVerifyView(TokenVerifyView):
+    '''
+    로그인 토큰 유효성 검사
+    '''
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenVerifyResponseSerializer,
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+class DecoratedTokenBlacklistView(TokenBlacklistView):
+    '''
+    ?
+    '''
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenBlacklistResponseSerializer,
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # rest frame work
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     
     # DRF Authentication 사용
     'rest_framework.authtoken',
@@ -39,9 +40,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
-
-    # jwt : json web token
-
 
     # my app
     'yamm',
@@ -143,6 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  # 
 }
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),

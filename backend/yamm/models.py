@@ -71,19 +71,5 @@ class User(AbstractBaseUser):
     class Meta :
         db_table = 'user'
     
-class userLogin(models.Model):
-    #로그인 제공자의 회원키
-    provider_key = models.CharField(
-        max_length=255,
-        null=False,
-        db_column="providerKey"
-    )
-    user = models.ForeignKey(
-        User, 
-        related_name='user_logins', 
-        on_delete=models.CASCADE,
-        db_column="userId")
 
-    class Meta:
-        db_table = "UserLogins"
     
