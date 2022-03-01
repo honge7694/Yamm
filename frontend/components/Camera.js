@@ -19,7 +19,6 @@ export default function Camera(props) {
 
     const webcamRef = useRef(null);
     
-    
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();        
         localStorage.setItem("image", imageSrc);
@@ -27,10 +26,23 @@ export default function Camera(props) {
         },        
         [webcamRef] 
     );
+
+    const [files, setFiles] = useState('');
     
-    
+    const onLoadFile = (e) => {
+        const file = e.target.files;
+        setFiles(file);
+    }
+
+    if (files === true) {
+        return localStorage.setItem("image1", files);
+        moveFoodInfo();
+    } else {
+        console.log('fail')
+    }
 
     const router = useRouter();
+
     const moveFoodInfo = () => {
         router.push({
             pathname: '/foodinfo',
@@ -50,6 +62,9 @@ export default function Camera(props) {
         />
         <div className="pt-8 text-center">
             <button className="p-4 rounded-3xl bg-main drop-shadow-xl" onClick={capture} >사진 촬영</button>
+        </div>
+        <div>
+          <input type="file" className="file" accept='image/jpg,impge/png,image/jpeg,image/gif' onChange={onLoadFile}/>
         </div>
         </>
     );
