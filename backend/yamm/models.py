@@ -59,17 +59,31 @@ class User(AbstractBaseUser):
     # 헬퍼 클래스 사용
     objects = UserManager()
 
-    # 사용자의 username field는 email으로 설정 (unique 속성 필요)
+    # 사용자의 username field는 email으로 설정 (unique 속성 필요, email로 로그인)
     USERNAME_FIELD = 'email'
 
     # 필수로 작성해야 하는 field
     REQUIRED_FIELDS = ['email, name, nickname, number']
 
     def __str__(self):
-        return self.nickname
+        return self.email
 
     class Meta :
         db_table = 'user'
     
+class userLogin(models.Model):
+    #로그인 제공자의 회원키
+    provider_key = models.CharField(
+        max_length=255,
+        null=False,
+        db_column="providerKey"
+    )
+    user = models.ForeignKey(
+        User, 
+        related_name='user_logins', 
+        on_delete=models.CASCADE,
+        db_column="userId")
 
+    class Meta:
+        db_table = "UserLogins"
     
