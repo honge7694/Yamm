@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'nickname', 'name', 'number', 'taste']
+        fields = ['email', 'password', 'nickname', 'name', 'phonenumber', 'taste']
 
 class EmailCheckAvailableSerializer(serializers.ModelSerializer):
     '''
