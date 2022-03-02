@@ -32,10 +32,10 @@ class EmailCheckAvailableSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['email', 'nickname']
-        extra_kwargs = {
-            'email': {"required": True, "write_only": True},
-            'nickname': {"required": True, "write_only": True},
-        }
+        # extra_kwargs = {
+        #     'email': {"required": True, "write_only": True},
+        #     'nickname': {"required": True, "write_only": True},
+        # }
 
 
 class TokenObtainPairResponseSerializer(serializers.Serializer):

@@ -38,7 +38,7 @@ class UserEmailCheck(APIView):
     
     def post(self, request):
         serializer = EmailCheckAvailableSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid(raise_exception=False)
 
         response = {}
 
@@ -52,7 +52,6 @@ class UserEmailCheck(APIView):
 
             if key in errors and errors[key]:
                 response[key] = {"result": False, "detail": errors[key][0]}
-
         
         return Response(response, status=status.HTTP_200_OK)
 
@@ -94,7 +93,7 @@ class DecoratedTokenVerifyView(TokenVerifyView):
 
 class DecoratedTokenBlacklistView(TokenBlacklistView):
     '''
-    ?
+    로그아웃 refresh 토큰 삭제
     '''
     @swagger_auto_schema(
         responses={
