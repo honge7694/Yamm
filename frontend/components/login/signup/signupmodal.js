@@ -9,13 +9,13 @@ return (
       <div onClick={(e)=>{e.stopPropagation();}} className="w-screen fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
         <form className=" bg-white shadow-md rounded px-8 pt-6 pb-8 ">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
               이메일
             </label>
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="이메일 입력"/>
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               비밀번호
             </label>
             <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="*******"/>

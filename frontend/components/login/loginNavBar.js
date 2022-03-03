@@ -8,6 +8,7 @@ import FontTitle from '../font/fontTitle';
 import TopNav from './topnav';
 import LoginForm from './loginform';
 import { useRouter } from "next/router";
+import TestForm from './testform';
 
 export default function LoginNavbar() {
 
@@ -26,10 +27,11 @@ export default function LoginNavbar() {
 
   return (
     <div>
-      {console.log(router)}
+      {/* {console.log(router)} */}
       <TopNav/>
       <FontTitle marginTop="mt-8" textSize="text-3xl" />
-      <LoginForm onSubmit={onSubmit}/>
+      { /*<LoginForm onSubmit={onSubmit}/> */}
+      <TestForm />
       <LoginLinks />
     </div>
   );
