@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from board.models import Post, PostImage
+from board.models import Post, PostImage, ImageTes
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class PostImageSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    images = serializers.SerializerMethodField()
+    images = serializers.SerializerMethodField("get_images")
 
     def get_images(self, obj):
         image = obj.postimage_set.all()
@@ -31,3 +31,7 @@ class PostSerializer(serializers.ModelSerializer):
         
         return instance
 
+class ImageTesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageTes
+        fields = '__all__'

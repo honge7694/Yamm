@@ -1,10 +1,10 @@
-from rest_framework import serializers, status, permissions
+from rest_framework import serializers, status, permissions, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import Post, PostImage 
-from ..serializers import PostSerializer, PostImageSerializer
+from ..models import Post, PostImage, ImageTes 
+from ..serializers import PostSerializer, PostImageSerializer, ImageTesSerializer
 
 class PostList(APIView):
     
@@ -23,4 +23,10 @@ class PostList(APIView):
             return Response(serializers.data, status.HTTP_201_CREATED)
         
 
-        return Response(serializers.erros, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ImageTes(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+
+    serializer_class = ImageTesSerializer
+    queryset = ImageTes.objects.all()

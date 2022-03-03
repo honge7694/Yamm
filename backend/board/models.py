@@ -14,3 +14,9 @@ class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     img = models.ImageField(upload_to="post/%Y/%m/%d", blank=True, null=True)
 
+class ImageTes(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(blank=True, null=True, upload_to='images/')
+
+    def __str__(self):
+        return self.title

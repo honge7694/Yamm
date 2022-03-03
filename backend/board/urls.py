@@ -5,4 +5,7 @@ urlpatterns =[
     path('', board_views.PostList.as_view()),
     # path('write/', board_views.PostWirte.as_view()),
     # path('delete/', )
+
+    # Test
+    path('boardtest/', board_views.ImageTes.as_view()),
 ]
