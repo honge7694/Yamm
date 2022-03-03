@@ -22,7 +22,7 @@ export default function LoginNavbar() {
   const onSubmit = useCallback(() => {
     console.log("dispath-loginRequestAction")
     dispatch(loginRequestAction({ id, password, nick, }));
-    router.push(router.query["url"]);
+    //router.push(router.query["url"]);
   }, [password]);
 
   return (
@@ -30,7 +30,7 @@ export default function LoginNavbar() {
       {/* {console.log(router)} */}
       <TopNav/>
       <FontTitle marginTop="mt-8" textSize="text-3xl" />
-      { /*<LoginForm onSubmit={onSubmit}/> */}
+      {/* { <LoginForm onSubmit={onSubmit}/> } */}
       <TestForm />
       <LoginLinks />
     </div>
