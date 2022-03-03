@@ -1,8 +1,6 @@
 from django.urls import path, include
 from .views import base_views, auth_views
 
-from rest_framework import urls
-
 # app_name = 'yamm'
 
 urlpatterns= [
