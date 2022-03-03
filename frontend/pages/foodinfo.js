@@ -21,8 +21,7 @@ function foodinfo(props) {
   }
   const closeMemo = () => {
     setWriteMemo(false)
-  } 
-  
+  }   
   const router = useRouter();
   
   const moveMain = () => {
@@ -40,8 +39,10 @@ function foodinfo(props) {
             <button className="p-4 px-8 m-4 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full" onClick={openMemo}>
               맞습니다</button>
             <button className="p-4 px-8 m-4 font-bold bg-white hover:bg-slate-300 shadow-lg rounded-full">아닙니다</button>
+
             { writeMemo ? <Memo closeMemo={closeMemo}/> : null }
             { searchFoodName ? <Search/> : null }
+            
             <div>
               <button className="p-4 px-8 mt-32 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full" onClick={moveMain}>확인</button>
             </div>
