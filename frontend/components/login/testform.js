@@ -11,7 +11,15 @@ const TestForm = () => {
     const submitFuction = async (e) => {
         console.log("qqq")
         e.preventDefault()
-        await axios.post('http://localhost:8000/yamm/signin/', {	"email" : "test@naver.com", "password" : "test" })
+        try {
+          await axios.post('http://localhost:8000/yamm/signin/', {	"email" : "tsest@naver.com", "password" : "tasest" })
+          .then((test)=>{
+            console.log(test)
+          });
+        }catch(error){
+          console.log(error, "error check signIn")
+        }
+        
         
     }
   
