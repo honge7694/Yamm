@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from yamm.models import User
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_post')
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_post')
     title = models.CharField(max_length=100)
     content = models.TextField()
     create_date = models.DateTimeField()
@@ -11,7 +11,7 @@ class Post(models.Model):
     reaction = models.ManyToManyField(User, related_name='reaction_post')
 
 class PostImage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, db_column='post_id')
     img = models.ImageField(upload_to="post/%Y/%m/%d", blank=True, null=True)
 
 class ImageTes(models.Model):

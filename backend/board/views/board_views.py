@@ -6,24 +6,12 @@ from rest_framework.views import APIView
 from ..models import Post, PostImage, ImageTes 
 from ..serializers import PostSerializer, PostImageSerializer, ImageTesSerializer
 
-class PostList(APIView):
-    
+class PostList(generics.CreateAPIView):
     # permission_classes = (IsAuthenticated, )
     permission_classes = [permissions.AllowAny]
-    
-    # serializers_class =PostSerializer()
 
-    # def get(self, request):
-    #     serializers = PostSerializer()
-
-    def post(self, request):
-        serializers = PostSerializer(data=request.data, context={"request": request})
-        if serializers.is_valid():
-            serializers.save(user=self.request.user)
-            return Response(serializers.data, status.HTTP_201_CREATED)
-        
-
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
 
 class ImageTes(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
