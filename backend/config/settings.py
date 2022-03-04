@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # my app
     'yamm',
+    'board',
 ]
 
 SITE_ID = 1

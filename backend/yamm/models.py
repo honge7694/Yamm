@@ -73,4 +73,4 @@ class User(AbstractBaseUser):
         db_table = 'user'
     
 
-    
+
