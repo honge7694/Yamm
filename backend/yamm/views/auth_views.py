@@ -2,6 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from rest_framework_simplejwt.views import (
     TokenBlacklistView,
     TokenObtainPairView,
@@ -55,25 +57,27 @@ class UserEmailCheck(APIView):
         
         return Response(response, status=status.HTTP_200_OK)
 
-class DecoratedTokenObtainPairView(TokenObtainPairView):
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     '''
     로그인 토큰 생성
     '''
-    # @swagger_auto_schema(
-    #     responses={
-    #         status.HTTP_200_OK: TokenObtainPairResponseSerializer,
-    #     }
-    # )
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
 
-    def post(self, request, *args, **kwargs):
-        response = {}
-        
-        response['token'] = super().post(request, *args, **kwargs)
-        response['user'] = User
+        # Add custom claims
+        token['name'] = user.name
+        token['nickname'] = user.nickname
+        token['email'] = user.email
+        token['phonenumber'] = user.phonenumber
+        token['taste'] = user.taste
+        # ...
 
-        print(response)
+        return token
 
-        return response
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 class DecoratedTokenRefreshView(TokenRefreshView):
     '''
@@ -110,3 +114,4 @@ class DecoratedTokenBlacklistView(TokenBlacklistView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
