@@ -59,13 +59,21 @@ class DecoratedTokenObtainPairView(TokenObtainPairView):
     '''
     로그인 토큰 생성
     '''
-    @swagger_auto_schema(
-        responses={
-            status.HTTP_200_OK: TokenObtainPairResponseSerializer,
-        }
-    )
+    # @swagger_auto_schema(
+    #     responses={
+    #         status.HTTP_200_OK: TokenObtainPairResponseSerializer,
+    #     }
+    # )
+
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+        response = {}
+        
+        response['token'] = super().post(request, *args, **kwargs)
+        response['user'] = User
+
+        print(response)
+
+        return response
 
 class DecoratedTokenRefreshView(TokenRefreshView):
     '''

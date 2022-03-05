@@ -5,21 +5,21 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 class UserManager(BaseUserManager):
     # 일반 user 생성
-    def create_user(self, email, name, nickname, number, password=None, **extra_fields):
+    def create_user(self, email, name, nickname, phonenumber, password=None, **extra_fields):
         if not email:
             raise ValueError('must have user email')
         if not name:
             raise ValueError('must have user name')
         if not nickname:
             raise ValueError('must have user nickname')
-        if not number:
-            raise ValueError('must have user number')
+        if not phonenumber:
+            raise ValueError('must have user phonenumber')
         
         user = self.model(
             email = self.normalize_email(email),
             name = name,
             nickname = nickname,
-            number = number,
+            phonenumber = phonenumber,
             **extra_fields
         )
 
@@ -29,13 +29,13 @@ class UserManager(BaseUserManager):
         return user
 
     # 관리자 user 생성
-    def create_superuser(self, email, name, nickname, number, password=None, **extra_fields):
+    def create_superuser(self, email, name, nickname, phonenumber, password=None, **extra_fields):
         user = self.model(
             email,
             password = password,
             name = name,
             nickname = nickname,
-            number = number,
+            phonenumber = phonenumber,
             **extra_fields
         )
 
@@ -49,7 +49,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
     name = models.CharField(default='', max_length=100, null=False, blank=False)
     nickname = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
-    number = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
+    phonenumber = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
     taste = models.CharField(max_length=100, null=True, blank=True)
 
     # 장고에서 제공하는 User모델의 필수 field
@@ -63,7 +63,7 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     # 필수로 작성해야 하는 field
-    REQUIRED_FIELDS = ['email, name, nickname, number']
+    REQUIRED_FIELDS = ['email, name, nickname, phonenumber']
 
     def __str__(self):
         return self.email

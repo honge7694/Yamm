@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             password = validated_data['password'],
             name = validated_data['name'],
             nickname = validated_data['nickname'],
-            number = validated_data['number'],
+            phonenumber = validated_data['phonenumber'],
             taste = validated_data['taste']
         )
 
@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'nickname', 'name', 'number', 'taste']
+        fields = ['email', 'password', 'nickname', 'name', 'phonenumber', 'taste']
 
 class EmailCheckAvailableSerializer(serializers.ModelSerializer):
     '''
