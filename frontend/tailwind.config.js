@@ -21,7 +21,11 @@ module.exports = {
     },
     maxHeight: {
       '80': '80%'
-    }
+    },
+
+    backgroundImage: {
+      'food-bg': "url('/foodbg.jpg')"
+    },
   },
   },
   variants: {
