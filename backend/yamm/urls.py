@@ -1,5 +1,7 @@
 from django.urls import path, include
 from .views import base_views, auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 # app_name = 'yamm'
 
@@ -18,6 +20,6 @@ urlpatterns= [
 
     # login test
     path('api-auth/', include('rest_framework.urls')),
+    
 
-
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

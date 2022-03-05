@@ -33,12 +33,19 @@ class PostImageSerializer(serializers.ModelSerializer):
 #         fields = ['id', 'title', 'content', 'create_date', 'images']
 
 class PostSerializer(serializers.ModelSerializer):
-    images = PostImageSerializer(many=True, read_only=True)
+    images = PostImageSerializer(many=True, required=False)
+    # img = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'images', 'create_date']
+        fields = ['id', 'title', 'content', 'create_date', 'images', 'author', ]
     
+    # def get_img(self, obj):
+    #     parent_comments = obj.imagekey.all()
+    #     serializer = PostImageSerializer(parent_comments, many=True)
+
+    #     return serializer.data
+
     def create(self, validated_data):
         images_data = self.context['request'].FILES
         post = Post.objects.create(**validated_data)

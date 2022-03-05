@@ -38,16 +38,26 @@ class EmailCheckAvailableSerializer(serializers.ModelSerializer):
         # }
 
 
-class TokenObtainPairResponseSerializer(serializers.Serializer):
-    access = serializers.CharField()
-    refresh = serializers.CharField()
+# class TokenObtainPairResponseSerializer(serializers.Serializer):
+#     access = serializers.CharField()
+#     refresh = serializers.CharField()
 
-    def create(self, validated_data):
-        raise NotImplementedError()
+#     def create(self, validated_data):
+#         raise NotImplementedError()
 
-    def update(self, instance, validated_data):
-        raise NotImplementedError()
+#     def update(self, instance, validated_data):
+#         raise NotImplementedError()
+class TokenObtainPairResponseSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
 
+        # custom claims
+        token['nickname'] = user.nickname
+        token['username'] = user.name
+        token['number'] = user.number
+
+        return token
 
 class TokenRefreshResponseSerializer(serializers.Serializer):
     access = serializers.CharField()
