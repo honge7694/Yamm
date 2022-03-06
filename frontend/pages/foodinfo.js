@@ -1,7 +1,8 @@
 import React, { useState , useEffect } from 'react';
 import { useRouter } from "next/router";
 import Memo from '../components/Memo'
-import Search from '../components/Search';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 
 function foodinfo(props) {
@@ -14,6 +15,7 @@ function foodinfo(props) {
   }, [])
 
   const [ writeMemo, setWriteMemo ] = useState(false)
+  
   const [ searchFoodName, setSearchFoodName ] = useState()
 
   const openMemo = () => {
@@ -21,12 +23,24 @@ function foodinfo(props) {
   }
   const closeMemo = () => {
     setWriteMemo(false)
-  }   
+  } 
+  
+  const nowTime = moment().format('YYYY-MM-DD');
+  const [date, setDate] = useState(nowTime)
+  const [time, setTime] = useState()
+
+  console.log(nowTime);
+  
+  const changeDate = (e) => {
+    setDate(e.target.value);
+  }
+
   const router = useRouter();
   
   const moveMain = () => {
     router.push('/')
   }
+
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl" >
       <div className="flex flex-col items-center text-center">
@@ -40,9 +54,14 @@ function foodinfo(props) {
               맞습니다</button>
             <button className="p-4 px-8 m-4 font-bold bg-white hover:bg-slate-300 shadow-lg rounded-full">아닙니다</button>
 
-            { writeMemo ? <Memo closeMemo={closeMemo}/> : null }
-            { searchFoodName ? <Search/> : null }
-            
+            { writeMemo ? <Memo 
+            closeMemo={closeMemo} 
+            nowTime={nowTime} 
+            date={date}
+            time={time}
+            changeDate={changeDate}/> : null }
+            { searchFoodName ? <Memo/> : null }
+
             <div>
               <button className="p-4 px-8 mt-32 text-white font-bold bg-red-600 hover:bg-red-800 shadow-lg rounded-full" onClick={moveMain}>확인</button>
             </div>

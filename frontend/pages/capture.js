@@ -15,18 +15,14 @@ function capture() {
   useEffect(() => {
     if(files) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onload = () => {
         setPreview(reader.result)
+        localStorage.setItem("image", preview);
+        // moveFoodInfo();
       }
       reader.readAsDataURL(files)
-      // moveFoodInfo()
     }
-  },[files])  
-
-  const abc = useCallback(() => {
-    localStorage.setItem("image", preview);
-    moveFoodInfo();
-  })
+  },[files]) 
 
 
   const closeModal = () => {
