@@ -1,6 +1,5 @@
-from dataclasses import field
 from django.contrib.auth import get_user_model
-from .models import User
+from .models import User, FoodImage, Food
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
