@@ -10,10 +10,10 @@ const BoardTest = () => {
     const routeCommunity = () => {
       
       console.log(isLoggedIn,"/community")
-      if (isLoggedIn==null) { 
+      if (true) { 
         router.push({
-          pathname: '/login',
-          query : { "url" : "/community" }
+          pathname: '/community/writeboard',
+          query : { "url" : "/community/writeboard" }
       })}else{
         router.push("/community");
       }

@@ -4,4 +4,7 @@ __pycache__/
 .idea
 #db.sqlite3
 *.pyc
+<<<<<<< HEAD
 node_modules
+=======
+>>>>>>> feature_community_board

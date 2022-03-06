@@ -1,4 +1,4 @@
-import { all, delay, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
@@ -19,27 +19,40 @@ import {
   UNFOLLOW_SUCCESS,
 } from '../reducers/user';
 
+
+
 function logInAPI(data) {
-  return axios.post('/api/login', data);
+  
+  return axios.post("http://127.0.0.1:8000/yamm/signin/", data)
+              .then((res)=>{
+                console.log("saga loginAPI", res)
+                return [res.status, res.data]
+              })
+              .catch((res)=>{
+                console.log(res.response.status,"ere")
+                return [res.response.status,res.respons];
+              });
 }
 
 function* logIn(action) {
   try {
     console.log('saga logIn');
-    // const result = yield call(logInAPI); -> 로그인  API
-    axios.get('https://source.unsplash.com/random')
-    .then((test)=>{console.log(test)});
-    yield delay(1000);
-    yield put({
-      type: LOG_IN_SUCCESS,
-      data: action.data,
-    });
+    const result = yield call( logInAPI, action.data );
+    console.log(result[1],"token")
+    if(result[0] != 200 ){
+      yield put({
+        type: LOG_IN_FAILURE,
+        error: result[1],
+      });  
+    }else{
+      yield put({
+        type: LOG_IN_SUCCESS,
+        data: result[1],
+      });  
+    }
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOG_IN_FAILURE,
-      error: err.response.data,
-    });
+    
   }
 }
 
@@ -63,17 +76,38 @@ function* logOut() {
   }
 }
 
-function signUpAPI() {
-  return axios.post('/api/signUp');
-}
+function signUpAPI(formdata) {
+  return axios({
+        method: "post",
+        url: "http://localhost:8000/yamm/signup/",
+        data: formdata,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res)=>{
+        console.log(res)
+        return res.status;
+        
+      })
+      .catch(error => {
+        console.log(error)
+        return error.response.status;
+      });
+  }
 
-function* signUp() {
+function* signUp(action) {
   try {
-    // const result = yield call(signUpAPI); -> 회원가입 API
-    yield delay(1000);
-    yield put({
-      type: SIGN_UP_SUCCESS,
-    });
+    
+    const result = yield call( signUpAPI, action.formdata );
+    if(result != 201){
+      yield put({
+        type: SIGN_UP_FAILURE,
+        error: result,
+      });  
+    }else{
+      yield put({
+        type: SIGN_UP_SUCCESS,
+      });  
+    }
   } catch (err) {
     console.error(err);
     yield put({

@@ -33,7 +33,7 @@ const FoodItemm = ({ foodData, testData }) => {
     return (
 
         <div className="flex">
-            {console.log(foodData)}
+            {/* {console.log(foodData)} */}
             <div className="w-2/6 mt-2  flex flex-col items-center justify-center">
                     <div className=" col-span-1 rounded-full  w-4/6 min-h-[50px] min-w-[50px]  flex justify-center items-center relative" >
                       <SmileClick />
