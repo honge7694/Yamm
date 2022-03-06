@@ -1,5 +1,4 @@
-from django.conf import settings
-from django.conf.urls.static import static
+
 from django.urls import path, include
 from .views import base_views, auth_views, distinction_views, food_views
 
@@ -34,4 +33,4 @@ urlpatterns = [
     # login test
     path('api-auth/', include('rest_framework.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
