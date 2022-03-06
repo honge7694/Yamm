@@ -21,23 +21,23 @@ class eaten(APIView):
         먹은 음식 리스트 불러오기
         '''
         # TODO: email 부분 request.user 로 바꾸기
-        # TODO: 졸려서 내일 완성하기 + 완성이 우선이지만, 장고답게 개발하려고 고민해보기
+        # TODO: 로직 완성하기 + 완성이 우선이지만, 장고답게 개발하려고 고민해보기
         user = get_object_or_404(User, email="test@test.com")
         print(request.data["date"])
 
         # food_image = FoodImage.objects.filter(date=request.data["date"])
-        food_image = FoodImage.objects.all(user=user)
+        food_image = FoodImage.objects.all()
         serializer = FoodImageSerializer(food_image, many=True)
 
-        list = []
-        for obj in serializer.data:
-            dict = {}
-            dict["image"] = obj["image"]
-            dict["food_name"] = obj["name"]
-            # dict[""]
+        # list = []
+        # for obj in serializer.data:
+        #     dict = {}
+        #     dict["image"] = obj["image"]
+        #     dict["food_name"] = obj["name"]
+        # dict[""]
 
         response = list
-        return Response(response, status.HTTP_200_OK)
+        return Response(serializer.data, status.HTTP_200_OK)
 
     def post(self, request):
         '''
