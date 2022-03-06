@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from yamm.models import User
+# from hitcount.models import HitCountMixin
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_post', db_column='author')
@@ -16,7 +17,9 @@ class PostImage(models.Model):
 
 class ImageTes(models.Model):
     title = models.CharField(max_length=200)
-    image = models.ImageField(blank=True, null=True, upload_to='images/')
+    image = models.ImageField(blank=True, null=True, upload_to='board/')
+    # name = models.CharField(max_length=200)
+    
 
     def __str__(self):
         return self.title

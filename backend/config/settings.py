@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     # cors
     'corsheaders',
 
+    # hitcount
+    'hitcount',
+
     # my app
     'yamm',
     'board',

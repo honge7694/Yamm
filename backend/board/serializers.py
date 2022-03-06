@@ -35,6 +35,7 @@ class PostImageSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     images = PostImageSerializer(many=True, required=False)
     # img = serializers.SerializerMethodField()
+    # hits = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -45,6 +46,12 @@ class PostSerializer(serializers.ModelSerializer):
     #     serializer = PostImageSerializer(parent_comments, many=True)
 
     #     return serializer.data
+
+    def get_hits(self, obj):
+        try:
+            return obj.hit_count.hits
+        except:
+            pass
 
     def create(self, validated_data):
         images_data = self.context['request'].FILES

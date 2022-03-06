@@ -1,10 +1,13 @@
+from distutils.command.config import config
 from rest_framework import serializers, status, permissions, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+# from hitcount.views import HttpCountDetailView
 
 from ..models import Post, PostImage, ImageTes 
 from ..serializers import PostSerializer, PostImageSerializer, ImageTesSerializer
+from config.permission import IsOwnerOrReadOnly 
 
 class PostWrite(generics.CreateAPIView):
     '''
@@ -29,8 +32,9 @@ class PostList(generics.ListCreateAPIView):
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
-    게시글 detail
+    게시글 업데이트, 디테일, 삭제
     '''
+    # permission_classes = [IsOwnerOrReadOnly]
     permission_classes = [permissions.AllowAny, ]
 
     serializer_class = PostSerializer
