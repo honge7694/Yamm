@@ -26,7 +26,6 @@ export default function LoginLinks() {
       </div>  
     </div>
     { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
-    { 채ㅜ내}
     </>
   );
 }

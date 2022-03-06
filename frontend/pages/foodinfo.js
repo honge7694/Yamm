@@ -2,21 +2,37 @@ import React, { useState , useEffect } from 'react';
 import { useRouter } from "next/router";
 import Memo from '../components/Memo'
 import moment from 'moment';
+import axios from 'axios';
 import 'moment/locale/ko';
 
 
 function foodinfo(props) {
 
   const [ foodImage, setFoodImage ] = useState("")
+  const nowTime = moment().format('YYYY-MM-DD');
+  const [ date, setDate ] = useState(nowTime)
+  const [ time, setTime ] = useState()
+  const [ writeMemo, setWriteMemo ] = useState(false)
+  const [ foodName, setFoodName ] = useState()
+  const [ searchFoodName, setSearchFoodName ] = useState()
   
   useEffect(() => {
     const Image = localStorage.getItem('image');
     setFoodImage(Image)
-  }, [])
 
-  const [ writeMemo, setWriteMemo ] = useState(false)
-  
-  const [ searchFoodName, setSearchFoodName ] = useState()
+    async function fetchData() {
+      const formData = new FormData();
+      formData.append("img", foodImage);
+      const res = await axios({
+        method: 'post',
+        url: 'localhost8000',
+        data: formData,
+    })
+    console.log(res)
+    }
+    
+    fetchData();
+  }, [])
 
   const openMemo = () => {
     setWriteMemo(true)
@@ -24,22 +40,32 @@ function foodinfo(props) {
   const closeMemo = () => {
     setWriteMemo(false)
   } 
-  
-  const nowTime = moment().format('YYYY-MM-DD');
-  const [date, setDate] = useState(nowTime)
-  const [time, setTime] = useState()
-
-  console.log(nowTime);
-  
   const changeDate = (e) => {
     setDate(e.target.value);
   }
-
   const router = useRouter();
   
   const moveMain = () => {
+
+    async function fetchData() {
+
+      const formData = new FormData();
+      formData.append("food_name", "돈까스");
+      formData.append("image", foodImage);
+      formData.append("date", date);
+      formData.append("memo", "메모추가필요");
+
+      const res = await axios({
+        method: 'post',
+        url: 'localhost8000',
+        data: formData,
+    })
+    console.log(res)
+    }
+    fetchData();
     router.push('/')
   }
+  
 
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl" >

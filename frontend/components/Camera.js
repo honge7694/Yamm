@@ -1,6 +1,7 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react'
 import Webcam from "react-webcam";
 import { useRouter } from "next/router";
+import axios from 'axios';
 
 const videoConstraints = {
     width: 500,
@@ -18,11 +19,12 @@ export default function Camera(props) {
     //   };
     
     // 후면 카메라를 기본 카메라로 하기 위해서는 위 주석 해제 
-
+    const [foodImg, setFoodImg] = useState()
     const webcamRef = useRef(null);
     
     const capture = useCallback(() => {
-        const imageSrc = webcamRef.current.getScreenshot();        
+        const imageSrc = webcamRef.current.getScreenshot();
+        setFoodImg(imageSrc)        
         localStorage.setItem("image", imageSrc);
         moveFoodInfo();
         },        
@@ -53,3 +55,4 @@ export default function Camera(props) {
         </>
     );
 };
+
