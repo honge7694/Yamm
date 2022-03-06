@@ -260,3 +260,6 @@ __pycache__/
 .idea
 *.pyc
 *_inital.py
+
+# etc
+*.xlsx
