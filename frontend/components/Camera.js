@@ -21,7 +21,6 @@ export default function Camera(props) {
 
     const webcamRef = useRef(null);
     
-    
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();        
         localStorage.setItem("image", imageSrc);
@@ -29,11 +28,8 @@ export default function Camera(props) {
         },        
         [webcamRef] 
     );
-    
-    
 
     const router = useRouter();
-    
     const moveFoodInfo = () => {
         router.push({
             pathname: '/foodinfo',
