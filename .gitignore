@@ -4,6 +4,12 @@
 
 ### Django ###
 venv
+/DB
+.idea
+# Created by https://www.toptal.com/developers/gitignore/api/python,django,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,react
+
+### Django ###
 *.log
 *.pot
 *.pyc
@@ -260,3 +266,6 @@ __pycache__/
 .idea
 *.pyc
 *_inital.py
+
+# etc
+*.xlsx
