@@ -22,6 +22,8 @@ export const initialState = {
   me: null,
   signUpData: {},
   loginData: {},
+  accessToken : null,
+  refreshToken : null, 
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -58,6 +60,13 @@ const dummyUser = (data) => ({
   Posts: [{ id: 1 }],
 });
 
+const loginToken = (data) => ({
+  ...data,
+  nickname: '이요르',
+  id: 1,
+  Posts: [{ id: 1 }],
+});
+
 export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
   data,
@@ -65,6 +74,11 @@ export const loginRequestAction = (data) => ({
 
 export const logoutRequestAction = () => ({
   type: LOG_OUT_REQUEST,
+});
+
+export const signUpRequestAction = (formdata) => ({
+  type: SIGN_UP_REQUEST,
+  formdata,
 });
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
@@ -104,14 +118,17 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.logInDone = false;
       break;
     case LOG_IN_SUCCESS:
-      {console.log(action,"test-loginSuccess");}
+      {console.log(action.data,"test-loginSuccess");}
       draft.logInLoading = false;
-      draft.me = dummyUser(action.data);
       draft.logInDone = true;
+      draft.accessToken = action.data["access"]
+      draft.refreshToken = action.data["refresh"]
+      
+      // draft.me = dummyUser(action.data);
       break;
     case LOG_IN_FAILURE:
       draft.logInLoading = false;
-      draft.logInError = action.error;
+      // draft.logInError = action.error;
       break;
     case LOG_OUT_REQUEST:
       draft.logOutLoading = true;
@@ -157,23 +174,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case ADD_POST_TO_ME:
       draft.me.Posts.unshift({ id: action.data });
       break;
-      // return {
-      //   ...state,
-      //   me: {
-      //     ...state.me,
-      //     Posts: [{ id: action.data }, ...state.me.Posts],
-      //   },
-      // };
     case REMOVE_POST_OF_ME:
       draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
       break;
-      // return {
-      //   ...state,
-      //   me: {
-      //     ...state.me,
-      //     Posts: state.me.Posts.filter((v) => v.id !== action.data),
-      //   },
-      // };
     default:
       break;
   }

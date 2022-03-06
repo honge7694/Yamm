@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import { useSelector } from 'react-redux';
 
 const WriteBoard = () => {
   // a local state to store the currently selected file.
   const [selectedFile, setSelectedFile] = React.useState(null);
   const [id, setId] = useState('');
+
+  const  { accessToken }   = useSelector((state) => state.user);
   const onChange = (e) => {
         
     setId(e.target.value);
@@ -12,6 +16,9 @@ const WriteBoard = () => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    console.log(jwt_decode(accessToken, " here token"));
+
     const formData = new FormData();
     formData.append("id", id);
     formData.append("title", "testTitle");
@@ -25,9 +32,12 @@ const WriteBoard = () => {
     try {
       const response = await axios({
         method: "post",
-        url: "/api/upload/file",
+        url: "http://127.0.0.1:8000/board/boardtest/",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res)=>{
+        console.log(res,"writeboardAPI")
       });
     } catch(error) {
       console.log(error)

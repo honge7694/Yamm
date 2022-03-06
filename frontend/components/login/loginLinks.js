@@ -6,6 +6,7 @@ export default function LoginLinks() {
   const [isSignUpModal, isSetSignUpModal] = useState(false); 
 
   return (
+    <>
     <div className=' ml-5 mr-5 mt-5 flex justify-center'>
       {/* grid flex 같이 써도 괜찮은 건가.. ? */}
       <div className='fixed bottom-8'>
@@ -21,8 +22,11 @@ export default function LoginLinks() {
           </div>
         </div>
 
-        { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
+        
       </div>  
     </div>
+    { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
+    { 채ㅜ내}
+    </>
   );
 }

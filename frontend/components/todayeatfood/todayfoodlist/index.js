@@ -21,7 +21,7 @@ const TodayFoodList = () => {
     return (
         <div>
             <div className="mt-10 ml-5 mr-5 bg-slate-100 rounded-2xl shadow-2xl">
-                {console.log(testData[0], "testData here")}
+                {/* {console.log(testData[0], "testData here")} */}
                 {/*data.length == 0 ? <Loader /> : data[0].map((foodData, i) => {
                     return <FoodItem key={i} foodData={foodData} />
                 })*/}
