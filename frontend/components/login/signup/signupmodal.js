@@ -146,7 +146,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
               </div>
           
               <div className="flex items-center justify-center ">
-                <button className="bg-yellow1 hover:bg-green1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button className="bg-yellow1 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                   회원가입
                 </button>
               </div>

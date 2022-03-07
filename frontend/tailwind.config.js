@@ -5,13 +5,18 @@ module.exports = {
   theme: {
   extend: {
     keyframes: {
-      wiggle: {
-        '0%': { transform: 'translate3d(0,100%,0)' },
-        'to': { transform: 'translateZ(0)' },
+      wiggledown: {
+        '0%': { transform: 'translate3d(0,-100%,0)' },
+        'to': { transform: 'translate3d(0,0,0)' },
+      },
+      wiggleup: {
+        '0%': { transform: 'translate3d(0,0,0)' },
+        'to': { transform: 'translate3d(0,100%,0)'},
       }
     },
     animation: {
-      wiggle: 'wiggle 1s ease-in-out',
+      wiggledown: 'wiggledown 1.5s ease-in-out',
+      wiggleup: 'wiggleup 1s ease-in-out ',
     },
     colors: {
       'main': '#EDA345',

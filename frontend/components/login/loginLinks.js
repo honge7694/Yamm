@@ -7,7 +7,7 @@ export default function LoginLinks() {
 
   return (
     <>
-    <div className=' ml-5 mr-5 mt-5 flex justify-center'>
+    <div className=' ml-5 mr-5 mt-5 flex justify-center overflow-hidden'>
       {/* grid flex 같이 써도 괜찮은 건가.. ? */}
       <div className='fixed bottom-8'>
         <div className="grid grid-cols-6 grid-flow-row gap-2 w-full">
@@ -22,11 +22,10 @@ export default function LoginLinks() {
           </div>
         </div>
 
-        
       </div>  
     </div>
     { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
-    { 채ㅜ내}
+    
     </>
   );
 }

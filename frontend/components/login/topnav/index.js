@@ -1,0 +1,58 @@
+import { bgcolor } from '@mui/system';
+import Image from 'next/image';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import HamburgerMenu from './hamburgermenu';
+
+const TopNav = () => {
+
+  const [sideMenuToggle, setSideMenuToggle]  = useState({
+    "toggle" : undefined,
+    "bgColor" : ""
+  });
+  const toggleSideMenu = useRef(null);
+  const sideMenuToggleFunction = () =>{
+    setSideMenuToggle({
+      ...sideMenuToggle,
+      ["toggle"] : true,
+      ["bgColor"] : "bg-yellow1 animate-wiggledown inset-0 top-0 left-0 absolute z-10"
+    });
+    if(sideMenuToggle["toggle"]==true) {
+      setSideMenuToggle({
+        ...sideMenuToggle,
+        ["toggle"] : false,
+        ["bgColor"] : "bg-white duration- opacity-70 delay-700 animate-wiggleup inset-0 top-0 left-0 absolute z-10"
+      })
+    }
+  } 
+  const dalayHiddenHamburgerMenu = useEffect(()=>{
+    
+    if(sideMenuToggle["toggle"] !== undefined){
+      toggleSideMenu.current.className="";
+      setTimeout(() => {
+        if(sideMenuToggle["toggle"] == false) toggleSideMenu.current.className=" hidden";
+      }, 900);
+    }
+    
+  }, [sideMenuToggle["toggle"]]);
+  
+  return (
+    <>
+      <div className='flex justify-between ' >
+        <div className='  relative h-[30px] w-[30px] mt-[28px] ml-[28px] dur'>
+          <Image src={"/Arrow2.svg"} layout={"fill"} />
+        </div>
+        <div onClick={sideMenuToggleFunction} className='relative z-30 h-[30px] w-[30px] mt-[28px] mr-[28px]'>
+          {sideMenuToggle["toggle"] ? <Image src={"/cancelx.svg"} layout={"fill"}/>
+                          : <Image src={"/HambergerMenu.svg"} layout={"fill"}/>}
+        </div>
+      </div>
+      
+      <div ref={toggleSideMenu} className="hidden">
+        <HamburgerMenu bgColor={sideMenuToggle["bgColor"]}/>
+      </div> 
+      
+    </>
+  );
+};
+
+export default TopNav;
