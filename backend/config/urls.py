@@ -7,4 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('yamm/', include('yamm.urls')),
     path('board/', include('board.urls')),
+    path('user/', include('user.urls')),
+    
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

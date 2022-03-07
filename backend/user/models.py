@@ -1,6 +1,6 @@
 from email.policy import default
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
@@ -47,7 +47,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     # id = models.AutoField(primary_key=True)
     email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
-    name = models.CharField(default='', max_length=100, null=False, blank=False)
+    username = models.CharField(default='', max_length=100, null=False, blank=False)
     nickname = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
     phonenumber = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
     taste = models.CharField(max_length=100, null=True, blank=True)
@@ -64,7 +64,7 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     # 필수로 작성해야 하는 field
-    REQUIRED_FIELDS = ['email, name, nickname, phonenumber']
+    # REQUIRED_FIELDS = ['email, nickname, phonenumber']
 
     def __str__(self):
         return self.email

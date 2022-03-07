@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from yamm.models import User
+from user.models import User
 # from hitcount.models import HitCountMixin
 
 class Post(models.Model):

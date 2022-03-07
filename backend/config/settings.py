@@ -30,32 +30,33 @@ INSTALLED_APPS = [
 
     # rest frame work
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
     
-    # DRF Authentication 사용
-    'rest_framework.authtoken',
-    'rest_auth',
-
     # rest_auth 회원가입
+    # 'rest_auth',
+    # 'rest_auth.registration',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_auth.registration',
 
     # cors
     'corsheaders',
 
-    # hitcount
-    'hitcount',
+    # hit
+    # 'hitcount',
 
     # my app
     'yamm',
     'board',
+    'user',
 ]
 
 SITE_ID = 1
 
-AUTH_USER_MODEL = 'yamm.User'
+AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,13 +151,40 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.AllowAny',
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  # 
 }
+
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+# 가입시 이메일 주소 받기.
+ACCOUNT_EMAIL_REQUIRED = True
+# 이메일 고유성
+ACCOUNT_UNIQUE_EMAIL = True
+# 가입할 때 사용자 이름 입력
+ACCOUNT_USERNAME_REQUIRED = False
+# 로그인 email로 하기.
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# 가입 중 이메일 확인방법
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
+REST_USE_JWT = True
+# JWT_AUTH_COOKIE = 'my-app-auth'
+# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'user.serializers.UserSerializer',
+}
+
+# user/adapter.py
+ACCOUNT_ADAPTER = 'user.adapters.CustomAccountAdapter'
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),

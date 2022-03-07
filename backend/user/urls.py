@@ -1,22 +1,19 @@
 from django.urls import path, include
-from .views import base_views, auth_views
+from .views import auth_views
 
-# app_name = 'yamm'
+'''
+/user/user         : .
+/user/signup       : 회원가입
+/user/login        : 로그인
+/user/logout       : 로그아웃
+/user/token/verify : 유효성 검사
+/user/token/refresh: 토큰 재발급
+'''
 
 urlpatterns= [
-    # base_views.py
-    path('', base_views.index, name='index'),
+    # dj_rest_auth
+    path('', include('dj_rest_auth.urls')),
+    path('signup/', include('dj_rest_auth.registration.urls')),
 
-    # auth_views.py
-    path('check/', auth_views.UserEmailCheck.as_view()),
-    path('signup/', auth_views.UserSignup.as_view()),
-    path('signin/', auth_views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),  # override sjwt stock token
-    path('token/refresh/', auth_views.DecoratedTokenRefreshView.as_view(), name='token_refresh'),
-    path('token/verify/', auth_views.DecoratedTokenVerifyView.as_view(), name='token_verify'),
-    path('signout/', auth_views.DecoratedTokenBlacklistView.as_view(), name='token_blacklist'),
-    
-
-    # login test
-    path('api-auth/', include('rest_framework.urls')),
-    
+    path('info/', auth_views.UserInfo.as_view()),
 ]
