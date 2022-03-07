@@ -18,23 +18,22 @@ function capture() {
       const reader = new FileReader();
       reader.onload = () => {
         setPreview(reader.result)
-        localStorage.setItem("image", preview);
-        // moveFoodInfo();
+        localStorage.setItem("image", reader.result);
+        moveFoodInfo();
       }
       reader.readAsDataURL(files)
     }
   },[files]) 
 
+  const onLoadFile = (e) => {
+    const file = e.target.files[0];
+    setFiles(file)
+  }
 
   const closeModal = () => {
     setShowModal(false);
   }
   
-  const onLoadFile = (e) => {
-    const file = e.target.files[0];
-    setFiles(file)
-
-  }
 
   const router = useRouter();
 

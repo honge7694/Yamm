@@ -8,7 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Home({ images }) {
-  
+  const today = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+  console.log(today)
   const router = useRouter();
   
   const moveCapture = () => {

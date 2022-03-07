@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import lottie from 'lottie-web';
 import Fade from 'react-reveal/Fade'
 import { useRouter } from "next/router";
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export default function intro() {
   
@@ -39,7 +39,7 @@ export default function intro() {
   return ( 
     <>
       <div className="w-screen h-screen">
-        <div className="w-full h-full flex">
+        <div className="w-full h-full flex flex-col">
           <div className="m-auto text-center">
           <div ref={foodcontainer}/>
             <Fade bottom> 
@@ -51,9 +51,13 @@ export default function intro() {
               </p>
             </Fade>
           </div>
+          <div className="text-center">
+            <ArrowDropDownIcon sx={{ fontSize: 60 }} className="bottom-0 text-main animate-bounce"/>
+          </div>
         </div>
 
-        <div className="w-full h-full flex bg-slate-50">
+
+        <div className="w-full h-full flex flex-col bg-slate-50">
           <div className="m-auto text-center">
             <Fade bottom> 
               <div className="ml-8 text-left font-bold ">
@@ -76,9 +80,12 @@ export default function intro() {
               </p>
             </Fade>
           </div>
+          <div className="text-center">
+            <ArrowDropDownIcon sx={{ fontSize: 60 }} className="bottom-0 text-main animate-bounce"/>
+          </div>
         </div>
 
-        <div className="w-full h-full flex">
+        <div className="w-full h-full flex flex-col">
           <div className="m-auto text-center">
             <Fade bottom> 
               <div className="ml-8 text-left font-bold ">
@@ -102,18 +109,13 @@ export default function intro() {
               </p>
             </Fade>
           </div>
+          <div className="text-center">
+            <ArrowDropDownIcon sx={{ fontSize: 60 }} className="bottom-0 text-main animate-bounce"/>
+          </div>
         </div>
 
         <div className="w-full h-full flex bg-slate-50">
           <div className="m-auto text-center">
-
-            {/* <Fade bottom> 
-              <div className="ml-8 text-left font-bold ">
-                <p className="mb-2 text-main text-2xl">AI 분석</p>
-                <p className="text-3xl">쉽고, 간편하게</p>
-                <p className="text-3xl">사진 한 장으로</p>
-              </div>
-            </Fade> */}
             <Fade bottom> 
               <div>
                 <img className="w-96 h-96 mt-2" src='mainlogo.png' alt="mainlogo"/>
