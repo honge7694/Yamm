@@ -13,7 +13,7 @@ class PostWrite(generics.CreateAPIView):
     '''
     게시글 업로드
     '''
-    # permission_classes = (IsAuthenticated, )
+    # permission_classes = [IsAuthenticated, ]
     permission_classes = [permissions.AllowAny, ]
 
     serializer_class = PostSerializer
