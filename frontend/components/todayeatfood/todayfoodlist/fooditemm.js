@@ -3,8 +3,6 @@ import { format } from "date-fns";
 import Slider from "react-slick";
 import { useRouter } from "next/router";
 import SmileClick from "./smileclick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -20,8 +18,8 @@ const settings = {
 const FoodItemm = ({ foodData, testData }) => {
 
     const router = useRouter();
-    let date = new Date(foodData["date"]);
-    let formatDate = format(date, "H:mma");
+    const date = new Date(foodData["date"]);
+    const formatDate = format(date, "H:mma");
     const [testData1, setTestData1] = useState(testData)
 
     const routeFoodname = () => {

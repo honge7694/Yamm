@@ -5,15 +5,13 @@ import { useSelector } from 'react-redux';
 const BoardTest = () => {
 
     const router = useRouter();
-    const isLoggedIn  = useSelector((state) => state.user.me);
-    
+    const  { accessToken }   = useSelector((state) => state.user);
     const routeCommunity = () => {
       
-      console.log(isLoggedIn,"/community")
       if (true) { 
         router.push({
-          pathname: '/community/writeboard',
-          query : { "url" : "/community/writeboard" }
+          pathname: '/community',
+          query : { "url" : "/community" }
       })}else{
         router.push("/community");
       }

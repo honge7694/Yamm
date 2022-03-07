@@ -4,7 +4,7 @@ import { signUpRequestAction } from '../../../reducers/user';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-const SignUpModal = ({ isSetSignUpModal }) => {
+const SignUpModal = ({ SetSignUpModalToggle }) => {
     
     const dispatch = useDispatch();
 
@@ -85,7 +85,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     }
   
     return (
-        <div onClick={(e)=>{isSetSignUpModal(false)}} className="w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75">
+        <div onClick={(e)=>{SetSignUpModalToggle(false)}} className="w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75">
           {/* 왜 버블링 안되지? 나중에 확인 */}
           <form onSubmit={submitFuction} onClick={(e)=>{console.log("signupmodal click event");e.stopPropagation();}} className="bg-white w-5/6 h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-scroll fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               

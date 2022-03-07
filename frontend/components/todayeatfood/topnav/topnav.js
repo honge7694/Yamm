@@ -4,7 +4,7 @@ import FontTitle from '../../font/fontTitle';
 
 const TopNav = () => {
     const router = useRouter();
-    const routeBackFuntion = () => router.push({ pathname : `/`, });
+    const routeBackFuntion = () => router.push({ pathname : `/mainfunction`, });
     const routeUpLoadFuntion = () => router.push({ pathname : `/uploadfoodimg`, });
     
     return (
