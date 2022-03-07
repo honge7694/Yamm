@@ -9,6 +9,7 @@ import 'moment/locale/ko';
 function foodinfo(props) {
 
   const [ foodImage, setFoodImage ] = useState("")
+  const [ foodImageFile, setFoodImageFile ] = useState()
   const nowTime = moment().format('YYYY-MM-DD');
   const [ date, setDate ] = useState(nowTime)
   const [ time, setTime ] = useState()
@@ -16,19 +17,31 @@ function foodinfo(props) {
   const [ foodName, setFoodName ] = useState()
   const [ searchFoodName, setSearchFoodName ] = useState()
   
+
+ 
   useEffect(() => {
     const Image = localStorage.getItem('image');
     setFoodImage(Image)
 
     async function fetchData() {
-      const formData = new FormData();
-      formData.append("img", foodImage);
-      const res = await axios({
-        method: 'post',
-        url: 'localhost8000',
-        data: formData,
-    })
-    console.log(res)
+      const url = {Image}
+
+      fetch(url)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], "food_img",{ type: "image/png" })
+        setFoodImageFile(file)
+        console.log(file)
+
+        const formData = new FormData();
+        console.log(file)
+        formData.append("image", file);
+        const res = axios({
+          method: 'post',
+          url: 'http://127.0.0.1:8000/yamm/distinction',
+          data: formData,
+      })
+      })
     }
     
     fetchData();
@@ -57,7 +70,7 @@ function foodinfo(props) {
 
       const res = await axios({
         method: 'post',
-        url: 'localhost8000',
+        url: 'http://127.0.0.1:8000/yamm/distinction',
         data: formData,
     })
     console.log(res)

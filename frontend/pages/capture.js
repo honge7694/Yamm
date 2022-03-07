@@ -60,12 +60,4 @@ function capture() {
 
 export default capture
 
-export const getInitialProps = async() => {
-  const res = await axios.post(`localhost:8000`, )
-  const foodname = await res.json();
-  return {
-    props: {
-      images
-    }
-  }
-}
+
