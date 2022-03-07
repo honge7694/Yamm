@@ -26,8 +26,10 @@ const Community = ()=>{
     setCurrentScrollY(-document.body.getBoundingClientRect().y);
     const scrollDirection =  (lastScrollTop < currentScrollY ? "down" : "up");
     setLastScrollTop(currentScrollY);
-    (scrollDirection == "down" ? bottomNav.current.className = 'hidden' : bottomNav.current.className = 
-    '') 
+    (scrollDirection == "down" ?
+      (bottomNav.current.className = 'hidden') :
+      (bottomNav.current.className = '') 
+    )
   };
 
   const itemListMap = useMemo(() => {

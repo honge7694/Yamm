@@ -17,12 +17,12 @@ const TodayEatFood = ({ images }) => {
   
   
   const router = useRouter();
-  const isLoggedIn  = useSelector((state) => state.user.me);
+  const  { accessToken }   = useSelector((state) => state.user);
   
   const routeTodayFoodEatDetail = () => {
     
-    console.log(isLoggedIn,"routeTodayFoodEatDetail")
-    if (isLoggedIn==null) { 
+    // console.log(isLoggedIn,"routeTodayFoodEatDetail")
+    if (accessToken===null) { 
       router.push({
         pathname: '/login',
         query : { "url" : "/todayfoodeatdetail" }

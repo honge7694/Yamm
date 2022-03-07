@@ -2,7 +2,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 const FoodItem = ({ foodData }) => {
 
-    //const nowTime1 = moment().format('MM-DD');
+    
     let date = new Date(foodData["date"]);
     let formatDate = format(date, "yyyy do H:mma");
     return (

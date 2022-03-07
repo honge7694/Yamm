@@ -3,7 +3,7 @@ import FontTitle from '../font/fontTitle';
 import SignUpModal from './signup/signupmodal';
 export default function LoginLinks() {
 
-  const [isSignUpModal, isSetSignUpModal] = useState(false); 
+  const [SignUpModalToggle, SetSignUpModalToggle] = useState(false); 
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function LoginLinks() {
         <div className="grid grid-cols-6 grid-flow-row gap-2 w-full">
           <div className='col-span-2 flex-col'>아이디 찾기</div>
           <div className='col-span-2 flex justify-center'>비밀번호 찾기</div>
-          <div className='col-span-2 flex justify-center' onClick={(e)=>{isSetSignUpModal(true)}}>회원가입</div>
+          <div className='col-span-2 flex justify-center' onClick={(e)=>{SetSignUpModalToggle(true)}}>회원가입</div>
           <div className='col-span-3 flex justify-center w-full h-full'>
             <FontTitle marginTop="" textSize="text-sm" />
           </div>
@@ -25,7 +25,7 @@ export default function LoginLinks() {
         
       </div>  
     </div>
-    { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
+    { SignUpModalToggle && <SignUpModal SetSignUpModalToggle={SetSignUpModalToggle} />}
     </>
   );
 }
