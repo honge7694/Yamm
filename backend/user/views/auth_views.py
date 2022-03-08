@@ -7,14 +7,14 @@ from ..models import User
 from ..serializers import UserInfoSerializer
 
 class UserInfo(APIView):
-    permissions_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserInfoSerializer
 
     def get_object(self, queryset=None):
         
         return self.request.user
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         '''
         유저 정보 조회
         '''
