@@ -10,19 +10,22 @@ class PostImageSerializer(serializers.ModelSerializer):
         fields = ['img']
 
 class PostSerializer(serializers.ModelSerializer):
-    images = PostImageSerializer(many=True, read_only=True)
-    # img = serializers.SerializerMethodField()
-    # hits = serializers.SerializerMethodField()
+    # images = PostImageSerializer(many=True, read_only=True)
+    images = serializers.SerializerMethodField()
 
+    def get_images(self, obj):
+        image = obj.imagekey.all()
+        return PostImageSerializer(instance=image, many=True).data
+    
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'create_date', 'images', 'author', )
+        fields = ['id', 'title', 'content', 'create_date', 'author', 'images',]
     
     def create(self, validated_data):
         images_data = self.context['request'].FILES
         post = Post.objects.create(**validated_data)
 
-        for image_data in images_data.getlist("img"):
+        for image_data in images_data.getlist('img'):
             PostImage.objects.create(post=post, img=image_data)
 
         return post

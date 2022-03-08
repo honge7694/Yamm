@@ -7,7 +7,7 @@ from ..models import User
 from ..serializers import UserInfoSerializer
 
 class UserInfo(APIView):
-    # permissions_classes = [permissions.AllowAny]
+    permissions_classes = [permissions.AllowAny]
     serializer_class = UserInfoSerializer
 
     def get_object(self, queryset=None):
