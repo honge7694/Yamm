@@ -1,6 +1,6 @@
 import BottomNavHome from './BottomNavHome';
 import BoardOrder from './BoardOrder';
-import BoardWriteDetail from './BoardWriteDetail';
+import WriteBoardDetail from './WriteBoardDetail';
 
 const BottomNav = () => {
 
@@ -11,7 +11,7 @@ const BottomNav = () => {
                 {/* space-x-12 로 바꾸면 간격만 벌어지는 것이 아니라 크기도 바뀜 왜..?*/}
                 <BottomNavHome />
                 <BoardOrder />
-                <BoardWriteDetail />
+                <WriteBoardDetail />
             </div>
         </div>
     );

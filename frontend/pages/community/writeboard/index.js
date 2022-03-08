@@ -1,64 +1,55 @@
+import TopNav from '../board/TopNav';
+import BoardImage from '../board/BoardImage';
+import ProfileTag from '../board/ProfileTag';
+import BoardContent from '../board/BoardContent';
+import { withRouter, useRouter } from 'next/router';
+import BottomNav from '../../../components/BottmNav/BottomNav';
 import React, { useState } from 'react';
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
-import { useSelector } from 'react-redux';
+import UpLoadImg from '../../../components/community/writeboard/uploadimg';
 
-const WriteBoard = () => {
-  // a local state to store the currently selected file.
-  const [selectedFile, setSelectedFile] = React.useState(null);
-  const [id, setId] = useState('');
+// API(BE->FE) title, nick, content, tag, foodImg
+// SEO router.push 안쓰고 Link 쓴다 ?
 
-  const  { accessToken }   = useSelector((state) => state.user);
-  const onChange = (e) => {
-        
-    setId(e.target.value);
-    console.log(e.target.value)
-  }
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    console.log(jwt_decode(accessToken, " here token"));
-
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("title", "testTitle");
-    formData.append("content", "testContent");
-    formData.append("create_date", "2022-03-03 23:40:01");
-    formData.append("images", selectedFile);
-
-    for(var pair of formData.entries()) {
-        console.log(pair); 
-     }
-    try {
-      const response = await axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/board/boardtest/",
-        data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res)=>{
-        console.log(res,"writeboardAPI")
-      });
-    } catch(error) {
-      console.log(error)
+const WriteBoard = (props) => {
+    const router = useRouter();
+    // idx는 API 요청 할 때 쓸 것
+    const {idx, image, hit, content } = router.query;
+    const [toggleProfileTag, setToggleProfileTag] = useState(false);
+    const onclickEmoji = (e) => {
+        console.log(e.target.innerText)
     }
-  }
-
-  const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0])
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" onChange={handleFileSelect}/>
-      <div className='bg-gray-500'>
-        <input type="text" onChange={onChange}  />
-      </div>
-      <div className='mt-5' >
-        <button className='bg-gray-500' type="submit">회원가입</button>
-      </div>
-    </form>
-  )
-};
+    const imoji = ["😀", "😱", "❤️", "🥳", "😇","😈", "😭", "👋", "☂️", "🔥", "🌟", "⛅️"];
+    const menuList = imoji.map((item, i) => (<div key={i} onClick={onclickEmoji} className=' w-1/4 h-[50px] bg-white bg-opacity-70  drop-shadow-lg text-2xl flex justify-center items-center'>{item}</div>));
+    
+    return (
+        <div className="">
+            <TopNav />
+            {/* <BoardImage imageUrl={image} /> */}
+            <UpLoadImg />
+            <div className=' bg-white mr-5 ml-5'>
+              <ProfileTag hit={hit} setToggleProfileTag={setToggleProfileTag} toggleProfileTag={toggleProfileTag}/>
+            </div>
+            { 
+                toggleProfileTag &&
+                    <div className='mr-5 ml-5 mt-8'>
+                        <div className=' flex flex-wrap  w-full bg-gray-200 p-6 rounded-2xl'>
+                                {menuList}
+                        </div>
+                        
+                    </div>
+            }
+        
+        <div className=' mt-8 rounded-xl bg-neutral-200 flex items-center justify-center ml-5 mr-5 p-3' >
+          <textarea className="h-[100px] focus:h-[170px] bg-white p-3 break-words w-11/12 placeholder:italic placeholder:text-center placeholder:text-slate-400 " placeholder='올리실 글을 작성해 주세요!'>
+            
+          </textarea>
+        </div>
+            
+            <div className=''>
+              <BottomNav></BottomNav>
+            </div>
+        </div>
+    );
+} 
 
 export default WriteBoard;

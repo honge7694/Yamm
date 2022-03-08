@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const BoardWriteDetail = () => {
+const WriteBoardDetail = () => {
     const router = useRouter();
     const routeFuntion = () => {
-        router.push('/myInfo')
+        router.push('/community/writeboard')
     }
     return (
         <div onClick={(e)=>{routeFuntion();}}>
@@ -13,4 +13,4 @@ const BoardWriteDetail = () => {
     );
 }
 
-export default BoardWriteDetail;
+export default WriteBoardDetail;
