@@ -23,13 +23,13 @@ import {
 
 function logInAPI(data) {
   
-  return axios.post("http://127.0.0.1:8000/yamm/signin/", data)
+  return axios.post("http://127.0.0.1:8000/user/login/", data)
               .then((res)=>{
                 console.log("saga loginAPI", res)
                 return [res.status, res.data]
               })
               .catch((res)=>{
-                console.log(res.response.status,"ere")
+                console.log(res.response,"ere")
                 return [res.response.status,res.respons];
               });
 }

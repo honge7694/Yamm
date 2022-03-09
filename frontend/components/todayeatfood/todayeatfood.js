@@ -17,12 +17,12 @@ const TodayEatFood = ({ images }) => {
   
   
   const router = useRouter();
-  const isLoggedIn  = useSelector((state) => state.user.me);
+  const { user } = useSelector((state) => state.user);
   
   const routeTodayFoodEatDetail = () => {
     
-    console.log(isLoggedIn,"routeTodayFoodEatDetail")
-    if (isLoggedIn==null) { 
+    
+    if (user==null) { 
       router.push({
         pathname: '/login',
         query : { "url" : "/todayfoodeatdetail" }
@@ -33,14 +33,14 @@ const TodayEatFood = ({ images }) => {
   
   return (
     <div>
-      <div className="font-bold px-8 pt-6 pb-2 text-xl">
+      <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  delay-1000">
           <p>오늘 먹은 음식</p>
       </div>
       <div className="bg-gray-200 px-8 ml-5 mr-5 rounded-2xl" onClick={(e)=>{routeTodayFoodEatDetail()}}>
         <Slider {...settings}>
           { images.map((image, i) => (
             <div className="h-[155px] relative  " key={image.id}>
-              <Image className=" rounded-2xl" src={dummyFoodImage[i]} layout="fill" />
+              <Image className=" rounded-2xl " src={dummyFoodImage[i]} layout="fill" />
             </div>
           )) }
         </Slider>

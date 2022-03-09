@@ -1,6 +1,9 @@
 import produce from '../util/produce';
 
 export const initialState = {
+  accessToken1: null,
+  accessToken : null,
+  refreshToken : null,
   followLoading: false, // 팔로우 시도중
   followDone: false,
   followError: null,
@@ -19,11 +22,9 @@ export const initialState = {
   changeNicknameLoading: false, // 닉네임 변경 시도중
   changeNicknameDone: false,
   changeNicknameError: null,
-  me: null,
+  user: null,
   signUpData: {},
-  loginData: {},
-  accessToken : null,
-  refreshToken : null, 
+  loginData: {}, 
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -83,34 +84,7 @@ export const signUpRequestAction = (formdata) => ({
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
-    case FOLLOW_REQUEST:
-      draft.followLoading = true;
-      draft.followError = null;
-      draft.followDone = false;
-      break;
-    case FOLLOW_SUCCESS:
-      draft.followLoading = false;
-      draft.me.Followings.push({ id: action.data });
-      draft.followDone = true;
-      break;
-    case FOLLOW_FAILURE:
-      draft.followLoading = false;
-      draft.followError = action.error;
-      break;
-    case UNFOLLOW_REQUEST:
-      draft.unfollowLoading = true;
-      draft.unfollowError = null;
-      draft.unfollowDone = false;
-      break;
-    case UNFOLLOW_SUCCESS:
-      draft.unfollowLoading = false;
-      draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data);
-      draft.unfollowDone = true;
-      break;
-    case UNFOLLOW_FAILURE:
-      draft.unfollowLoading = false;
-      draft.unfollowError = action.error;
-      break;
+    
     case LOG_IN_REQUEST:
       {console.log(action,"test-loginRequest");}
       draft.logInLoading = true;
@@ -118,12 +92,12 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.logInDone = false;
       break;
     case LOG_IN_SUCCESS:
-      {console.log(action.data,"test-loginSuccess");}
+      {console.log(action.data["user"],"test-loginSuccess");}
       draft.logInLoading = false;
       draft.logInDone = true;
-      draft.accessToken = action.data["access"]
-      draft.refreshToken = action.data["refresh"]
-      
+      draft.accessToken = action.data["access_token"];
+      draft.refreshToken = action.data["refresh_token"];
+      draft.user = action.data["user"];
       // draft.me = dummyUser(action.data);
       break;
     case LOG_IN_FAILURE:
@@ -139,7 +113,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       console.log(action,"test-logoutSuccess");
       draft.logOutLoading = false;
       draft.logOutDone = true;
-      draft.me = null;
+      draft.user = null;
       break;
     case LOG_OUT_FAILURE:
       draft.logOutLoading = false;
@@ -171,14 +145,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.changeNicknameLoading = false;
       draft.changeNicknameError = action.error;
       break;
-    case ADD_POST_TO_ME:
-      draft.me.Posts.unshift({ id: action.data });
-      break;
-    case REMOVE_POST_OF_ME:
-      draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
-      break;
-    default:
-      break;
+    // case ADD_POST_TO_ME:
+    //   draft.me.Posts.unshift({ id: action.data });
+    //   break;
+    // case REMOVE_POST_OF_ME:
+    //   draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
+    //   break;
+    // default:
+    //   break;
   }
 });
 

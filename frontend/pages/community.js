@@ -4,6 +4,8 @@ import Loader from "../components/Loader";
 import Dummy from '../components/Dummy';
 import BottomNav from '../components/BottmNav/BottomNav';
 import { dataDummy } from '../components/Dummy';
+import axios from 'axios';
+import Image from 'next/image';
 const targetCSS = "w-screen h-[140px] flex justify-center text-center items-center";
 const container = "flex";
 const itemWrapper = "flex flex-col w-1/2";
@@ -17,6 +19,9 @@ const Community = ()=>{
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [itemLists, setItemLists] = useState(dataDummy);
+
+  const [itemLoading, setItemLoading] = useState(true);
+  const [boardItem, setBoardItem] = useState([]);
    // 스크롤 이벤트 등록
   useEffect(() => {
     window.addEventListener("scroll", listener);
@@ -31,19 +36,23 @@ const Community = ()=>{
   };
 
   const itemListMap = useMemo(() => {
-    console.log("itemList add", itemLists)
-    let oddResult =  itemLists.map((v, i) => {
+    let oddResult =  boardItem.map((item, i) => {
+      if( item.images[0] == undefined){
+        console.log("sdsdadasd")
+      }
       if(i%2!=0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
+        // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
-    let evenResult =  itemLists.map((v, i) => {
+    let evenResult =  boardItem.map((item, i) => {
       if(i%2==0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
+        // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
     return [evenResult, oddResult];
-  }, [itemLists]);
+  }, [itemLists, boardItem]);
   const getMoreItem = async () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500)); // API 호출로 수정
@@ -69,7 +78,18 @@ const Community = ()=>{
     }
     return () => observer && observer.disconnect();
   }, [target]);
-
+  
+  useEffect(()=>{
+    axios.get('http://localhost:8000/board/')
+    .then((res)=>{
+      console.log(res.data)
+      setBoardItem([...res.data]);
+      setItemLoading(false);
+    })
+    .catch(error => console.log(error))
+    
+  },[]);
+  console.log(boardItem,"ere")
   return (
     <>
       
@@ -78,20 +98,23 @@ const Community = ()=>{
       </div>
       {/* Dummy.js 에서 함수 받아 와서 itemList 들어 있는 배열 가져 올 것, API 비동기 처리 할 것  */}
       {/* 두개로 받아서 성능 이슈 map 함수 하나로 할 것 */ }
-      <div className={container} >
-        <div className={itemWrapper} >
-          {itemListMap[0]/* 짝수 번째 게시글*/ }
-        </div>
-        <div className={itemWrapper} >
-          {itemListMap[1]/* 홀수 번째 게시글*/}
-        </div>
-      </div>
+      {itemLoading === false && (<div className={container} >
+          <div className={itemWrapper} >
+            {itemListMap[0]}
+          </div>
+          <div className={itemWrapper} >
+            {itemListMap[1]}
+          </div>
+        </div>)}
+        <div>sdss</div>
 
-      <div className={targetCSS} ref={setTarget} >
-          {isLoaded && <Loader /> /* 로딩 */}
-      </div>
+      {/* <div className={targetCSS} ref={setTarget} >
+          {isLoaded && <Loader /> }
+      </div> */}
+
     </>
   );
 };
 
 export default memo(Community);
+
