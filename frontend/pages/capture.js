@@ -47,10 +47,11 @@ function capture() {
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
         <div className="">
             {showModal ? <Modal closeModal={closeModal}/> : null}
-              <div className="text-white bg-main/30 p-2 pd-8 rounded-3xl">
-                <Camera/>
-                <input type="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/>
-                <p>{preview}</p>
+              <div className="h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">
+                <div className="mt-10">
+                  <Camera className=""/>
+                    <input type="file" id="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/>
+                </div>
               </div>
         </div>
     </div>

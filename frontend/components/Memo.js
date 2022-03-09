@@ -18,7 +18,7 @@ const Memo = ({closeMemo, nowDate ,nowTime, todayDate, time, memo, changeDate, c
           </p>
 
         </form>
-        <button className="w-20 h-8 text-white bg-main rounded-3xl mt-3"onClick={closeMemo}>확인</button>
+        <button className="w-20 h-8 text-white bg-main rounded-3xl mt-3" onClick={closeMemo}>확인</button>
       </div>
     </div>
   )

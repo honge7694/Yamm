@@ -9,8 +9,6 @@ const videoConstraints = {
     facingMode: "user"
 };
 
-
-
 export default function Camera(props) {
     
 
@@ -50,7 +48,7 @@ export default function Camera(props) {
             videoConstraints={videoConstraints}
         />
         <div className="pt-8 text-center">
-            <button className="p-4 rounded-3xl bg-main drop-shadow-xl" onClick={capture} >사진 촬영</button>
+            <button className="p-4 mt-12 rounded-3xl bg-main drop-shadow-xl" onClick={capture} >사진 촬영</button>
         </div>
         </>
     );
