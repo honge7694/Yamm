@@ -1,15 +1,16 @@
-from dataclasses import field
-from unittest.util import _MAX_LENGTH
+from wsgiref import validate
 from django.contrib.auth import get_user_model
-from .models import User
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from allauth.account.adapter import get_adapter
+from rest_framework.validators import UniqueValidator
+from .models import User
 
 class UserSerializer(RegisterSerializer):
     '''
     유저 추가
     '''
-    nickname = serializers.CharField()
+    nickname = serializers.CharField(required=True, validators=[UniqueValidator(queryset=User.objects.all(), message=("Name already exists"))])
     phonenumber = serializers.CharField()
     taste = serializers.CharField(allow_null=True)
     profile_img = serializers.ImageField(use_url=True, allow_null=True)
@@ -23,10 +24,11 @@ class UserSerializer(RegisterSerializer):
         data['profile_img'] = self.validated_data.get('profile_img')
 
         return data
-    
+
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'nickname', 'username', 'phonenumber', 'taste', 'profile_img']
+        fields = ['email', 'password', 'nickname', 'username', 'phonenumber', 'taste', 'profile_img', 'reaction', 'user_img']
+
 
 class UserInfoSerializer(serializers.ModelSerializer):
     '''

@@ -5,9 +5,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 # from hitcount.views import HttpCountDetailView
 
-from ..models import Post, PostImage, ImageTes 
-from ..serializers import PostSerializer, PostImageSerializer, ImageTesSerializer
+from ..models import Post, PostImage
+from ..serializers import PostSerializer, PostImageSerializer
 from config.permission import IsOwnerOrReadOnly 
+
 
 class PostWrite(generics.CreateAPIView):
     '''
@@ -40,9 +41,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
-
-class ImageTes(generics.CreateAPIView):
-    permission_classes = [permissions.AllowAny]
-
-    serializer_class = ImageTesSerializer
-    queryset = ImageTes.objects.all()

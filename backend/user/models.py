@@ -48,8 +48,8 @@ class User(AbstractBaseUser):
     # id = models.AutoField(primary_key=True)
     email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
     username = models.CharField(default='', max_length=100, null=False, blank=False)
-    nickname = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
-    phonenumber = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
+    nickname = models.CharField(default='', max_length=100, null=False, blank=False)
+    phonenumber = models.CharField(default='', max_length=100, null=False, blank=False)
     taste = models.CharField(max_length=100, null=True, blank=True)
     profile_img = models.ImageField(upload_to='user', blank=True, null=True)
 
@@ -67,7 +67,7 @@ class User(AbstractBaseUser):
     # REQUIRED_FIELDS = ['email, nickname, phonenumber']
 
     def __str__(self):
-        return self.email
+        return self.nickname
 
     class Meta :
         db_table = 'user'

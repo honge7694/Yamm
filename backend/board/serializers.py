@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from board.models import Post, PostImage, ImageTes
+from board.models import Post, PostImage
+from user.models import User
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -9,17 +10,21 @@ class PostImageSerializer(serializers.ModelSerializer):
         model = PostImage
         fields = ['img']
 
+
 class PostSerializer(serializers.ModelSerializer):
-    # images = PostImageSerializer(many=True, read_only=True)
     images = serializers.SerializerMethodField()
+    user_info = serializers.SerializerMethodField()
 
     def get_images(self, obj):
         image = obj.imagekey.all()
         return PostImageSerializer(instance=image, many=True).data
-    
+
+    def get_user_info(self, obj):
+        return User.objects.filter(username=obj.author).values('nickname', 'username', 'profile_img')
+
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'create_date', 'author', 'images',]
+        fields = ['id', 'title', 'content', 'create_date', 'images', 'tags', 'author', 'user_info']
     
     def create(self, validated_data):
         images_data = self.context['request'].FILES
@@ -29,9 +34,3 @@ class PostSerializer(serializers.ModelSerializer):
             PostImage.objects.create(post=post, img=image_data)
 
         return post
-
-
-class ImageTesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ImageTes
-        fields = '__all__'
