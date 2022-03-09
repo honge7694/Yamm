@@ -133,7 +133,8 @@ class nutrient(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
-        food = Food.objects.filter(name=request.data["food_name"]).first()
+        food_name = request.query_params.get('food_name')
+        food = Food.objects.filter(name=food_name).first()
         serializers = FoodSerializer(food)
         response = serializers.data
         return Response(response)
