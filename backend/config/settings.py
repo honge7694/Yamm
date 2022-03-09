@@ -53,7 +53,7 @@ SITE_ID = 1
 AUTH_USER_MODEL = 'yamm.User'
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # CORS 관련 추가
+    'corsheaders.middleware.CorsMiddleware',  # CORS 관련 추가
     'django.middleware.security.SecurityMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
@@ -72,7 +72,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'frontend', 'build'), # 경로 변경
+            os.path.join(BASE_DIR, 'frontend', 'build'),  # 경로 변경
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,9 +87,9 @@ TEMPLATES = [
 ]
 
 # 경로 추가
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
+# ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
