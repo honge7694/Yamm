@@ -85,11 +85,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FoodImageSerializer(serializers.ModelSerializer):
+    pk = serializers.IntegerField(read_only=True)
     image = serializers.ImageField(use_url=True)
 
     class Meta:
         model = FoodImage
-        fields = ("image", "user_id", "food_id", "date", "memo")
+        fields = ("pk", "image", "user_id", "food_id", "date", "memo")
 
 
 class FoodSerializer(serializers.ModelSerializer):

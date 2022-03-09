@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework import status, permissions
 from django.shortcuts import get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
+from datetime import datetime
 
 from ..models import User, Food, FoodImage
 from ..serializers import FoodSerializer, FoodImageSerializer
@@ -20,24 +21,47 @@ class eaten(APIView):
         '''
         먹은 음식 리스트 불러오기
         '''
-        # TODO: email 부분 request.user 로 바꾸기
-        # TODO: 로직 완성하기 + 완성이 우선이지만, 장고답게 개발하려고 고민해보기
-        user = get_object_or_404(User, email="test@test.com")
-        print(request.data["date"])
+        date = datetime.strptime(request.data["date"], '%Y-%m-%d')
 
-        # food_image = FoodImage.objects.filter(date=request.data["date"])
-        food_image = FoodImage.objects.all()
+        # TODO: user_id 하드코딩
+        food_image = FoodImage.objects.filter(user_id=1)
+        food_image = food_image.filter(
+            date__year=date.year, date__month=date.month, date__day=date.day).order_by("date")
         serializer = FoodImageSerializer(food_image, many=True)
+        req_list = []
+        if serializer.data:
+            req_list.append({'carb': 0, 'protein': 0, 'fat': 0, 'calorie': 0})
+            req_list.append(list())
 
-        # list = []
-        # for obj in serializer.data:
-        #     dict = {}
-        #     dict["image"] = obj["image"]
-        #     dict["food_name"] = obj["name"]
-        # dict[""]
+            old_date = datetime.strptime(
+                serializer.data[0]["date"], '%Y-%m-%dT%H:%M:%S')
+            i = 1
+            for obj in serializer.data:
+                dict = {}
 
-        response = list
-        return Response(serializer.data, status.HTTP_200_OK)
+                food = Food.objects.filter(id=obj["food_id"]).first()
+
+                req_list[0]['carb'] += food.carb
+                req_list[0]['protein'] += food.protein
+                req_list[0]['fat'] += food.fat
+                req_list[0]['calorie'] += food.calorie
+
+                dict["id"] = obj["pk"]
+                dict["date"] = obj["date"]
+                dict["image"] = obj["image"]
+                dict["food_name"] = food.name
+                dict["memo"] = obj["memo"]
+
+                now_date = datetime.strptime(obj["date"], '%Y-%m-%dT%H:%M:%S')
+                d = now_date - old_date
+                if d.seconds / 3600 >= 1.0:
+                    i += 1
+                    req_list.append(list())
+                req_list[i].append(dict)
+                old_date = now_date
+
+        response = req_list
+        return Response(response, status.HTTP_200_OK)
 
     def post(self, request):
         '''
@@ -47,13 +71,12 @@ class eaten(APIView):
         user = get_object_or_404(User, email="test@test.com")
         food = get_object_or_404(Food, name=request.data["food_name"])
 
-        serializers = FoodImageSerializer(data=request.data)
-        serializers.is_valid()
+        serializer = FoodImageSerializer(data=request.data)
+        serializer.is_valid()
 
-        validated_data = serializers.validated_data
+        validated_data = serializer.validated_data
 
         foodimage = FoodImage()
-        print(user, food)
         foodimage.user = user
         foodimage.food = food
         foodimage.date = validated_data["date"]
@@ -63,6 +86,26 @@ class eaten(APIView):
         foodimage.save()
 
         return Response(status.HTTP_200_OK)
+
+    def put(self, request):
+        foodimage = FoodImage.objects.get(pk=request.data["id"])
+        data = {
+            "image": foodimage.image,
+            "user_id": foodimage.user_id,
+            "food_id": get_object_or_404(Food, name=request.data["food_name"]),
+            "date": request.data["date"],
+            "memo": request.data["memo"],
+        }
+        serializer = FoodImageSerializer(foodimage, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        foodimage = FoodImage.objects.get(pk=request.data["id"])
+        foodimage.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class search(APIView):
@@ -84,13 +127,6 @@ class search(APIView):
 
         response = {"search_result": list}
         return Response(response)
-
-
-class eaten_update(APIView):
-    '''
-    먹은 음식 상세 정보 수정
-    '''
-    pass
 
 
 class nutrient(APIView):
