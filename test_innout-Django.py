@@ -35,12 +35,12 @@ def set_model():
     parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
     parser.add_argument('--augment', action='store_true', help='augmented inference')
 
-    global opt
+    #global opt
     opt, _ = parser.parse_known_args()
     opt.cfg = check_file(opt.cfg)  # check file
     opt.names = check_file(opt.names)  # check file
 
-    global model
+    #global model
     model = Darknet(opt.cfg, (320, 192))
     
     model.cuda()
@@ -51,6 +51,8 @@ def set_model():
     model.load_state_dict(new_state_dict)
 
     model.eval()
+
+#    return [opt, model]??
 
 
 def preference_image(img):
