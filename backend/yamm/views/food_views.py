@@ -18,7 +18,8 @@ class eaten(APIView):
         '''
         먹은 음식 리스트 불러오기
         '''
-        date = datetime.strptime(request.data["date"], '%Y-%m-%d')
+        date = request.query_params.get('date')
+        date = datetime.strptime(date, '%Y-%m-%d')
 
         # TODO: user_id 하드코딩
         food_image = FoodImage.objects.filter(user_id=1)
