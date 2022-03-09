@@ -72,7 +72,7 @@ class eaten(APIView):
             "food_id": food,
             "date": request.data["date"],
             "memo": request.data["memo"],
-            "image": request.data["image"],
+            "image": request.FILES["image"],
         }
         print(data)
         serializer = FoodImageSerializer(data=data)
