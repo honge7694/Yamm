@@ -110,7 +110,8 @@ class search(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
-        search_word = request.data["word"]
+        search_word = request.query_params.get('word')
+        # search_word = request.data["word"]
         food_search = Food.objects.filter(
             name__icontains=search_word).all()[:10]
 
