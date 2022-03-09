@@ -1,10 +1,10 @@
 
 import Link from "next/link";
 // API 로 수정 할 것 30일 데이터에서 해당 날짜 색칠
-const birthdays = [
-    [26,"0"], // 0 - 속안좋음 ... 
-    [27,"1"],
-]
+const birthdays = {
+  26: ['ss'],
+  27: ['ss'],
+};
 
 export default function renderDay(day) {
     

@@ -28,7 +28,6 @@ export default function LoginNavbar() {
 
   return (
     <div>
-      {/* {console.log(router)} */}
       <TopNav/>
       <FontTitle marginTop="mt-8" textSize="text-3xl" />
       { <LoginForm onSubmit={onSubmit} setEmail={setEmail} setPassword={setPassword} /> }

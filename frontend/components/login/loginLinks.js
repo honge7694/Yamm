@@ -3,7 +3,7 @@ import FontTitle from '../font/fontTitle';
 import SignUpModal from './signup/signupmodal';
 export default function LoginLinks() {
 
-  const [isSignUpModal, isSetSignUpModal] = useState(false); 
+  const [isSignUpModal, isSetSignUpModal] = useState(undefined); 
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function LoginLinks() {
 
       </div>  
     </div>
-    { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} />}
+    { isSignUpModal && <SignUpModal isSetSignUpModal={isSetSignUpModal} isSignUpModal={isSetSignUpModal} />}
     
     </>
   );

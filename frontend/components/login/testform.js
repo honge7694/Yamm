@@ -47,12 +47,18 @@ const TestForm = () => {
           return
         }
         const formData = new FormData();
-        formData.append("email", inputValue["email"]);
+        formData.append("emal", inputValue["email"]);
         formData.append("password", inputValue["password1"]);
         formData.append("name", inputValue["name"]);
         formData.append("nickname", inputValue["nickname"]);
         formData.append("phonenumber", inputValue["phonenumber"]);
         formData.append("taste", inputValue["taste"]);
+        // const tags = ["😀", "🤣", "😇"];
+        // tags.forEach(tag => formData.append('tags', tag))
+        // formData.append("emoji", "🤣");
+        // formData.append("emoji", "😇");
+        
+        
         formData.append("image", imageFile); // 이미지 파일 추가
 
         for(var pair of formData.entries()) console.log(pair);  // formdata 프론트 쪽에서 확인

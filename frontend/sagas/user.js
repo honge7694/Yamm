@@ -79,7 +79,7 @@ function* logOut() {
 function signUpAPI(formdata) {
   return axios({
         method: "post",
-        url: "http://localhost:8000/yamm/signup/",
+        url: "http://localhost:8000/user/signup/",
         data: formdata,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -89,8 +89,8 @@ function signUpAPI(formdata) {
         
       })
       .catch(error => {
-        console.log(error)
-        return error.response.status;
+        console.log(error.response.data)
+        return error.response.data;
       });
   }
 

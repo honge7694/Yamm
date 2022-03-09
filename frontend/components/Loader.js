@@ -8,6 +8,7 @@ const Loader = () => {
     <div className={LoaderWrap}>
       <ReactLoading type="spin" color="#A593E0" />
     </div>
+    
   );
 };
 

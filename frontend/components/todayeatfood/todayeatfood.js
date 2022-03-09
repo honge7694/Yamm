@@ -1,13 +1,13 @@
 import Slider from "react-slick";
 import { useRouter } from "next/router";
 import { useSelector } from 'react-redux';
-
+import Image from "next/image";
 
 const settings = {
-    className: "center",
+    className: " ",
     centerMode: true,
     infinite: true,
-    centerPadding: "100px",
+    centerPadding: "30px",
     slidesToShow: 1,
     speed: 500
   };
@@ -36,12 +36,12 @@ const TodayEatFood = ({ images }) => {
       <div className="font-bold px-8 pt-6 pb-2 text-xl">
           <p>오늘 먹은 음식</p>
       </div>
-      <div className="bg-gray-200 px-8" onClick={(e)=>{routeTodayFoodEatDetail()}}>
+      <div className="bg-gray-200 px-8 ml-5 mr-5 rounded-2xl" onClick={(e)=>{routeTodayFoodEatDetail()}}>
         <Slider {...settings}>
           { images.map((image, i) => (
-          <div key={image.id}>
-            <img className="w-auto px-2 rounded-3xl" src={dummyFoodImage[i]}></img>
-          </div>
+            <div className="h-[155px] relative  " key={image.id}>
+              <Image className=" rounded-2xl" src={dummyFoodImage[i]} layout="fill" />
+            </div>
           )) }
         </Slider>
       </div>

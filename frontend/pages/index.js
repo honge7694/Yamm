@@ -49,6 +49,7 @@ export default function Home({ images }) {
 }
 
 export const getServerSideProps = async() => {
+  // 달력 여기서 처리할 것
   const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_start=0&_end=4`)
   const images = await res.json();
   return {

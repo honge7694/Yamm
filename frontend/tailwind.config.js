@@ -5,6 +5,8 @@ module.exports = {
   theme: {
   extend: {
     keyframes: {
+      // overflow - x - hidden
+      // position : relative
       wiggledown: {
         '0%': { transform: 'translate3d(0,-100%,0)' },
         'to': { transform: 'translate3d(0,0,0)' },

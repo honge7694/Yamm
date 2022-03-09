@@ -24,10 +24,13 @@ const TopNav = () => {
       })
     }
   } 
+
+  // 1. 에니메이션 끝나고 사라지기
+  // 2. useEffect 
+
   const dalayHiddenHamburgerMenu = useEffect(()=>{
-    
-    if(sideMenuToggle["toggle"] !== undefined){
-      toggleSideMenu.current.className="";
+    if(sideMenuToggle["toggle"] !== undefined){ // 해결 부분
+      toggleSideMenu.current.className=""; 
       setTimeout(() => {
         if(sideMenuToggle["toggle"] == false) toggleSideMenu.current.className=" hidden";
       }, 900);
@@ -47,9 +50,16 @@ const TopNav = () => {
         </div>
       </div>
       
-      <div ref={toggleSideMenu} className="hidden">
+      <div ref={toggleSideMenu} className="hidden"> 
         <HamburgerMenu bgColor={sideMenuToggle["bgColor"]}/>
-      </div> 
+      </div>
+      {/* <div ref={toggleSideMenu} className="hidden"> */} 
+      {/* <div className="" 
+        style={{ transition : "opacity 900ms step-end",
+                opacity : sideMenuToggle["toggle"] ? 1 : 0 }} >
+
+        <HamburgerMenu bgColor={sideMenuToggle["bgColor"]}/>
+      </div> */}
       
     </>
   );
