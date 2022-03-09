@@ -9,10 +9,7 @@ from ..models import User, Food, FoodImage
 from ..serializers import FoodSerializer, FoodImageSerializer
 
 
-# TODO: 미완성
-# eaten: 먹은 음식 리스트 불러오기
-# eaten_update: 먹은 음식 상세 정보 수정
-# 전체: permission 연동되면 수정하기
+# TODO: permission 연동되면 수정하기
 
 class eaten(APIView):
     permission_classes = [permissions.AllowAny]
@@ -68,24 +65,21 @@ class eaten(APIView):
         사진 업로드
         '''
         # TODO: email 부분 request.user 로 바꾸기
-        user = get_object_or_404(User, email="test@test.com")
         food = get_object_or_404(Food, name=request.data["food_name"])
-
-        serializer = FoodImageSerializer(data=request.data)
-        serializer.is_valid()
-
-        validated_data = serializer.validated_data
-
-        foodimage = FoodImage()
-        foodimage.user = user
-        foodimage.food = food
-        foodimage.date = validated_data["date"]
-        foodimage.memo = validated_data["memo"]
-        foodimage.image = validated_data["image"]
-
-        foodimage.save()
-
-        return Response(status.HTTP_200_OK)
+        user = get_object_or_404(User, id=1)
+        data = {
+            "user_id": user,
+            "food_id": food,
+            "date": request.data["date"],
+            "memo": request.data["memo"],
+            "image": request.data["image"],
+        }
+        print(data)
+        serializer = FoodImageSerializer(data=data)
+        if serializer.is_valid():  # 유효성 검사
+            serializer.save()  # 저장
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
         foodimage = FoodImage.objects.get(pk=request.data["id"])
