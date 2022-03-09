@@ -65,19 +65,20 @@ class eaten(APIView):
         사진 업로드
         '''
         # TODO: email 부분 request.user 로 바꾸기
-        food = get_object_or_404(Food, name=request.data["food_name"])
         user = get_object_or_404(User, id=1)
+        food = get_object_or_404(Food, name=request.data["food_name"])
+
         data = {
-            "user_id": user,
-            "food_id": food,
+            "user_id": user.id,
+            "food_id": food.id,
             "date": request.data["date"],
             "memo": request.data["memo"],
             "image": request.FILES["image"],
         }
-        print(data)
+
         serializer = FoodImageSerializer(data=data)
         if serializer.is_valid():  # 유효성 검사
-            serializer.save()  # 저장
+            serializer.save(user=user, food=food)  # 저장
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
