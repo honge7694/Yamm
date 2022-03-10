@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import axios from 'axios';
 import Calendar from "../components/calendar/index";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from "../components/todayeatfood/todayeatfood";
@@ -8,23 +7,15 @@ import BoardTest from '../components/boardtest';
 import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-<<<<<<< HEAD
-import { useEffect } from "react";
-=======
 import { useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
->>>>>>> feature_community_board
 
 export default function Home({ images }) {
   const router = useRouter();
-<<<<<<< HEAD
-
-=======
   const { me } = useSelector((state) => (state.user));
   
   
->>>>>>> feature_community_board
   const moveCapture = () => {
     router.push('/capture')
   }
@@ -49,12 +40,6 @@ export default function Home({ images }) {
 
   return (
     <>
-<<<<<<< HEAD
-    <div className="w-full h-full m-auto bg-slate-50 rounded-3xl">
-      <div className="w-80 h-40 p-8 flex text-left flex-col justify-center">
-        <span className="font-bold text-3xl text-main ">안녕하세요. ---님</span><br/>
-        <span className="font-bold ">오늘은 어떤 음식을 드셨나요?</span>
-=======
     <div className="container mx-auto h-full bg-slate-50 rounded-3xl">
       
       <div className=" h-40 p-8  text-left w-full ">
@@ -77,7 +62,6 @@ export default function Home({ images }) {
                       </div>)
         }
         <div className="flex justify-end text-gray-400 font-bold mt-2">오늘은 어떤 음식을 드셨나요?</div>
->>>>>>> feature_community_board
       </div>
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>

@@ -6,7 +6,7 @@ import renderDay from './renderDay';
 export default function Calendar() {
   
   return (
-      <div className=" w-full  flex justify-center mt-11">
+      <div className=" w-full  flex justify-center">
         <div className="w-5/6  flex justify-center">
           <DayPicker
             canChangeMonth={true}
