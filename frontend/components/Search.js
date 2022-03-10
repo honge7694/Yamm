@@ -8,7 +8,15 @@ function Search({selectFood,foodName,closeSearch,searchFood,searchResult}) {
   const [ foodList, setFoodList ] = useState()
 
 
-  const search = () => {
+  const enterKey = () => {
+    if (window.event.keyCode == 13) {
+        search();
+        console.log('성공')
+    }
+  }
+
+  const search = () => {  
+
     async function fetchData() {
       axios({
         method: 'get',
@@ -25,6 +33,7 @@ function Search({selectFood,foodName,closeSearch,searchFood,searchResult}) {
     }
     fetchData()
   }  
+
   return (
     <div>
       <div className="fixed inset-0 bg-black/50">
@@ -34,6 +43,7 @@ function Search({selectFood,foodName,closeSearch,searchFood,searchResult}) {
               className="outline outline-2" 
               type="text"                             
               placeholder="음식검색"
+              onKeyUp={enterKey}
               onChange={searchFood}/>
             <SearchIcon className="ml-2" onClick={search}/>
           </div>
@@ -48,7 +58,7 @@ function Search({selectFood,foodName,closeSearch,searchFood,searchResult}) {
             }) : null }  
           </div>
           <div className="fixed bottom-4 w-full gird justify-center">
-            <div className="font-bold mb-3">선택하신 음식이 {foodName} 맞으신가요?</div> 
+            <div className="font-bold mb-3">사진의 음식이 {foodName} 맞으신가요?</div> 
             <button className="w-20 h-8 text-white bg-main rounded-3xl" onClick={closeSearch}>확인</button>
           </div>  
         </div>

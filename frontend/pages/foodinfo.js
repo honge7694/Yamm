@@ -30,16 +30,25 @@ function foodinfo(props) {
     setFoodImage(Image)
 
     async function fetchData() {
-      const url = {Image}
-      fetch(url)
-      .then(res => res.blob())
-      .then(blob => {
-        const file = new File([blob], "food_img",{ type: "image/png" })
-        setFoodImageFile(file)
+
+      const dataURLtoFile = (dataurl, fileName) => {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        
+        while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], fileName, {type: "image/png"})
+      }
+      var testfile = dataURLtoFile(Image, 'food.png');
+      setFoodImageFile(testfile)
 
       const formData = new FormData();
       
-      formData.append("image", file);
+      formData.append("image", testfile);
 
       axios({
         method: 'post',
@@ -47,9 +56,6 @@ function foodinfo(props) {
         data: formData,
       })
       .then((response) => {setFoodName(response.data.food_name)})
-      console.log(file)
-
-      })
     }
     fetchData();
   }, [])
@@ -66,46 +72,28 @@ function foodinfo(props) {
   const searchFood = (e) => {
     setSearchResult(e.target.value)
   }
-  console.log(searchResult)
   const selectFood = (e) => {
     setFoodName(e.target.value)
-    console.log('성공')
   }
-
-
   const moveMain = () => {
 
     async function fetchData() {
 
       const formData = new FormData();
-
-      formData.append("food_name", '돈가스')
+      formData.append("food_name", foodName)
       formData.append("image", foodImageFile)
-      formData.append("date", "2022-03-08 21:16:00")
+      formData.append("date", todayDate+' '+time)
       formData.append("memo", memo);
-      let content_length = JSON.stringify(formData).length;
 
-      for (let key of formData.keys()) {
-        console.log(key);
-      }
-      for (let value of formData.values()) {
-        console.log(value);
-      }
       const res = await axios({
         method: 'post',
-        header: { 
-          'Content-Length': content_length, 
-          'Content-Type': 'multipart/form-data' }, 
         url: 'http://127.0.0.1:8000/yamm/food/eaten',
         data: formData,
     })
     }
     fetchData();
-  
-
-    // router.push('/')
+    router.push('/')
   }
-  
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl" >
       <div className="flex flex-col items-center text-center">

@@ -1,4 +1,4 @@
-import Layout from './Layout'
+import Layout from '../components/Layout'
 import "tailwindcss/tailwind.css";
 import '../styles/globals.css';
 import "slick-carousel/slick/slick.css";

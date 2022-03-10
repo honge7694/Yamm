@@ -7,14 +7,30 @@ import TodayEatFoodNull from "../components/todayeatfood/todayeatfoodnull";
 import BoardTest from '../components/boardtest';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react";
 
 export default function Home({ images }) {
   const router = useRouter();
-  const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
 
   const moveCapture = () => {
     router.push('/capture')
   }
+
+  useEffect(() => {
+    const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
+
+    const fetchDate = () => {
+      const res = axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/yamm/food/eaten',
+        params: {
+          "date": nowDate
+        }
+      })  
+      .then((res)=> console.log(res.data.shift()))
+    }
+    fetchDate();
+  }, [])
 
   return (
     <>
@@ -55,18 +71,18 @@ export const getServerSideProps = async() => {
   }
 }
 
-// export const getServerSideProps = async() => {
-//   const res = await axios({
+// export const getStaticProps = async() => {
+//   const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
+//   const res = await fetch({
 //     method: 'get',
 //     url: 'http://127.0.0.1:8000/yamm/food/eaten',
 //     params: {
 //       "date": nowDate
 //     }
 //   })
-//   .then((response) => console.log(response))
+//   const data = await res.json()
 //   return {
-//     props: {
-//       props
-//     }
+//     props: 
+//       { data }
 //   }
 // }
