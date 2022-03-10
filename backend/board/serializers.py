@@ -35,7 +35,7 @@ class PostSerializer(serializers.ModelSerializer):
         return PostImageSerializer(instance=image, many=True).data
 
     def get_user_info(self, obj):
-        return User.objects.filter(username=obj.author).values('nickname', 'username', 'profile_img')
+        return User.objects.filter(nickname=obj.author).values('nickname', 'username', 'profile_img')
 
     def get_reaction(self, obj):
         return PostReaction.objects.filter(id=obj.id).count()
