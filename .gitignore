@@ -268,4 +268,5 @@ __pycache__/
 
 # etc
 *.xlsx
+excel*
 migrations
