@@ -1,3 +1,7 @@
+# Created by https://www.toptal.com/developers/gitignore/api/python,django,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,react
+
+### Django ###
 venv
 /DB
 .idea
@@ -264,3 +268,5 @@ __pycache__/
 
 # etc
 *.xlsx
+excel*
+migrations

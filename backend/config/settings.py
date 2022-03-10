@@ -1,10 +1,10 @@
+import os
 from pathlib import Path
 from datetime import timedelta
-import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-vl7-tu*g9)po0^#38h%ap&5fcn#@n%o^%-&9coq=h1uu1cs_(&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '*']
 
 
 # Application definition
@@ -56,6 +56,7 @@ AUTH_USER_MODEL = 'user.User'
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS 관련 추가
     'django.middleware.security.SecurityMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
@@ -73,7 +74,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend', 'build'),  # 경로 변경
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,6 +88,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# 경로 추가
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
+# ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -127,7 +135,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
