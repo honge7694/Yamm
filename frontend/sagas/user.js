@@ -2,9 +2,6 @@ import { all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
-  FOLLOW_FAILURE,
-  FOLLOW_REQUEST,
-  FOLLOW_SUCCESS,
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
@@ -14,10 +11,49 @@ import {
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
-  UNFOLLOW_FAILURE,
-  UNFOLLOW_REQUEST,
-  UNFOLLOW_SUCCESS,
+  USERINFO_REQUEST,
+  USERINFO_SUCCESS,
+  USERINFO_FAILURE,
 } from '../reducers/user';
+
+
+function userInfoAPI(acToken) {
+  console.log('test 유저 정보 API')
+  return axios.get("http://127.0.0.1:8000/user/info", { 
+    headers: {
+      Authorization: `Bearer ${acToken}`
+    }
+  })
+  .then((res)=>{
+    console.log(res,'유저 정보 받아오는 API success')
+    return [res.status, res.data];
+  })
+  .catch(error => {
+    console.log(error.response,'유저 정보 받아오는 API ERROR')
+    return error.response.data;
+  });
+}
+
+function* userInfo(action) {
+  try {
+    console.log('saga userInfo',action.formdata);
+    const result = yield call( userInfoAPI, action.formdata );
+    console.log(result[1],"token")
+    if(result[0] != 200 ){
+      yield put({
+        type: USERINFO_FAILURE,
+        error: result[1],
+      });  
+    }else{
+      yield put({
+        type: USERINFO_SUCCESS,
+        data: result[1]
+      });  
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 
 
@@ -25,7 +61,8 @@ function logInAPI(data) {
   
   return axios.post("http://127.0.0.1:8000/user/login/", data)
               .then((res)=>{
-                console.log("saga loginAPI", res)
+                // const userData = test(res.data["access_token"])
+                // console.log("saga loginAPI", res.data)
                 return [res.status, res.data]
               })
               .catch((res)=>{
@@ -47,12 +84,11 @@ function* logIn(action) {
     }else{
       yield put({
         type: LOG_IN_SUCCESS,
-        data: result[1],
+        data: result[1]
       });  
     }
   } catch (err) {
     console.error(err);
-    
   }
 }
 
@@ -138,9 +174,6 @@ function* follow(action) {
   }
 }
 
-function unfollowAPI() {
-  return axios.post('/api/unfollow');
-}
 
 function* unfollow(action) {
   try {
@@ -179,12 +212,17 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
+function* watchUserInfo() {
+  yield takeLatest(USERINFO_REQUEST, userInfo);
+}
+
 export default function* userSaga() {
   yield all([
-    fork(watchFollow),
-    fork(watchUnfollow),
+    // fork(watchFollow),
+    // fork(watchUnfollow),
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchSignUp),
+    fork(watchUserInfo),
   ]);
 }

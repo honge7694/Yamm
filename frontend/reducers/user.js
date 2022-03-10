@@ -1,15 +1,9 @@
 import produce from '../util/produce';
-
+import axios from 'axios';
 export const initialState = {
-  accessToken1: null,
+  
   accessToken : null,
   refreshToken : null,
-  followLoading: false, // 팔로우 시도중
-  followDone: false,
-  followError: null,
-  unfollowLoading: false, // 언팔로우 시도중
-  unfollowDone: false,
-  unfollowError: null,
   logInLoading: false, // 로그인 시도중
   logInDone: false,
   logInError: null,
@@ -19,10 +13,11 @@ export const initialState = {
   signUpLoading: false, // 회원가입 시도중
   signUpDone: false,
   signUpError: null,
-  changeNicknameLoading: false, // 닉네임 변경 시도중
-  changeNicknameDone: false,
-  changeNicknameError: null,
+  userInfoLoading: false,
+  userInfoDone: false,
+  userInfoError: null,
   user: null,
+  me : null,
   signUpData: {},
   loginData: {}, 
 };
@@ -39,28 +34,25 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
-export const CHANGE_NICKNAME_REQUEST = 'CHANGE_NICKNAME_REQUEST';
-export const CHANGE_NICKNAME_SUCCESS = 'CHANGE_NICKNAME_SUCCESS';
-export const CHANGE_NICKNAME_FAILURE = 'CHANGE_NICKNAME_FAILURE';
+export const USERINFO_REQUEST = 'USERINFO_REQUEST';
+export const USERINFO_SUCCESS = 'USERINFO_SUCCES';
+export const USERINFO_FAILURE = 'USERINFO_FAILURE';
 
-export const FOLLOW_REQUEST = 'FOLLOW_REQUEST';
-export const FOLLOW_SUCCESS = 'FOLLOW_SUCCESS';
-export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
 
-export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
-export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
-export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
-export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
-export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: '이요르',
-  id: 1,
-  Posts: [{ id: 1 }],
-});
 
+// const dummyUser = (data) => ({
+//   // ...data,
+//   // nickname: '이요르',
+//   // id: 1,
+//   // Posts: [{ id: 1 }],
+  
+// });
+const dummyUser1 = (data) => {
+  console.log(data,"dummydata")
+}
+  
 const loginToken = (data) => ({
   ...data,
   nickname: '이요르',
@@ -82,22 +74,43 @@ export const signUpRequestAction = (formdata) => ({
   formdata,
 });
 
+export const userInfoRequestAction = (formdata) => ({
+  type: USERINFO_REQUEST,
+  formdata,
+});
+
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
     
+    case USERINFO_REQUEST:
+      draft.userInfoLoading = true;
+      draft.userInfoError = null;
+      draft.userInfoDone = false;
+      break;
+    case USERINFO_SUCCESS:
+      {console.log(action,"test-userInfoSuccess");}
+      draft.userInfoLoading = false;
+      draft.userInfoDone = true;
+      draft.me = action;
+      break;
+    case USERINFO_FAILURE:
+      draft.userInfoLoading = false;
+      break;
     case LOG_IN_REQUEST:
-      {console.log(action,"test-loginRequest");}
+      // {console.log(action,"test-loginRequest");}
       draft.logInLoading = true;
       draft.logInError = null;
       draft.logInDone = false;
       break;
     case LOG_IN_SUCCESS:
-      {console.log(action.data["user"],"test-loginSuccess");}
+      
+      // {console.log(action.data,"test-loginSuccess");}
       draft.logInLoading = false;
       draft.logInDone = true;
       draft.accessToken = action.data["access_token"];
       draft.refreshToken = action.data["refresh_token"];
       draft.user = action.data["user"];
+      
       // draft.me = dummyUser(action.data);
       break;
     case LOG_IN_FAILURE:
@@ -132,27 +145,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.signUpLoading = false;
       draft.signUpError = action.error;
       break;
-    case CHANGE_NICKNAME_REQUEST:
-      draft.changeNicknameLoading = true;
-      draft.changeNicknameError = null;
-      draft.changeNicknameDone = false;
-      break;
-    case CHANGE_NICKNAME_SUCCESS:
-      draft.changeNicknameLoading = false;
-      draft.changeNicknameDone = true;
-      break;
-    case CHANGE_NICKNAME_FAILURE:
-      draft.changeNicknameLoading = false;
-      draft.changeNicknameError = action.error;
-      break;
-    // case ADD_POST_TO_ME:
-    //   draft.me.Posts.unshift({ id: action.data });
-    //   break;
-    // case REMOVE_POST_OF_ME:
-    //   draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
-    //   break;
-    // default:
-    //   break;
   }
 });
 

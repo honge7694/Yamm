@@ -1,52 +1,44 @@
 import 'react-circular-progressbar/dist/styles.css';
 import CircleGraph from './circlegraph';
-import React, { useCallback, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/ko';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-const CalorieGraph = () => {
+const CalorieGraph = ({ tanDanGiAPI, nowTime }) => {
+    
+    
+    const [percentBarChange, setPercentBarChange] = useState("w-[30%] rounded-2xl bg-yellow-100 ease-linear duration-500")
+    
+    const totalPercent = useEffect(()=>{
+        const percentBar = parseInt((tanDanGiAPI["calorie"]/2000)*100)
+        if ( percentBar > 100 ) setPercentBarChange("w-[100%] rounded-2xl bg-red1 ease-linear duration-500 delay-1000")
+        else setPercentBarChange(`w-[${percentBar}%] rounded-2xl bg-yellow-100 ease-linear duration-500 delay-1000`)
+    },[tanDanGiAPI]);
 
-    const nowTime = moment().format('YY년 MM월 DD일');
-    const [tanDanGi, setTanDanGi] = useState([
-        ["탄수화물", 20, 10],
-        ["단백질", 10, 30],
-        ["지방", 70, 60],
-    ]);
-    
-    const [totalKcal, setTotalKcal] = useState(1309);
-    
-    const totalPercent = useCallback((totalKcal) => {
-        return totalKcal/2000;
-    }, [totalKcal]);
-    
     return (
         <div className=' mt-12 mr-5 ml-5'>
-            <div className='flex justify-end font-["Jalnan"] text-xs'>{nowTime}</div>
+            <div className='flex justify-end font-["Jalnan"] text-xs'>
+                {nowTime}
+            </div>
 
             <div className='flex justify-center mt-6 '>
 
                 <div className=' w-11/12  items-end'>
 
                     <div className='flex justify-start text-xs mt-1'>총 섭취량 📌</div>
-                    <div className='flex justify-end text-[8px]'>{totalKcal} / 2000 kcal</div>
+                    <div className='flex justify-end text-[8px]'>{parseInt(tanDanGiAPI["calorie"])} / 2000 kcal</div>
                     
                     <div className='flex justify-center mt-2'>
                         <div className='h-[8px] flex justify-start w-full bg-blue-300 rounded-2xl'>
-                        <div className='w-1/2 rounded-2xl bg-yellow-100 ease-linear duration-500'></div>
+                        <div className={percentBarChange}></div>
                     </div>
                     </div>        
 
                     <div className='flex justify-between mt-2 '>
-                        {tanDanGi.map((tandangi, i)=>{
-                            return <CircleGraph key={i} name={tandangi[0]} weight={tandangi[2]} percentage={tandangi[1]} />
-                        })}
+                        <CircleGraph name={"탄수화물"} weight={tanDanGiAPI["carb"]} percentage={parseInt((tanDanGiAPI["carb"]/tanDanGiAPI["calorie"])*100)}/>
+                        <CircleGraph name={"단백질"} weight={tanDanGiAPI["protein"]} percentage={parseInt((tanDanGiAPI["protein"]/tanDanGiAPI["calorie"])*100)}/>
+                        <CircleGraph name={"지방"} weight={tanDanGiAPI["fat"]} percentage={parseInt((tanDanGiAPI["fat"]/tanDanGiAPI["calorie"])*100)}/>
                     </div>
-
                 </div>
             </div>
-
-            
-                       
         </div>
     );
 };

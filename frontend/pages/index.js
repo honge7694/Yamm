@@ -10,26 +10,46 @@ import BoardTest from '../components/boardtest';
 import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from 'react';
+import axios from 'axios';
+import Image from 'next/image';
 
 export default function Home({ images }) {
   
   const router = useRouter();
-  const { user } = useSelector((state) => (state.user));
-
+  const { me } = useSelector((state) => (state.user));
+  
+  
   const moveCapture = () => {
     router.push('/capture')
   }
+  
+
 
   return (
     <>
     <div className="container mx-auto h-full bg-slate-50 rounded-3xl">
-      <div className="w-80 h-40 p-8 flex text-left flex-col justify-center">
-        { user == null ? (<span className="font-bold text-3xl text-main ">
-                            안녕하세요. --- 님 {console.log(user,"main user")}
+      
+      <div className=" h-40 p-8  text-left w-full ">
+        { me == null ? (<span className=" flex justify-end font-bold text-3xl text-main ">
+                            안녕하세요. --- 님 
                           </span>)
-                      : (<div className=' font-bold text-3xl text-yellow1'> 안녕하세요 { user.pk } 님 </div>)
+                      : (
+                      <div className=' w-full font-bold text-3xl text-yellow1 '>
+                        <div className='flex justify-end  items-center'> 
+                          안녕하세요 &nbsp; 
+                          <div className=' rounded-3xl relative w-[30px] h-[30px]'>
+                            <Image className=' rounded-3xl' src={me.data["profile_img"]} layout={"fill"} />
+                          </div>
+                        </div>
+                        <div className='flex justify-end '> 
+                          "<span className='font-["Jalnan"] '>{ me.data["nickname"] }</span>" 님
+                          <br/>
+                        </div>  
+                        
+                      </div>)
         }
-        <span className="font-bold mt-2">오늘은 어떤 음식을 드셨나요?</span>
+        <div className="flex justify-end text-gray-400 font-bold mt-2">오늘은 어떤 음식을 드셨나요?</div>
       </div>
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>

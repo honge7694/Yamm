@@ -6,12 +6,14 @@ import BottomNav from '../components/BottmNav/BottomNav';
 import { dataDummy } from '../components/Dummy';
 import axios from 'axios';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+
 const targetCSS = "w-screen h-[140px] flex justify-center text-center items-center";
 const container = "flex";
 const itemWrapper = "flex flex-col w-1/2";
 
 const Community = ()=>{
-
+  const { accessToken } = useSelector((state)=>(state.user))
   const bottomNav = useRef(null);
   const [currentScrollY, setCurrentScrollY] = useState(0);
   const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -90,6 +92,35 @@ const Community = ()=>{
     
   },[]);
   console.log(boardItem,"ere")
+
+  useEffect(()=>{
+    if(accessToken){
+      console.log(accessToken,'56567')
+      // fetch("http://127.0.0.1:8000/user/info/", {
+      //   method: "GET",
+      //   headers: {
+      //     "Authorization": accessToken,
+      //   },
+      // }).then((response) => console.log(response))
+      // .catch((err)=>{console.log(err)});
+      axios.get("http://127.0.0.1:8000/user/info/", {}, {
+        Authorization : {
+          accessToken
+        }
+      })
+      .then((res)=>{
+        console.log(res,'kkkkkkkkkkkk')
+        return res.status;
+      })
+      .catch(error => {
+        console.log(error.response,'ssssss')
+        return error.response.data;
+      });
+    
+    }
+  }, [accessToken])
+
+
   return (
     <>
       

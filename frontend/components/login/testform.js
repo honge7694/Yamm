@@ -20,7 +20,10 @@ const TestForm = () => {
     }
 
     const [imageFile, setImageFile] = useState(null);
-    const handleImage = (event) => setImageFile(event.target.files[0])
+    const handleImage = (event) => {
+      // console.log(typeof event.target.files[0], "0310-test!!")
+      setImageFile(event.target.files[0])
+    }
 
     const [hiddenWarnText,setHiddenWarnText] = useState({
        "email" : "hidden text-red-500 text-xs italic",
@@ -57,9 +60,8 @@ const TestForm = () => {
         // tags.forEach(tag => formData.append('tags', tag))
         // formData.append("emoji", "🤣");
         // formData.append("emoji", "😇");
-        
-        
         formData.append("image", imageFile); // 이미지 파일 추가
+        
 
         for(var pair of formData.entries()) console.log(pair);  // formdata 프론트 쪽에서 확인
         
