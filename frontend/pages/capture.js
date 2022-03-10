@@ -33,7 +33,6 @@ function capture() {
   const closeModal = () => {
     setShowModal(false);
   }
-  
 
   const router = useRouter();
 

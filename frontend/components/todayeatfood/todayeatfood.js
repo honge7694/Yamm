@@ -1,13 +1,13 @@
 import Slider from "react-slick";
 import { useRouter } from "next/router";
 import { useSelector } from 'react-redux';
-
+import Image from "next/image";
 
 const settings = {
-    className: "center",
+    className: " ",
     centerMode: true,
     infinite: true,
-    // centerPadding: "100px",
+    centerPadding: "30px",
     slidesToShow: 1,
     speed: 500
   };
@@ -16,12 +16,12 @@ const dummyFoodImage = ["/asset/떡볶이.png","/asset/삼겹살.png","/asset/�
 const TodayEatFood = ({ images }) => {
   
   const router = useRouter();
-  const  { accessToken }   = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   
   const routeTodayFoodEatDetail = () => {
     
-    // console.log(isLoggedIn,"routeTodayFoodEatDetail")
-    if (accessToken===null) { 
+    
+    if (user==null) { 
       router.push({
         pathname: '/login',
         query : { "url" : "/todayfoodeatdetail" }
@@ -32,14 +32,14 @@ const TodayEatFood = ({ images }) => {
   
   return (
     <div>
-      <div className="font-bold px-8 pt-6 pb-2 text-xl">
+      <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  delay-1000">
           <p>오늘 먹은 음식</p>
       </div>
-      <div className="" onClick={(e)=>{routeTodayFoodEatDetail()}}>
+      <div className="bg-gray-200 px-8 ml-5 mr-5 rounded-2xl" onClick={(e)=>{routeTodayFoodEatDetail()}}>
         <Slider {...settings}>
           { images.map((image, i) => (
-          <div key={image.id}>
-            <img className="w-auto h-auto px-2 rounded-t-3xl" src={dummyFoodImage[i]}></img>
+          <div className="h-[155px] relative" key={image.id}>
+            <Image className="w-auto h-auto rounded-t-3xl px-2  " src={dummyFoodImage[i]} layout="fill" />
             <div className="px-2">
               <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl">
                 <p className="text-lg pt-2">음식이름</p>

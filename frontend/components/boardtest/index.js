@@ -19,15 +19,15 @@ const BoardTest = () => {
 
     return (
         <div>
-            <div className="font-bold px-8 pt-6 pb-2 text-xl">
+            <div className="font-bold px-8 pt-9 pb-2 text-xl">
                 <p>커뮤니티</p>
             </div>
 
             <div className="min-h-[250px] px-8 flex-col items-center justify-center flex" onClick={(e)=>{routeCommunity()}}>
-                <div className=" w-4/6 rounded-xl bg-gray-200">
+                <div className=" w-4/6 rounded-xl bg-gray-200 ">
                     <div className="flex w-full">
                         <div className=" w-1/2 justify-center flex m-5">
-                            <Image className="rounded-2xl" src="/asset/떡볶이.png" width="100" height="100%" />
+                            <Image className="rounded-2xl " src="/asset/떡볶이.png" width="100" height="100%" />
                         </div>
                         <div className="w-1/2 justify-center flex m-5">
                             <Image className="rounded-2xl" src="/asset/갈비.png" width="100" height="100%" />

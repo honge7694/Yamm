@@ -19,7 +19,7 @@ const  CircleGraph = ({ percentage, weight, name}) => {
             <div className='flex-col  '>
                 <div className='flex justify-center text-[8px]'>{name}</div>
                 <div className='w-[70px] h-[70px] flex justify-center'>
-                    <CircularProgressbar value={percentage1} text={`${percentage1}%`} />
+                    <CircularProgressbar value={percentage} text={`${percentage}%`} />
                 </div>
                 <div className='flex justify-center text-[8px]'>{weight}</div>
             </div>
