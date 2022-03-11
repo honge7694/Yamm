@@ -11,19 +11,27 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
-export default function Home({ images }) {
+export default function Home({ }) {
+
   const router = useRouter();
   const { me } = useSelector((state) => (state.user));
   
   const moveCapture = () => {
-    router.push('/capture')
+    
+    if (me==null) { 
+      router.push({
+        pathname: '/login',
+        query : { "url" : "/capture" }
+    })}else{
+      router.push("/capture");
+    }
   }
+  
   
   const [ todayFoodInfo, setTodayFoodInfo ] = useState()
   
   useEffect(() => {
     const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
-
     const fetchDate = () => {
       axios({
         method: 'get',
@@ -59,7 +67,6 @@ export default function Home({ images }) {
                           "<span className='font-["Jalnan"] '>{ me.data["nickname"] }</span>" 님
                           <br/>
                         </div>  
-                        
                       </div>)
         }
         <div className="flex justify-end text-gray-400 font-bold mt-2">오늘은 어떤 음식을 드셨나요?</div>

@@ -32,7 +32,7 @@ export default function intro() {
 
   const moveLogin = () => {
       router.push({
-          pathname: '/login',
+          pathname: '/main',
       })
   }
 

@@ -16,10 +16,10 @@ const settings = {
       <div className="font-bold px-8 pt-6 pb-2 text-xl">
           <p>오늘 먹은 음식</p>
       </div>
-      <div className="px-8 bg-gray-200 flex justify-center">
+      <div className="px-8 flex justify-center">
         <Slider {...settings} >
-          <div className= "min-w-[150px] max-w-[300px] min-h-[150px] max-h-[300px] px-2 rounded-3xl bg-red1 items-center">
-            사진을 추가해주세요
+          <div className= "min-w-[150px] max-w-[300px] min-h-[150px] max-h-[300px] px-2 rounded-3xl items-center text-center m-auto">
+              사진을 추가해주세요
           </div>
         </Slider>
       </div>
