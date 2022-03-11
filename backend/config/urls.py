@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('yamm/', include('yamm.urls')),
-    path('boards/', include('board.urls')),
-    path('user/', include('user.urls')),
+    path('api/yamm/', include('yamm.urls')),
+    path('api/boards/', include('board.urls')),
+    path('api/user/', include('user.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
