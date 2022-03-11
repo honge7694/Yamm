@@ -13,47 +13,46 @@ class PostWrite(generics.CreateAPIView):
     '''
     게시글 업로드
     '''
-    # permission_classes = [IsAuthenticated, ]
-    permission_classes = [permissions.AllowAny ]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
 
-class PostList(generics.ListCreateAPIView):
+class PostListAPIView(generics.ListCreateAPIView):
     '''
-    게시글 목록
+    게시글 생성, 목록
     '''
-    permission_classes = [permissions.AllowAny ]
+    permission_classes = [permissions.AllowAny]
 
     serializer_class = PostSerializer
-    queryset = Post.objects.all().order_by('-create_date')
+    queryset = Post.objects.all()#.order_by('-create_date')
 
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     '''
-    게시글 업데이트, 디테일, 삭제
+    게시글 수정, 조회, 삭제
     '''
     # permission_classes = [IsOwnerOrReadOnly]
-    permission_classes = [permissions.AllowAny ]
+    permission_classes = [permissions.AllowAny]
 
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
 
-class PostReactionCreate(generics.ListCreateAPIView):
+class PostReactionAPIView(generics.ListCreateAPIView):
     '''
     게시글 추천
     '''
 
-    permission_classes = [permissions.AllowAny ]
+    permission_classes = [permissions.AllowAny]
 
     serializer_class = PostReactionSerializer
-    # queryset = PostReaction.
 
     def get_queryset(self):
         user = self.request.user
-        print(user,"####################")
+
         post = Post.objects.get(pk=self.kwargs['pk'])
         return PostReaction.objects.filter(user=user, post=post)
 
@@ -71,6 +70,6 @@ class PostReactionCreate(generics.ListCreateAPIView):
 
             return Response(status=status.HTTP_204_NO_CONTENT)
 
-        serializer.save(user=self.request.user, post=Post.objects.get(pk=self.kwargs['pk']))
-        # else:
-        #     raise ValidationError("Not reaction for post")
+        # serializer.save(user=self.request.user, post=Post.objects.get(pk=self.kwargs['pk']))
+        else:
+            raise ValidationError("Not reaction for post")

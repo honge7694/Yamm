@@ -10,15 +10,27 @@ class Post(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     tags = models.CharField(max_length=100, null=True)
-    # reaction = models.ManyToManyField(User, related_name='reaction_post') # 추천
     user_info = models.CharField(max_length=100)
+
+    class Meta :
+        db_table = 'post'
+        ordering = ['-create_date',]
+
+    def __str__(self):
+        return self.title
 
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, db_column='post_id', related_name='imagekey')
-    img = models.ImageField(upload_to="images/post/", blank=True, null=True)
+    img = models.ImageField(upload_to="images/post/")
+
+    class Meta :
+        db_table = 'post_img'
 
 
 class PostReaction(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     post = ForeignKey(Post, on_delete=models.CASCADE, db_column='board_id')
+
+    class Meta :
+        db_table = 'post_reaction'
