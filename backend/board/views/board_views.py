@@ -18,6 +18,16 @@ class PostListAPIView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
+    # def get_queryset(self):
+    #     order = self.request.data('', 'recent')
+
+    #     # order = 'recent'
+    #     if order == 'recent':
+    #         return Post.objects.all()
+
+    #     elif order == 'popular':
+    #         return Post.objects.all().order_by()
+
 
 class PostRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     '''
@@ -60,5 +70,5 @@ class PostReactionAPIView(generics.ListCreateAPIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         # serializer.save(user=self.request.user, post=Post.objects.get(pk=self.kwargs['pk']))
-        else:
-            raise ValidationError("Not reaction for post")
+        # else:
+            # raise ValidationError("Not reaction for post")

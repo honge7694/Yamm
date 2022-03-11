@@ -16,9 +16,6 @@ class Post(models.Model):
         db_table = 'post'
         ordering = ['-create_date',]
 
-    def __str__(self):
-        return self.title
-
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, db_column='post_id', related_name='imagekey')

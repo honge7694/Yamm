@@ -38,7 +38,7 @@ class PostSerializer(serializers.ModelSerializer):
         return User.objects.filter(nickname=obj.author).values('nickname', 'username', 'profile_img')
 
     def get_reaction(self, obj):
-        return PostReaction.objects.filter(id=obj.id).count()
+        return PostReaction.objects.filter(post_id=obj.id).count()
 
     class Meta:
         model = Post
