@@ -9,17 +9,6 @@ from ..serializers import PostReactionSerializer, PostSerializer, PostImageSeria
 from config.permission import IsOwnerOrReadOnly 
 
 
-class PostWrite(generics.CreateAPIView):
-    '''
-    게시글 업로드
-    '''
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
-
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
-
-
 class PostListAPIView(generics.ListCreateAPIView):
     '''
     게시글 생성, 목록
@@ -27,7 +16,7 @@ class PostListAPIView(generics.ListCreateAPIView):
     permission_classes = [permissions.AllowAny]
 
     serializer_class = PostSerializer
-    queryset = Post.objects.all()#.order_by('-create_date')
+    queryset = Post.objects.all()
 
 
 class PostRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
