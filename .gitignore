@@ -270,3 +270,4 @@ __pycache__/
 *.xlsx
 excel*
 migrations
+weights
