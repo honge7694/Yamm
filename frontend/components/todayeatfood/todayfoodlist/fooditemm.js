@@ -82,8 +82,8 @@ const FoodItemm = ({ foodData, testData, }) => {
                   <div onClick={routeFoodname} className='w-[100px] h-[160px] relative ' key={i} id={i} >
                     <Image className={' rounded-2xl shadow-2xl'} src={`http://localhost:8000${test["image"]}`} layout="fill" />
                     <div className=" absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
-                        <p className="text-xs text-neutral-200 font-sans mt-3">{test["food_name"]}</p>
-                        <p className=" mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{"탄수화물 단백질 지방 "}</p>
+                        <p className="text-xs text-neutral-200 font-sans m-3 ml-[-2px]">{test["food_name"]}</p>
+                        {/* <p className=" mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{""}</p> */}
                     </div>
                   </div>
                   

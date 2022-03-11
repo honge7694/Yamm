@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import ReactLoading from "react-loading";
 import lottie from 'lottie-web';
 
-const SignUpModal = ({ SetSignUpModalToggle }) => {
+const SignUpModal = ({ isSetSignUpModal }) => {
     
     const checkAnimation = useRef(null);
     const dispatch = useDispatch();
