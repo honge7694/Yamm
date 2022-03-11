@@ -21,7 +21,10 @@ const TodayFoodList = ({ eatFoodData }) => {
             <div className="mt-10 ml-5 mr-5 bg-slate-100 rounded-2xl shadow-2xl">
                 
                 {eatFoodData.map((item, i)=>{
-                    if(i != 0) return < FoodItemm key={i} testData={eatFoodData[i]} /> 
+                    if(i != 0) return ( <div className=" rounded-2xl ">
+                                            < FoodItemm key={i} testData={eatFoodData[i]} />
+                                            <div className=" bg-yellow1 pt-[1px] bg-opacity-50"></div>
+                                        </div>)
                     // console.log(item,"sds")
                 })}
                 {/* {  < FoodItemm testData={eatFoodData[1]} /> } */}

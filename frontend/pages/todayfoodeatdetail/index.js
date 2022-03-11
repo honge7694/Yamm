@@ -1,10 +1,11 @@
-import TopNav from '../../components/todayeatfood/topnav/topnav';
+// import TopNav from '../../components/todayeatfood/topnav/topnav';
 import CalorieGraph from '../../components/todayeatfood/caloriegraph';
 import TodayFoodList from '../../components/todayeatfood/todayfoodlist';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import ReactLoading from "react-loading";
+import TopNav from '../../components/login/topnav';
 function FoodInFo({  }) {
   
   const nowTime = moment().format('YYYY년 MM월 DD일');
@@ -44,6 +45,7 @@ function FoodInFo({  }) {
 
     return (
     <div>
+      
       <TopNav />
       <CalorieGraph tanDanGiAPI={tanDanGiAPI} nowTime={nowTime} dataNull={dataNull}/>
       { eatFoodData.length == 0  ?

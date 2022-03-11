@@ -10,7 +10,7 @@ import moment from 'moment';
 import ReactLoading from "react-loading";
 import Router from 'next/router';
 const settings = {
-  className: " w-full h-5/6 bg-white pt-1 ",
+  className: " w-full h-5/6  pt-1 ",
   centerMode: true,
   infinite: true,
   centerPadding: "5px",
@@ -34,10 +34,10 @@ const FoodItemm = ({ foodData, testData, }) => {
     const [formDate, setFormDate] = useState('');
     const router = useRouter();
     const routeFoodname = (e) => {
-        // console.log(testData,"wewewew", e.currentTarget.id)
+        console.log(testData,"wewewew", e.currentTarget.id)
         Router.push({
           pathname : `/todayfoodeatdetail/foodname`,
-          query: { "img" : testData[e.currentTarget.id]["image"], "name" : testData[e.currentTarget.id]["food_name"], "memo" : testData[e.currentTarget.id]["memo"], "date" : testData[e.currentTarget.id]["date"]  },
+          query: { "id" : testData[e.currentTarget.id]["id"], "img" : testData[e.currentTarget.id]["image"], "name" : testData[e.currentTarget.id]["food_name"], "memo" : testData[e.currentTarget.id]["memo"], "date" : testData[e.currentTarget.id]["date"]  },
         })
       }
     let date = '';

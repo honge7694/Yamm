@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useRouter, withRouter } from "next/router";
 import axios from 'axios';
-
+import Router from 'next/router';
 // withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ router : { query } }) {
@@ -27,7 +27,15 @@ function FoodInFoFoodName({ router : { query } }) {
   const routeBackFuntion = () => {
     router.push('/todayfoodeatdetail')
   }
-  console.log(query["name"],"sds")
+  console.log(query,)
+
+  const routeFoodname = (e) => {
+    // console.log(testData,"wewewew", e.currentTarget.id)
+    Router.push({
+      pathname : `/todayfoodeatdetail/modify`,
+      query: {... query},
+    })
+  }
 
   useEffect(()=>{
     axios.get(`http://127.0.0.1:8000/yamm/food/nutrient?food_name=${query["name"]}`)
@@ -70,7 +78,7 @@ function FoodInFoFoodName({ router : { query } }) {
                 <FontTitle marginTop="" textSize="text-xl" />
             </div>
             
-            <div className='rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white' id="testForm"> 
+            <div onClick={routeFoodname} className='rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white' id="testForm"> 
                 수정
             </div>
       </div>

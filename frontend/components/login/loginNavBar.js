@@ -40,7 +40,8 @@ export default function LoginNavbar() {
   return (
     <div>
       <TopNav/>
-      <FontTitle marginTop="mt-8" textSize="text-3xl" />
+      <div className=' mt-36'></div>
+      {/* <FontTitle marginTop="mt-8" textSize="text-3xl" /> */}
       { <LoginForm onSubmit={onSubmit} setEmail={setEmail} setPassword={setPassword} /> }
       {/* <TestForm /> */}
       <LoginLinks />

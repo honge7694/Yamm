@@ -2,9 +2,11 @@ import { bgcolor } from '@mui/system';
 import Image from 'next/image';
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import HamburgerMenu from './hamburgermenu';
-
+import FontTitle from '../../font/fontTitle';
+import { useRouter } from 'next/router';
 const TopNav = () => {
 
+  const router = useRouter();
   const [sideMenuToggle, setSideMenuToggle]  = useState({
     "toggle" : undefined,
     "bgColor" : ""
@@ -41,8 +43,13 @@ const TopNav = () => {
   return (
     <>
       <div className='flex justify-between ' >
-        <div className='  relative h-[30px] w-[30px] mt-[28px] ml-[28px] dur'>
+        <div onClick={(e)=>{
+          router.push('/')
+        }} className='  relative h-[30px] w-[30px] mt-[28px] ml-[28px] dur'>
           <Image src={"/Arrow2.svg"} layout={"fill"} />
+        </div>
+        <div className='mt-7 text-2xl font-bold'>
+                <FontTitle marginTop="" textSize="text-xl" />
         </div>
         <div onClick={sideMenuToggleFunction} className='relative z-30 h-[30px] w-[30px] mt-[28px] mr-[28px]'>
           {sideMenuToggle["toggle"] ? <Image src={"/cancelx.svg"} layout={"fill"}/>
