@@ -57,25 +57,43 @@ function* userInfo(action) {
 
 
 
-function logInAPI(data) {
+async function logInAPI(data) {
   
-  return axios.post("http://127.0.0.1:8000/user/login/", data)
-              .then((res)=>{
+  const loginResponse = await axios.post("http://127.0.0.1:8000/user/login/", data)
+  const test =  await userInfoAPI(loginResponse.data["access_token"])
+  return [loginResponse.status, loginResponse.data]
+
+  // return [loginResponse.status, loginResponse.data, test[1]["email"]]
+  // return test[1]["email"]
+  
+  
+  // .then((test)=>{
+  //   console.log(test," promise 객체 알까기")
+  //   return test[1]["email"]
+  // })
+  // .catch((error)=>console.log(error,"eerrrr"))       
+                // .then((res)=>{
                 // const userData = test(res.data["access_token"])
                 // console.log("saga loginAPI", res.data)
-                return [res.status, res.data]
-              })
-              .catch((res)=>{
-                console.log(res.response,"ere")
-                return [res.response.status,res.respons];
-              });
+                // const test =  userInfoAPI(res.data["access_token"])
+                //               .then((test)=>{
+                //                 console.log(test," promise 객체 알까기")
+                //                 return test[1]["email"]
+                //               })
+                //               .catch((error)=>console.log(error,"eerrrr"))
+              //   return [res.status, res.data, test]
+              // })
+              // .catch((res)=>{
+              //   console.log(res.response,"ere")
+              //   return [res.response.status,res.respons];
+              // });
 }
 
 function* logIn(action) {
-  try {
+  try { 
     console.log('saga logIn');
     const result = yield call( logInAPI, action.data );
-    console.log(result[1],"token")
+    console.log(result[1],result[2],"token")
     if(result[0] != 200 ){
       yield put({
         type: LOG_IN_FAILURE,
@@ -84,7 +102,7 @@ function* logIn(action) {
     }else{
       yield put({
         type: LOG_IN_SUCCESS,
-        data: result[1]
+        data: result[1]//
       });  
     }
   } catch (err) {

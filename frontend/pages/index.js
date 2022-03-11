@@ -4,7 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from "../components/todayeatfood/todayeatfood";
 import TodayEatFoodNull from "../components/todayeatfood/todayeatfoodnull";
 import BoardTest from '../components/boardtest';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; // ***
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from 'react';
@@ -14,7 +14,7 @@ import Image from 'next/image';
 export default function Home({ }) {
 
   const router = useRouter();
-  const { me } = useSelector((state) => (state.user));
+  const { me } = useSelector((state) => (state.user)); // ***
   
   const moveCapture = () => {
     

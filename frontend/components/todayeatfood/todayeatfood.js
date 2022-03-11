@@ -32,7 +32,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
   
   return (
     <div>
-      <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  delay-1000">
+      <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  ">
           <p>오늘 먹은 음식</p>
       </div>
       <div className= "px-8 ml-5 mr-5 rounded-2xl" onClick={(e)=>{routeTodayFoodEatDetail()}}>

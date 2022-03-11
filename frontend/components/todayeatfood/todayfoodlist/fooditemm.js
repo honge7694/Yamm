@@ -8,13 +8,12 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import moment from 'moment';
 import ReactLoading from "react-loading";
-
-
+import Router from 'next/router';
 const settings = {
-  className: " w-full ",
+  className: " w-full h-5/6  pt-1",
   centerMode: true,
   infinite: true,
-  centerPadding: "50px",
+  centerPadding: "5px",
   slidesToShow: 1,
   speed: 500
 };
@@ -34,7 +33,13 @@ const FoodItemm = ({ foodData, testData, }) => {
     const [loading, setLoading] = useState(true); 
     const [formDate, setFormDate] = useState('');
     const router = useRouter();
-    
+    const routeFoodname = (e) => {
+        console.log(testData,"wewewew", e.currentTarget.id)
+        Router.push({
+          pathname : `/todayfoodeatdetail/foodname`,
+          query: { "id" : testData[e.currentTarget.id]["id"], "img" : testData[e.currentTarget.id]["image"], "name" : testData[e.currentTarget.id]["food_name"], "memo" : testData[e.currentTarget.id]["memo"], "date" : testData[e.currentTarget.id]["date"]  },
+        })
+      }
     let date = '';
     
     useEffect(()=>{
@@ -69,21 +74,22 @@ const FoodItemm = ({ foodData, testData, }) => {
             </div>
 
             {/* 여기 슬라이더 css 살짝 안맞음 수정할 것*/}
-            <div className='w-4/6 flex justify-end mt-2 '>
-              <div className=" rounded-2xl w-2/3 min-h-[100px] h-full  flex items-center justify-center">
-              {/* <Slider {...settings}>
+            <div className='w-4/6 flex justify-end mt-2  '>
+              <div className="  rounded-2xl w-4/6 min-h-[200px] h-full  flex items-center justify-center ">
+              { <Slider {...settings}>
                 { testData.map((test, i) => (
-                  <Link key={i}  href={{
-                    pathname: '/todayfoodeatdetail/foodname',
-                    query: { "img" : test["img"], "name" : test["name"], "memo" : test["memo"], "date" : test["date"]  },
-                  }} >
-                    <a className='w-full h-full'>
-                      <Image className={'rounded-2xl shadow-2xl'} src={test["img"]} width="100%" height="100%" />
-                    </a>
-                  </Link>
+                  
+                  <div onClick={routeFoodname} className='w-[100px] h-[160px] relative ' key={i} id={i} >
+                    <Image className={' rounded-2xl shadow-2xl'} src={`http://localhost:8000${test["image"]}`} layout="fill" />
+                    <div className=" absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
+                        <p className="text-xs text-neutral-200 font-sans mt-3">{test["food_name"]}</p>
+                        <p className=" mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{"탄수화물 단백질 지방 "}</p>
+                    </div>
+                  </div>
+                  
                 ))
                 }
-              </Slider> */}
+              </Slider> }
               </div>
             </div>
         </div>)}
@@ -92,3 +98,8 @@ const FoodItemm = ({ foodData, testData, }) => {
 };
 
 export default FoodItemm;
+
+// onClick={(e)=>(router.push({
+//   pathname: '/todayfoodeatdetail',
+//   query: { "img" : test["img"], "name" : test["name"], "memo" : test["memo"], "date" : test["date"]  },
+// }))}
