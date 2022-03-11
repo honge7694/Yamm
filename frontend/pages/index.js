@@ -7,7 +7,7 @@ import BoardTest from '../components/boardtest';
 import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
@@ -15,25 +15,27 @@ export default function Home({ images }) {
   const router = useRouter();
   const { me } = useSelector((state) => (state.user));
   
-  
   const moveCapture = () => {
     router.push('/capture')
   }
   
-
-
+  const [ todayFoodInfo, setTodayFoodInfo ] = useState()
+  
   useEffect(() => {
     const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
 
     const fetchDate = () => {
-      const res = axios({
+      axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/yamm/food/eaten',
         params: {
           "date": nowDate
         }
-      })  
-      .then((res)=> console.log(res.data.shift()))
+      }) 
+      .then((response) => {
+        response.data.shift()
+        setTodayFoodInfo((response.data.flat()))
+      })
     }
     fetchDate();
   }, [])
@@ -41,7 +43,6 @@ export default function Home({ images }) {
   return (
     <>
     <div className="container mx-auto h-full bg-slate-50 rounded-3xl">
-      
       <div className=" h-40 p-8  text-left w-full ">
         { me == null ? (<span className=" flex justify-end font-bold text-3xl text-main ">
                             안녕하세요. --- 님 
@@ -73,7 +74,7 @@ export default function Home({ images }) {
           </div>
         </button>
       </div>
-      {true ? <TodayEatFood images={images}/> : <TodayEatFoodNull/>}
+      {true ? <TodayEatFood todayFoodInfo={todayFoodInfo}/> : <TodayEatFoodNull/>}
       <div className="font-bold px-8 pt-8 text-xl">달력</div>
       <div className="mt-0">      
         <Calendar className="mt-0"/>  

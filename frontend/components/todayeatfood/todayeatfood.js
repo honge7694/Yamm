@@ -13,13 +13,13 @@ const settings = {
   };
 const dummyFoodImage = ["/asset/떡볶이.png","/asset/삼겹살.png","/asset/삼겹살.png", "/asset/떡볶이.png"] 
 
-const TodayEatFood = ({ images }) => {
+const TodayEatFood = ({ todayFoodInfo }) => {
+
   
   const router = useRouter();
   const { user } = useSelector((state) => state.user);
   
   const routeTodayFoodEatDetail = () => {
-    
     
     if (user==null) { 
       router.push({
@@ -37,13 +37,13 @@ const TodayEatFood = ({ images }) => {
       </div>
       <div className= "px-8 ml-5 mr-5 rounded-2xl" onClick={(e)=>{routeTodayFoodEatDetail()}}>
         <Slider {...settings}>
-          { images.map((image, i) => (
-            <div className="" key={image.id}>
-              <img className="w-auto h-auto rounded-t-3xl px-2 " src={dummyFoodImage[i]} layout="fill"></img>
+          { todayFoodInfo && todayFoodInfo.map((images) => (
+            <div className="" key={images.id}>
+              <img className="w-full rounded-t-3xl px-2 h-[155px]" layout="fill" src={`http://localhost:8000${images.image}`}></img>
               <div className="px-2">
                 <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl">
-                  <p className="text-lg pt-2">음식이름</p>
-                  <p className="text-sm">칼로리: 탄수화물: 단백질: 지방:</p>
+                  <p className="font-bold text-lg pt-2">{images.food_name}</p>
+                  <p className="text-lg ">메모: {images.memo}</p>
                 </div>
               </div>
             </div>
