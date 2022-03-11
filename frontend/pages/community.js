@@ -23,7 +23,16 @@ const Community = ()=>{
   const [itemLists, setItemLists] = useState(dataDummy);
 
   const [itemLoading, setItemLoading] = useState(true);
-  const [boardItem, setBoardItem] = useState([]);
+  const [boardItem, setBoardItem] = useState({
+    "itemcount" : 0,
+    "item" : []
+  });
+
+  const setCountBack = () => {
+    // 10개 보다 작을 때
+    // 10개보다 많고 20개 보다 작을 때
+    // 20개 이상 있을때
+  }
    // 스크롤 이벤트 등록
   useEffect(() => {
     window.addEventListener("scroll", listener);
@@ -38,16 +47,16 @@ const Community = ()=>{
   };
 
   const itemListMap = useMemo(() => {
-    let oddResult =  boardItem.map((item, i) => {
+    let oddResult =  boardItem["item"].map((item, i) => {
       if( item.images[0] == undefined){
-        console.log("sdsdadasd")
+        console.log(item,"sdsdadasd")
       }
       if(i%2!=0){
         return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
         // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
-    let evenResult =  boardItem.map((item, i) => {
+    let evenResult =  boardItem["item"].map((item, i) => {
       if(i%2==0){
         return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
         // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
@@ -59,7 +68,8 @@ const Community = ()=>{
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500)); // API 호출로 수정
     let Items = dataDummy;
-    setItemLists((itemLists) => itemLists.concat(Items));
+    setBoardItem()
+    // setItemLists((itemLists) => itemLists.concat(Items));
     //console.log("www", itemLists)
     setIsLoaded(false);
   };
@@ -82,44 +92,23 @@ const Community = ()=>{
   }, [target]);
   
   useEffect(()=>{
-    axios.get('http://localhost:8000/board/')
+    axios.get('http://localhost:8000/boards/')
     .then((res)=>{
       console.log(res.data)
-      setBoardItem([...res.data]);
+      setBoardItem({
+        ... boardItem,
+        "item" : [...res.data]
+      });
       setItemLoading(false);
     })
     .catch(error => console.log(error))
     
   },[]);
-  console.log(boardItem,"ere")
+  console.log(boardItem,boardItem.length,"게시판 아이템들")
 
-  useEffect(()=>{
-    if(accessToken){
-      console.log(accessToken,'56567')
-      // fetch("http://127.0.0.1:8000/user/info/", {
-      //   method: "GET",
-      //   headers: {
-      //     "Authorization": accessToken,
-      //   },
-      // }).then((response) => console.log(response))
-      // .catch((err)=>{console.log(err)});
-      axios.get("http://127.0.0.1:8000/user/info/", {}, {
-        Authorization : {
-          accessToken
-        }
-      })
-      .then((res)=>{
-        console.log(res,'kkkkkkkkkkkk')
-        return res.status;
-      })
-      .catch(error => {
-        console.log(error.response,'ssssss')
-        return error.response.data;
-      });
-    
-    }
-  }, [accessToken])
+  const dummyCreate = () => {
 
+  }
 
   return (
     <>
@@ -127,6 +116,7 @@ const Community = ()=>{
       <div ref={bottomNav} className='hidden'>
         <BottomNav></BottomNav>
       </div>
+      <button onClick={dummyCreate} className='m-2 p-3 text-base text-white bg-yellow1 w-full rounded-2xl'>더미 데이터 10개 생성 클릭</button>
       {/* Dummy.js 에서 함수 받아 와서 itemList 들어 있는 배열 가져 올 것, API 비동기 처리 할 것  */}
       {/* 두개로 받아서 성능 이슈 map 함수 하나로 할 것 */ }
       {itemLoading === false && (<div className={container} >
@@ -137,11 +127,12 @@ const Community = ()=>{
             {itemListMap[1]}
           </div>
         </div>)}
-        <div>sdss</div>
+        {/* <div>sdss</div> */}
 
-      {/* <div className={targetCSS} ref={setTarget} >
-          {isLoaded && <Loader /> }
-      </div> */}
+      {  boardItem["itemcount"] > 10 &&
+          <div className={targetCSS} ref={setTarget} >
+            {isLoaded && <Loader /> }
+          </div> }
 
     </>
   );

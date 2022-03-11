@@ -6,11 +6,12 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
     
     
     const [percentBarChange, setPercentBarChange] = useState("w-[30%] rounded-2xl bg-yellow-100 ease-linear duration-500")
-    
+    const percentBar = parseInt((tanDanGiAPI["calorie"]/2000)*100)
+
     const totalPercent = useEffect(()=>{
-        const percentBar = parseInt((tanDanGiAPI["calorie"]/2000)*100)
-        if ( percentBar > 100 ) setPercentBarChange("w-[100%] rounded-2xl bg-red1 ease-linear duration-500 delay-1000")
-        else setPercentBarChange(`w-[${percentBar}%] rounded-2xl bg-yellow-100 ease-linear duration-500 delay-1000`)
+        console.log(percentBar,"percentbar")
+        if ( percentBar > 100 ) setPercentBarChange(" rounded-2xl bg-red1 ease-linear duration-500 delay-1000")
+        if( percentBar < 100 ) setPercentBarChange(`rounded-2xl bg-yellow-100 ease-linear duration-500 delay-1000`)
     },[tanDanGiAPI]);
 
     return (
@@ -18,7 +19,7 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
             <div className='flex justify-end font-["Jalnan"] text-xs'>
                 {nowTime}
             </div>
-
+            
             <div className='flex justify-center mt-6 '>
 
                 <div className=' w-11/12  items-end'>
@@ -27,8 +28,8 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
                     <div className='flex justify-end text-[8px]'>{parseInt(tanDanGiAPI["calorie"])} / 2000 kcal</div>
                     
                     <div className='flex justify-center mt-2'>
-                        <div className='h-[8px] flex justify-start w-full bg-blue-300 rounded-2xl'>
-                        <div className={percentBarChange}></div>
+                        <div className=' h-[8px] flex justify-start w-full bg-blue-300 rounded-2xl'>
+                        <div className={percentBarChange} style={{ width : `${percentBar}%`}} ></div>
                     </div>
                     </div>        
 
