@@ -34,7 +34,7 @@ export default function LoginNavbar() {
   },[accessToken]);
 
   useEffect(()=>{
-    if(me != null) router.push('/');
+    if(me != null) router.push('/main');
   },[me]);
 
   return (
