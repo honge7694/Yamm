@@ -2,7 +2,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import CircleGraph from './circlegraph';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-const CalorieGraph = ({ tanDanGiAPI, nowTime }) => {
+const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
     
     
     const [percentBarChange, setPercentBarChange] = useState("w-[30%] rounded-2xl bg-yellow-100 ease-linear duration-500")
@@ -22,7 +22,7 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime }) => {
             <div className='flex justify-center mt-6 '>
 
                 <div className=' w-11/12  items-end'>
-
+                    { dataNull && <div className=' flex justify-center text-lg text-red1 mb-4'>" 해당날짜의 먹은 음식이 없습니다 "</div>}
                     <div className='flex justify-start text-xs mt-1'>총 섭취량 📌</div>
                     <div className='flex justify-end text-[8px]'>{parseInt(tanDanGiAPI["calorie"])} / 2000 kcal</div>
                     
