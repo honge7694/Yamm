@@ -71,7 +71,6 @@ def Model():
 run = Model()
 
 
-img = cv2.imread('test_2-4.jpg')
 def inputdata(img):
     #preprocessing
     img_org = img[..., ::-1].copy()
