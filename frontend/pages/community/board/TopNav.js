@@ -15,7 +15,7 @@ const TopNav = () => {
                 <FontTitle marginTop="" textSize="text-xl" />
             </div>
             <div className=' rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white'>
-                저장
+                수정
             </div>
         </div>
     );

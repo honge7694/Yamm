@@ -1,4 +1,4 @@
-import TopNav from './TopNav';
+import Topna
 import BoardImage from './BoardImage';
 import ProfileTag from './ProfileTag';
 import BoardContent from './BoardContent';
@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 // API(BE->FE) title, nick, content, tag, foodImg
 // SEO router.push 안쓰고 Link 쓴다 ?
 
-const Idx = (props) => {
+const Fix = (props) => {
     const router = useRouter();
     // idx는 API 요청 할 때 쓸 것
     const {idx, image, hit, content, tag, profile_img, nickname, reaction} = router.query;
@@ -42,4 +42,4 @@ const Idx = (props) => {
     );
 } 
 
-export default withRouter(Idx);
+export default withRouter(Fix);
