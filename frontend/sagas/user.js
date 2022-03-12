@@ -19,7 +19,7 @@ import {
 
 function userInfoAPI(acToken) {
   console.log('test 유저 정보 API')
-  return axios.get("http://127.0.0.1:8000/user/info", { 
+  return axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/info", { 
     headers: {
       Authorization: `Bearer ${acToken}`
     }
@@ -59,7 +59,7 @@ function* userInfo(action) {
 
 async function logInAPI(data) {
   
-  const loginResponse = await axios.post("http://127.0.0.1:8000/user/login/", data)
+  const loginResponse = await axios.post("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/login/", data)
   const test =  await userInfoAPI(loginResponse.data["access_token"])
   return [loginResponse.status, loginResponse.data]
 
@@ -133,7 +133,7 @@ function* logOut() {
 function signUpAPI(formdata) {
   return axios({
         method: "post",
-        url: "http://localhost:8000/user/signup/",
+        url: "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/signup/",
         data: formdata,
         headers: { "Content-Type": "multipart/form-data" },
       })

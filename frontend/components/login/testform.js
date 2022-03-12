@@ -66,13 +66,13 @@ const TestForm = () => {
         for(var pair of formData.entries()) console.log(pair);  // formdata 프론트 쪽에서 확인
         
         try {
-          // await axios.post('http://localhost:8000/yamm/signup/', {	"email" : "tsest@naver.com", "password" : "tasest" })
+          // await axios.post('http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/signup/', {	"email" : "tsest@naver.com", "password" : "tasest" })
           // .then((res)=>{
           //   console.log(res)
           // });
           await axios({
             method: "post",
-            url: "http://localhost:8000/yamm/signup/",
+            url: "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/signup/",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
           })

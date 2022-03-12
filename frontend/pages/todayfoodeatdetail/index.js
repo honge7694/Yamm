@@ -21,8 +21,8 @@ function FoodInFo({ response }) {
         protein : ""
   })
   useEffect(()=>{
-    axios.get(`http://127.0.0.1:8000/yamm/food/eaten?date=${nowTimeAPI}`)
-    // axios.get("http://127.0.0.1:8000/yamm/food/eaten?date=2021-03-11")
+    axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=${nowTimeAPI}`)
+    // axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=2021-03-11")
     .then((res)=>{
         console.log(res,  "칼로리 API 응답 성공")
         setTanDanGiAPI({
@@ -61,7 +61,7 @@ export default FoodInFo;
 
 export const getServerSideProps = async() => {
   // 달력 여기서 처리할 것
-  const { data } = await axios.get("http://127.0.0.1:8000/yamm/food/eaten?date=2021-03-11")
+  const { data } = await axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=2021-03-11")
   // console.log(response)
   // const response1 = await response.json();
   return {

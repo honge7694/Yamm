@@ -28,7 +28,7 @@ const Modify = (props) => {
 
     const submitFuction = async (e) => {
         console.log(inputValue,"보낼값!")
-        axios.put('http://127.0.0.1:8000/yamm/food/eaten', inputValue)
+        axios.put('http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten', inputValue)
         .then((res)=>{
             console.log(res)
         })
@@ -53,7 +53,7 @@ const Modify = (props) => {
                         </div>
                       </div>)
             }
-            <BoardImage imageUrl={`http://localhost:8000${router.query["img"]}`} />
+            <BoardImage imageUrl={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${router.query["img"]}`} />
             
             <div className='flex  mt-7 mb-[-20px] ml-5 mr-5 gap-4 '>
             <div className=" mb-4">

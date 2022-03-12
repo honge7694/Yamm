@@ -54,13 +54,13 @@ const Community = ()=>{
         console.log(item,"sdsdadasd")
       }
       if(i%2!=0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
         // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
     let evenResult =  boardItem["item"].map((item, i) => {
       if(i%2==0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://localhost:8000${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
         // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
       }
     });
@@ -94,7 +94,7 @@ const Community = ()=>{
   }, [target]);
   
   useEffect(()=>{
-    axios.get('http://localhost:8000/boards/')
+    axios.get('http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/')
     .then((res)=>{
       console.log(res.data)
       setBoardItem({

@@ -52,7 +52,7 @@ function foodinfo(props) {
 
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/yamm/distinction',
+        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/distinction',
         data: formData,
       })
       .then((response) => {setFoodName(response.data.food_name)})
@@ -87,7 +87,7 @@ function foodinfo(props) {
 
       const res = await axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/yamm/food/eaten',
+        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
         data: formData,
     })
     }

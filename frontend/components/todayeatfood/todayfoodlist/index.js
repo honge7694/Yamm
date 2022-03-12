@@ -10,7 +10,7 @@ import { testData } from './datacuthook';
 const TodayFoodList = ({ eatFoodData }) => {
     const [data,setData] = useState([]);
     // useEffect(()=>{
-    //     axios.get('http://127.0.0.1:8000/yamm/food/eaten?date=2021-02-08')
+    //     axios.get('http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=2021-02-08')
     //     .then((res) =>{
     //         console.log(res.data,"food")
     //         setData(arr => [...data, eatFoodData])

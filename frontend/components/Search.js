@@ -20,7 +20,7 @@ function Search({selectFood,foodName,closeSearch,searchFood,searchResult}) {
     async function fetchData() {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/yamm/food/search',
+        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/search',
         // headers: {
         //   "Content-Type": "application/json"
         // },

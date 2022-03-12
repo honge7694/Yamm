@@ -38,7 +38,7 @@ function FoodInFoFoodName({ router : { query } }) {
   }
 
   useEffect(()=>{
-    axios.get(`http://127.0.0.1:8000/yamm/food/nutrient?food_name=${query["name"]}`)
+    axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/nutrient?food_name=${query["name"]}`)
     .then((res)=>{
       console.log(res)
       setTanDanGi({
@@ -89,7 +89,7 @@ function FoodInFoFoodName({ router : { query } }) {
 
       {<div className='flex justify-center mt-12'>
         <div className='w-[250px] h-[250px] relative' >
-          <Image className={'rounded-2xl shadow-2xl'} src={ `http://localhost:8000${query["img"]}`} layout="fill" />
+          <Image className={'rounded-2xl shadow-2xl'} src={ `http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${query["img"]}`} layout="fill" />
         </div>
       </div>}
       

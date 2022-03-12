@@ -39,11 +39,11 @@ const TodayEatFood = ({ todayFoodInfo }) => {
         <Slider {...settings}>
           { todayFoodInfo && todayFoodInfo.map((images) => (
             <div className="" key={images.id}>
-              <img className="w-full rounded-t-3xl px-2 h-[155px]" layout="fill" src={`http://localhost:8000${images.image}`}></img>
+              <img className="w-full rounded-t-3xl px-2 h-[155px]" layout="fill" src={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${images.image}`}></img>
               <div className="px-2">
-                <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl">
+                <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl overflow-auto">
                   <p className="font-bold text-lg pt-2">{images.food_name}</p>
-                  <p className="text-lg ">메모: {images.memo}</p>
+                  <p className="text-lg">메모: {images.memo}</p>
                 </div>
               </div>
             </div>

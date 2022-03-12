@@ -35,7 +35,7 @@ export default function Home({ }) {
     const fetchDate = () => {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/yamm/food/eaten',
+        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
         params: {
           "date": nowDate
         }
@@ -108,7 +108,7 @@ export const getServerSideProps = async() => {
 //   const nowDate  = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0]; 
 //   const res = await fetch({
 //     method: 'get',
-//     url: 'http://127.0.0.1:8000/yamm/food/eaten',
+//     url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
 //     params: {
 //       "date": nowDate
 //     }

@@ -32,7 +32,7 @@ const Test = () => {
     try {
       const response = await axios({
         method: "post",
-        url: "http://127.0.0.1:8000/board/boardtest/",
+        url: "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/board/boardtest/",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       })
