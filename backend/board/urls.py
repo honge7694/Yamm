@@ -12,7 +12,7 @@ DELETE  boards/<pk> 삭제
 
 POST    boards/<pk>/reaction 추천, 한번 더 보내면 삭제.
 '''
-urlpatterns =[
+urlpatterns = [
     path('', board_views.PostListAPIView.as_view()),
     path('<int:pk>', board_views.PostRetrieveUpdateDestroyAPIView.as_view()),
     # path('reaction', board_views.PostListReactionAPIView.as_view()),

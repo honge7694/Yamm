@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 from ..models import Post, PostReaction
 from ..serializers import PostReactionSerializer, PostSerializer, PostImageSerializer
-from config.permission import IsOwnerOrReadOnly 
+from config.permission import IsOwnerOrReadOnly
 
 
 class PostListAPIView(generics.ListCreateAPIView):
@@ -50,8 +50,9 @@ class PostReactionAPIView(generics.ListCreateAPIView):
             self.get_queryset().delete()
 
             return Response(status=status.HTTP_204_NO_CONTENT)
-        
-        serializer.save(user=self.request.user, post=Post.objects.get(pk=self.kwargs['pk']))
+
+        serializer.save(user=self.request.user,
+                        post=Post.objects.get(pk=self.kwargs['pk']))
 
     def delete(self, serializer, *args, **kwargs):
         if self.get_queryset().exists():
