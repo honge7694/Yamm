@@ -25,7 +25,7 @@ export default function BoardCards({ image, boardTitle, classNameCSS, content, i
         <div className='mt-[5px]'>
           <div className={classNameCSS}>
               {/* API 호출 후 10개 씩 BORAD CARD IMAGE 받아온다 */}
-              <ImageItem image={image} contentLength={contentLength} idx={idx} hit={hit} content={content} tag={tag} create_date={create_date} user_info={user_info} reaction={reaction} />
+              <ImageItem image={image} contentLength={contentLength} boardTitle={boardTitle} idx={idx} hit={hit} content={content} tag={tag} create_date={create_date} user_info={user_info} reaction={reaction} />
               
       
               <div className={boardTitleExtraMenuWrap1}>
