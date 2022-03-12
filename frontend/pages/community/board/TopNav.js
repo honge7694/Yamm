@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import FontTitle from '../../../components/font/fontTitle';
 
-const TopNav = () => {
+const TopNav = ({ fixRoute }) => {
     const router = useRouter();
     const routeFuntion = () => router.push({ pathname : `/community`, });
 
@@ -14,8 +14,8 @@ const TopNav = () => {
             <div className='mt-1 text-2xl font-bold'>
                 <FontTitle marginTop="" textSize="text-xl" />
             </div>
-            <div className=' rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white'>
-                저장
+            <div onClick={fixRoute} className=' rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white'>
+                수정
             </div>
         </div>
     );

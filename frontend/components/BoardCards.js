@@ -7,7 +7,7 @@ import BoardTitle from '../components/BoardTitle';
 const boardTitleExtraMenuWrap1 = "flex justify-between mt-1";
 const boardTitleExtraMenuWrap = "";
 
-export default function BoardCards({ image, boardTitle, classNameCSS, content, idx, hit }){
+export default function BoardCards({ image, boardTitle, classNameCSS, content, idx, hit, tag, create_date, user_info, reaction }){
     const contentLength = useMemo(()=>{
         //console.log(content.length,'here') 나중에 사진 길이 체크할 함수 !!
         if (content.length < 20){
@@ -25,7 +25,7 @@ export default function BoardCards({ image, boardTitle, classNameCSS, content, i
         <div className='mt-[5px]'>
           <div className={classNameCSS}>
               {/* API 호출 후 10개 씩 BORAD CARD IMAGE 받아온다 */}
-              <ImageItem image={image} contentLength={contentLength} idx={idx} hit={hit} content={content} image={image} />
+              <ImageItem image={image} contentLength={contentLength} boardTitle={boardTitle} idx={idx} hit={hit} content={content} tag={tag} create_date={create_date} user_info={user_info} reaction={reaction} />
               
       
               <div className={boardTitleExtraMenuWrap1}>

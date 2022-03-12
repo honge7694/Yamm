@@ -11,10 +11,14 @@ import TagModal from '../../../components/TagModal/TagModal';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-const WriteBoard = (props) => {
+import Image from 'next/image';
+
+const Fix = (props) => {
+    const router = useRouter();
+    
+    const { title, content, tags, img, create_date, idx} = router.query;
     const author = useSelector((state)=>(state.user.user["pk"]))
     const [selectedFile, setSelectedFile] = useState(null);
-    const router = useRouter();
     const [toggleProfileTag, setToggleProfileTag] = useState(false);
     const onclickEmoji = (e) => {
         setInputValue({
@@ -39,6 +43,14 @@ const WriteBoard = (props) => {
         [e.target.id] : e.target.value 
       });
     }
+    const deleteBoard = async () => {
+        try{
+            await axios.delete(`http://localhost:8000/boards/${idx}`)
+            console.log("삭제 성공 !")
+        }catch{
+            console.log("삭제 실패")
+        }
+    }
 
     const handleSubmit = async () => {
         // event.preventDefault()
@@ -53,13 +65,13 @@ const WriteBoard = (props) => {
     
         try {
           const response = await axios({
-            method: "post",
-            url: "http://localhost:8000/boards/",
+            method: "put",
+            url: `http://localhost:8000/boards/${idx}`,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
           })
           .then((res)=>{
-            console.log(res,"제출성공!!")
+            console.log(res,"수정성공!!")
           });
         } catch(error) {
           console.log(error)
@@ -68,24 +80,30 @@ const WriteBoard = (props) => {
 
     return (
         <div className="">
+            
             {console.log(author,"sdsd")}
             <TopNav />
-            {/* <BoardImage imageUrl={image} /> */}
             <UpLoadImg setSelectedFile={setSelectedFile} handleSubmit={handleSubmit} />
+            
+            <div className='ml-7 mr-7'>
+                <div onClick={deleteBoard} className=' flex justify-center className="w-full px-4 py-2 text-white bg-red1 rounded shadow-xl"'>
+                     게시글 삭제
+                </div>
+            </div>
             <div className=' bg-white mr-5 ml-5'>
             <div className="grid grid-cols-6 grid-flow-row gap-3 mt-6">
-          <div className=" row-span-1 mt-1 col-span-1 font-['Jalnan'] rounded-full bg-neutral-200 h-[50px] w-[50px] flex justify-center items-center" >
-            <div className='relative flex justify-center items-center w-full h-full'>
-                사진
+            <div className=" row-span-1 mt-1 col-span-1 font-['Jalnan'] rounded-full bg-neutral-200 h-[50px] w-[50px] flex justify-center items-center" >
+              <div className='relative flex justify-center items-center w-full h-full'>
+                  사진
+              </div>
             </div>
-          </div>
-          <div className=" col-span-4 px-1" >
-            <input onChange={onChange}  className="shadow appearance-none border rounded w-full mt-2 py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline" id="create_date" type="text" placeholder="YYYY-MM-DD"></input>
-          </div>
-            
-          <div className=" col-span-1 flex items-center  pr-1 justify-end" >
-            <TagModal setToggleProfileTag={setToggleProfileTag} toggleProfileTag={toggleProfileTag}/>
-          </div>
+            <div className=" col-span-4 px-1" >
+              <input onChange={onChange}  className="shadow appearance-none border rounded w-full mt-2 py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline" id="create_date" type="text" placeholder="YYYY-MM-DD"></input>
+            </div>
+              
+            <div className=" col-span-1 flex items-center  pr-1 justify-end" >
+              <TagModal setToggleProfileTag={setToggleProfileTag} toggleProfileTag={toggleProfileTag}/>
+            </div>
         </div>
             </div>
             { 
@@ -115,4 +133,4 @@ const WriteBoard = (props) => {
     );
 } 
 
-export default WriteBoard;
+export default withRouter(Fix);
