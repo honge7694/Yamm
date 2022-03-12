@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -161,7 +161,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
 
@@ -183,6 +182,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 
 REST_USE_JWT = True
+JWT_AUTH_COOKIE_USE_CSRF = False
+JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED = False
 # JWT_AUTH_COOKIE = 'my-app-auth'
 # JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 

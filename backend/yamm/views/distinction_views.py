@@ -9,7 +9,7 @@ import cv2
 import numpy
 
 
-class distinction(APIView):
+class Distinction(APIView):
     '''
     사진 판별
     '''
@@ -20,6 +20,11 @@ class distinction(APIView):
         image = cv2.imdecode(numpy.frombuffer(
             image.read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
         confidence, label = inputdata(image)
+
+        # 음식이 아닐 경우 예외
+        if label == 9999:
+            response = {"food_name": ""}
+            return Response(response, status.HTTP_200_OK)
 
         food = Food.objects.filter(pk=label-1).first()
 

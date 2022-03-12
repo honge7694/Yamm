@@ -10,7 +10,7 @@ from ..serializers import FoodSerializer, FoodImageSerializer
 
 # TODO: permission 연동되면 수정하기
 
-class eaten(APIView):
+class Eaten(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
@@ -103,7 +103,7 @@ class eaten(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class search(APIView):
+class Search(APIView):
     '''
     음식이름 검색
     '''
@@ -125,7 +125,7 @@ class search(APIView):
         return Response(response)
 
 
-class nutrient(APIView):
+class Nutrient(APIView):
     '''
     음식 영양소 정보 불러오기
     '''
