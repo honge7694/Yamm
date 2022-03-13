@@ -37,7 +37,7 @@ export default function Home({ images }) {
       </div>
 
       <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
-      <div className="flex justify-center px-8 ">
+      <div className="flex justify-center px-8  ">
         <button className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white" onClick={moveCapture}>
           <div className="pt-8 text-2xl">오늘 먹은 음식을 추가해주세요</div>
           <div className="pt-4 text-main">

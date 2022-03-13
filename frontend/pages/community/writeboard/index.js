@@ -12,7 +12,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 const WriteBoard = (props) => {
-    const author = useSelector((state)=>(state.user.user["pk"]))
+    const author = useSelector((state)=>(state.user))
     const [selectedFile, setSelectedFile] = useState(null);
     const router = useRouter();
     const [toggleProfileTag, setToggleProfileTag] = useState(false);
@@ -62,6 +62,8 @@ const WriteBoard = (props) => {
             console.log(res,"제출성공!!")
           });
         } catch(error) {
+          alert("로그인을 해주세요!")
+          router.push('/main')
           console.log(error)
         }
     }

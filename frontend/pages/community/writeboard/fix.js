@@ -17,7 +17,7 @@ const Fix = (props) => {
     const router = useRouter();
     
     const { title, content, tags, img, create_date, idx} = router.query;
-    const author = useSelector((state)=>(state.user.user["pk"]))
+    const author = useSelector((state)=>(state.user))
     const [selectedFile, setSelectedFile] = useState(null);
     const [toggleProfileTag, setToggleProfileTag] = useState(false);
     const onclickEmoji = (e) => {
@@ -74,6 +74,8 @@ const Fix = (props) => {
             console.log(res,"수정성공!!")
           });
         } catch(error) {
+          alert("로그인을 해주세요!")
+          router.push('/main')
           console.log(error)
         }
     }

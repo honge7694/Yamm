@@ -31,11 +31,15 @@ const TopNav = () => {
   // 2. useEffect 
 
   const dalayHiddenHamburgerMenu = useEffect(()=>{
-    if(sideMenuToggle["toggle"] !== undefined){ // 해결 부분
-      toggleSideMenu.current.className=""; 
-      setTimeout(() => {
-        if(sideMenuToggle["toggle"] == false) toggleSideMenu.current.className=" hidden";
-      }, 900);
+    try{
+      if(sideMenuToggle["toggle"] !== undefined){ // 해결 부분
+        toggleSideMenu.current.className=""; 
+        setTimeout(() => {
+          if(sideMenuToggle["toggle"] == false) toggleSideMenu.current.className=" hidden";
+        }, 900);
+      }
+    }catch(e){
+      
     }
     
   }, [sideMenuToggle["toggle"]]);

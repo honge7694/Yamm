@@ -112,8 +112,8 @@ const Community = ()=>{
     }
   }, [boardItem])
   return (
-    <>
-      
+    <div className='  flex justify-center'>
+    <div className='lg:w-[500px]'>
       <div ref={bottomNav} className='hidden'>
         <BottomNav></BottomNav>
       </div>
@@ -132,7 +132,8 @@ const Community = ()=>{
       (<div className={targetCSS} ref={setTarget} >
           {isLoaded && <Loader /> }
       </div>)}
-    </>
+    </div>
+    </div>
   );
 };
 

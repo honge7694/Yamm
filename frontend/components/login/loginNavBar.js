@@ -22,7 +22,7 @@ export default function LoginNavbar() {
   const router = useRouter();
   // setemail 해도 useCallback 에 추가해 주지 않으면 값 바뀌지 않는지 질문!
   // 버튼 눌려 있어서 다른 곳 클릭해야 하는데 왜 그런지 질문
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(() => {  
     console.log("dispath-loginRequestAction", email, password , accessToken)
     dispatch(loginRequestAction({ email, password }));
     // if(accessToken != null) router.push(router.query["url"]);
@@ -38,7 +38,7 @@ export default function LoginNavbar() {
   },[me]);
 
   return (
-    <div>
+    <div >
       <TopNav/>
       <div className=' mt-36'></div>
       {/* <FontTitle marginTop="mt-8" textSize="text-3xl" /> */}
