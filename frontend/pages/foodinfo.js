@@ -92,7 +92,7 @@ function foodinfo(props) {
     })
     }
     fetchData();
-    router.push('/')
+    router.push('/main')
   }
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl" >

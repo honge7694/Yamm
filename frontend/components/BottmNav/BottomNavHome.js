@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 const BottomNavHome = () => {
     const router = useRouter();
     const routeFuntion = (e) => {
-        router.push('/')
+        router.push('/main')
     }
     return (
         <div onClick={(e)=>{routeFuntion();}}>

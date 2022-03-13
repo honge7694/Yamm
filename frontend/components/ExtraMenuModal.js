@@ -36,8 +36,8 @@ const ExtraMenuModal = () => {
                 <div onClick={(e)=>{setIsExtraMenuImageClicked(false); console.log("backlog-modal")}} className={extraMenuModalContainer}>
                     <div className="w-screen h-1/6 fixed bottom-0 flex-col justify-center border-t-2 border-slate-900 rounded-3xl ml-10 mr-10 divide-y divide-dashed p-[10px] bg-stone-100">
                         <div className='text-center' onClick={(e)=>{modalItemBubbleStop(e)}} >되돌아가기</div>
-                        <div className='text-center' onClick={(e)=>{modalItemBubbleStop(e)}} >저장</div>
-                        <div className='text-center' onClick={(e)=>{modalItemBubbleStop(e)}} >공유</div>
+                        {/* <div className='text-center' onClick={(e)=>{modalItemBubbleStop(e)}} >저장</div>
+                        <div className='text-center' onClick={(e)=>{modalItemBubbleStop(e)}} >공유</div> */}
                     </div>
                 </div>
                 

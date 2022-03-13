@@ -3,7 +3,8 @@ import Camera from '../components/Camera'
 import Modal from '../components/Modal'
 import { useRouter } from "next/router";
 import axios from 'axios';
-
+import UpLoadImg from '../components/community/writeboard/uploadimg';
+import CaptureUpLoad from '../components/captureupload';
 
 function capture() {
 
@@ -15,6 +16,7 @@ function capture() {
 
   useEffect(() => {
     if(files) {
+      console.log(files, "여기에 file 들어가는지 확인")
       const reader = new FileReader();
       reader.onload = () => {
         setPreview(reader.result)
@@ -49,7 +51,8 @@ function capture() {
               <div className="h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">
                 <div className="mt-10">
                   <Camera className=""/>
-                    <input type="file" id="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/>
+                    {/* <input type="file" id="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/> */}
+                    <CaptureUpLoad onLoadFile={onLoadFile} />
                 </div>
               </div>
         </div>

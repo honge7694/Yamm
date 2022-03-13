@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Test = () => {
   // a local state to store the currently selected file.
-  const [selectedFile, setSelectedFile] = React.useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [id, setId] = useState('');
 
   const  { accessToken }   = useSelector((state) => state.user);

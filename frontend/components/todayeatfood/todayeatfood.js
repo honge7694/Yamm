@@ -31,7 +31,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
   }
   
   return (
-    <div>
+    <div className="">
       <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  ">
           <p>오늘 먹은 음식</p>
       </div>
@@ -41,9 +41,9 @@ const TodayEatFood = ({ todayFoodInfo }) => {
             <div className="" key={images.id}>
               <img className="w-full rounded-t-3xl px-2 h-[155px]" layout="fill" src={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${images.image}`}></img>
               <div className="px-2">
-                <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl overflow-auto">
-                  <p className="font-bold text-lg pt-2">{images.food_name}</p>
-                  <p className="text-lg">메모: {images.memo}</p>
+                <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl break-all ">
+                  <p className="font-bold text-lg pt-2 ">{images.food_name}</p>
+                  <p className="text-lg h-1/2 break-all   p-1 w-full overflow-y-hidden">{images.memo}</p>
                 </div>
               </div>
             </div>

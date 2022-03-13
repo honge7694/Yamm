@@ -6,14 +6,12 @@ import BottomNav from '../components/BottmNav/BottomNav';
 import { dataDummy } from '../components/Dummy';
 import axios from 'axios';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
-
 const targetCSS = "w-screen h-[140px] flex justify-center text-center items-center";
 const container = "flex";
 const itemWrapper = "flex flex-col w-1/2";
 
 const Community = ()=>{
-  const { accessToken } = useSelector((state)=>(state.user))
+
   const bottomNav = useRef(null);
   const [currentScrollY, setCurrentScrollY] = useState(0);
   const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -22,60 +20,63 @@ const Community = ()=>{
   const [isLoaded, setIsLoaded] = useState(false);
   const [itemLists, setItemLists] = useState(dataDummy);
 
-  const [itemLoading, setItemLoading] = useState(true);
   const [boardItem, setBoardItem] = useState({
-    "itemcount" : 0,
+    "count" : 0,
+    "next" : "http://localhost:8000/boards/",
     "item" : []
   });
-
-  const setCountBack = () => {
-    // 10개 보다 작을 때
-    // 10개보다 많고 20개 보다 작을 때
-    // 20개 이상 있을때
-  }
    // 스크롤 이벤트 등록
   useEffect(() => {
     window.addEventListener("scroll", listener);
     return () => window.removeEventListener("scroll", listener);
   });
   const listener = (e) => {
-    setCurrentScrollY(-document.body.getBoundingClientRect().y);
-    const scrollDirection =  (lastScrollTop < currentScrollY ? "down" : "up");
-    setLastScrollTop(currentScrollY);
-    (scrollDirection == "down" ?
-      (bottomNav.current.className = 'hidden') :
-      (bottomNav.current.className = '') 
-    )
+    try{
+      setCurrentScrollY(-document.body.getBoundingClientRect().y);
+      const scrollDirection =  (lastScrollTop < currentScrollY ? "down" : "up");
+      setLastScrollTop(currentScrollY);
+      (scrollDirection == "down" ? bottomNav.current.className = 'hidden' : bottomNav.current.className = 
+      '')
+    }catch(e){
+
+    }
   };
 
   const itemListMap = useMemo(() => {
+    let boardCardImage =""
     let oddResult =  boardItem["item"].map((item, i) => {
-      if( item.images[0] == undefined){
-        console.log(item,"sdsdadasd")
-      }
+      // console.log(item["images"].length == 0 )
       if(i%2!=0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
-        // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
+        
+        if(item["images"].length == 0){
+          boardCardImage="/noimage1.svg";
+        }else{
+          boardCardImage = `http://localhost:8000${item["images"][0]["img"]}`
+        }
+        // console.log(item)
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={boardCardImage} boardTitle={item["title"]} content={item["content"]} idx={item["id"]} hit={item["reaction"]} tag={item["tags"]} create_date={item["create_date"]} user_info={item["user_info"][0]} reaction={item["reaction"]} />;
       }
     });
     let evenResult =  boardItem["item"].map((item, i) => {
       if(i%2==0){
-        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item.images[0]["img"]}`}  boardTitle={item.title} content={item.content} idx={item.id} hit={"12"} />
-        // return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={itemLists[i]["foodImg"]} boardTitle={itemLists[i]["title"]} content={itemLists[i]["content"]} idx={itemLists[i]["idx"]} hit={itemLists[i]["hit"]} />;
+        if(item["images"].length == 0){
+          boardCardImage="/noimage1.svg";
+        }else{
+          boardCardImage = `http://localhost:8000${item["images"][0]["img"]}`
+        }
+        return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={boardCardImage} boardTitle={item["title"]} content={item["content"]} idx={item["id"]} hit={item["reaction"]} tag={item["tags"]} create_date={item["create_date"]} user_info={item["user_info"][0]} reaction={item["reaction"]} />;
       }
     });
     return [evenResult, oddResult];
-  }, [itemLists, boardItem]);
+  }, [boardItem]);
   const getMoreItem = async () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500)); // API 호출로 수정
     let Items = dataDummy;
-    setBoardItem()
-    // setItemLists((itemLists) => itemLists.concat(Items));
-    //console.log("www", itemLists)
+    setItemLists((itemLists) => itemLists.concat(Items));
     setIsLoaded(false);
   };
-
+    
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting && !isLoaded) {
       observer.unobserve(entry.target);
@@ -91,54 +92,49 @@ const Community = ()=>{
       observer.observe(target);
     }
     return () => observer && observer.disconnect();
-  }, [target]);
-  
+  }, []);
+
   useEffect(()=>{
-    axios.get('http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/')
-    .then((res)=>{
-      console.log(res.data)
-      setBoardItem({
-        ... boardItem,
-        "item" : [...res.data]
-      });
-      setItemLoading(false);
-    })
-    .catch(error => console.log(error))
-    
-  },[]);
-  console.log(boardItem,boardItem.length,"게시판 아이템들")
+    // console.log("", boardItem)
+    if(boardItem["next"] !=null ){
+      axios.get(boardItem["next"])
+      .then((res)=>{
 
-  const dummyCreate = () => {
-
-  }
-
+        // console.log(res.data ," 데이터 가져온느거 성공")
+        setBoardItem((prevState)=>({
+          ...prevState,
+          count : res.data["count"],
+          next : res.data["next"],
+          item : [...prevState["item"],...res.data["results"]],
+        }))
+      })
+      .catch((error)=>console.log(error, "첫 데이터 가져올때 error"))
+    }
+  }, [boardItem])
   return (
-    <>
-      
+    <div className='  flex justify-center'>
+    <div className='lg:w-[500px]'>
       <div ref={bottomNav} className='hidden'>
         <BottomNav></BottomNav>
       </div>
-      <button onClick={dummyCreate} className='m-2 p-3 text-base text-white bg-yellow1 w-full rounded-2xl'>더미 데이터 10개 생성 클릭</button>
-      {/* Dummy.js 에서 함수 받아 와서 itemList 들어 있는 배열 가져 올 것, API 비동기 처리 할 것  */}
-      {/* 두개로 받아서 성능 이슈 map 함수 하나로 할 것 */ }
-      {itemLoading === false && (<div className={container} >
-          <div className={itemWrapper} >
-            {itemListMap[0]}
-          </div>
-          <div className={itemWrapper} >
-            {itemListMap[1]}
-          </div>
-        </div>)}
-        {/* <div>sdss</div> */}
+      <div className={container} >
+        <div className={itemWrapper} >
+          {itemListMap[0] }
+        </div>
+        <div className={itemWrapper} >
+          {itemListMap[1]}
+        </div>
+      </div>
 
-      {  boardItem["itemcount"] > 10 &&
-          <div className={targetCSS} ref={setTarget} >
-            {isLoaded && <Loader /> }
-          </div> }
 
-    </>
+      {boardItem["next"] == null ?
+      <div className=' flex justify-center p-3 font-bold text-yellow1 text-xl border-2 border-yellow1 shadow-lg'> 마지막 게시글 입니다! </div> :
+      (<div className={targetCSS} ref={setTarget} >
+          {isLoaded && <Loader /> }
+      </div>)}
+    </div>
+    </div>
   );
 };
 
-export default memo(Community);
-
+export default Community;

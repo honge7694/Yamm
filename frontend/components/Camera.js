@@ -21,13 +21,14 @@ export default function Camera(props) {
     const webcamRef = useRef(null);
     
     const capture = useCallback(() => {
+        // console.log(webcamRef.current, "웹캡 ")
         const imageSrc = webcamRef.current.getScreenshot();
         setFoodImg(imageSrc)        
         localStorage.setItem("image", imageSrc);
         moveFoodInfo();
-        },        
-        [webcamRef] 
-    );
+        
+    
+    },[webcamRef]);
 
     const router = useRouter();
     const moveFoodInfo = () => {
