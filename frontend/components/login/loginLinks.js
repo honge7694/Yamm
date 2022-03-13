@@ -18,14 +18,8 @@ export default function LoginLinks() {
         <div className="grid grid-cols-6 grid-flow-row gap-5 w-full">
           <div className='col-span-2 flex justify-center mt-1'><FontTitle marginTop="" textSize="text-sm" /></div>
           <div onClick={routeGitLink} className='col-span-2 flex justify-center gap-2'>
-            <div className=' relative w-5 h-5 mt-1'>
-              <Image src="/twitter.svg" layout="fill" />
-            </div>
             <div className='  relative w-5 h-5 mt-1'>
               <Image src="/github.svg" layout="fill" />
-            </div>
-            <div className=' relative w-5 h-5 mt-1'>
-              <Image src="/myinfo.svg" layout="fill" />
             </div>
           </div>
           <div className='col-span-2 flex justify-center' onClick={(e)=>{isSetSignUpModal(true)}}>회원가입</div>

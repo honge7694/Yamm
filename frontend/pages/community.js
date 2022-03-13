@@ -22,7 +22,7 @@ const Community = ()=>{
 
   const [boardItem, setBoardItem] = useState({
     "count" : 0,
-    "next" : "http://localhost:8000/boards/",
+    "next" : "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/",
     "item" : []
   });
    // 스크롤 이벤트 등록
@@ -51,7 +51,7 @@ const Community = ()=>{
         if(item["images"].length == 0){
           boardCardImage="/noimage1.svg";
         }else{
-          boardCardImage = `http://localhost:8000${item["images"][0]["img"]}`
+          boardCardImage = `http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item["images"][0]["img"]}`
         }
         // console.log(item)
         return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={boardCardImage} boardTitle={item["title"]} content={item["content"]} idx={item["id"]} hit={item["reaction"]} tag={item["tags"]} create_date={item["create_date"]} user_info={item["user_info"][0]} reaction={item["reaction"]} />;
@@ -62,7 +62,7 @@ const Community = ()=>{
         if(item["images"].length == 0){
           boardCardImage="/noimage1.svg";
         }else{
-          boardCardImage = `http://localhost:8000${item["images"][0]["img"]}`
+          boardCardImage = `http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${item["images"][0]["img"]}`
         }
         return <BoardCards classNameCSS="ml-2 mr-2" key={i} image={boardCardImage} boardTitle={item["title"]} content={item["content"]} idx={item["id"]} hit={item["reaction"]} tag={item["tags"]} create_date={item["create_date"]} user_info={item["user_info"][0]} reaction={item["reaction"]} />;
       }

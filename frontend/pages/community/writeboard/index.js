@@ -54,7 +54,7 @@ const WriteBoard = (props) => {
         try {
           const response = await axios({
             method: "post",
-            url: "http://localhost:8000/boards/",
+            url: "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
           })

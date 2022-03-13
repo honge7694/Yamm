@@ -45,7 +45,7 @@ const Fix = (props) => {
     }
     const deleteBoard = async () => {
         try{
-            await axios.delete(`http://localhost:8000/boards/${idx}`)
+            await axios.delete(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/${idx}`)
             console.log("삭제 성공 !")
         }catch{
             console.log("삭제 실패")
@@ -66,7 +66,7 @@ const Fix = (props) => {
         try {
           const response = await axios({
             method: "put",
-            url: `http://localhost:8000/boards/${idx}`,
+            url: `http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/${idx}`,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
           })

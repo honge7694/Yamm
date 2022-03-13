@@ -20,7 +20,7 @@ const ProfileTag = ({ hit, setToggleProfileTag, toggleProfileTag, profile_img, n
     
       await axios({
         method: "post",
-        url: `http://localhost:8000/boards/${idx}/reaction`,
+        url: `http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/boards/${idx}/reaction`,
         data: formData,
         headers: { "Authorization": `Bearer ${accessToken}` },
       })
@@ -44,7 +44,7 @@ const ProfileTag = ({ hit, setToggleProfileTag, toggleProfileTag, profile_img, n
         <div className="grid grid-cols-6 grid-flow-row gap-3 mt-6">
           <div className=" row-span-1 col-span-1 font-['Jalnan'] rounded-full bg-neutral-200 w-[50px] h-[50px] flex justify-center items-center" >
             <div className='relative w-full h-full'>
-              <Image className=' rounded-full' src={`http://localhost:8000/media/${profile_img}`} layout={"fill"} />
+              <Image className=' rounded-full' src={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/media/${profile_img}`} layout={"fill"} />
             </div>
           </div>
           <div className=" col-span-3 ml-3" >
