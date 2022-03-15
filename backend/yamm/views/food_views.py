@@ -21,7 +21,7 @@ class Eaten(APIView):
         date = datetime.strptime(date, '%Y-%m-%d')
 
         # TODO: user_id 하드코딩
-        food_image = FoodImage.objects.filter(user_id=1)
+        food_image = FoodImage.objects.filter(user_id=request.user.id)
         food_image = food_image.filter(
             date__year=date.year, date__month=date.month, date__day=date.day).order_by("date")
         serializer = FoodImageSerializer(food_image, many=True)
@@ -65,7 +65,7 @@ class Eaten(APIView):
         사진 업로드
         '''
         # TODO: email 부분 request.user 로 바꾸기
-        user = get_object_or_404(User, id=1)
+        user = get_object_or_404(User, id=request.user.id)
         food = get_object_or_404(Food, name=request.data["food_name"])
 
         data = {
