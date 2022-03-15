@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import Memo from '../components/Memo'
 import Search from '../components/Search';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 
 function foodinfo(props) {
+  const { accessToken } = useSelector((state) => (state.user));
 
   const [ foodImage, setFoodImage ] = useState("")
   const [ foodImageFile, setFoodImageFile ] = useState()
@@ -89,6 +90,7 @@ function foodinfo(props) {
         method: 'post',
         url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
         data: formData,
+        headers: { "Authorization": `Bearer ${accessToken}`},
     })
     }
     fetchData();

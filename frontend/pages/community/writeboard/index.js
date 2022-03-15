@@ -47,7 +47,7 @@ const WriteBoard = (props) => {
         formData.append("content", inputValue["content"]);
         formData.append("create_date", inputValue["create_date"]);
         formData.append("tags", inputValue["tags"]);
-        formData.append("author", author);
+        formData.append("author", author.user["pk"]);
         formData.append("img", selectedFile);
         for(var pair of formData.entries()) console.log(pair); 
     

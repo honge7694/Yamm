@@ -14,7 +14,7 @@ import Image from 'next/image';
 export default function Home({ }) {
 
   const router = useRouter();
-  const { me } = useSelector((state) => (state.user)); // ***
+  const { accessToken, me } = useSelector((state) => (state.user)); // ***
   
   const moveCapture = () => {
     
@@ -36,9 +36,8 @@ export default function Home({ }) {
       axios({
         method: 'get',
         url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
-        params: {
-          "date": nowDate
-        }
+        params: {"date": nowDate},
+        headers: { "Authorization": `Bearer ${accessToken}`}
       }) 
       .then((response) => {
         response.data.shift()
